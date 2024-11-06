@@ -1,6 +1,7 @@
 import subprocess
-import tomli
 from pathlib import Path
+
+import tomli
 
 
 def main():
@@ -9,14 +10,14 @@ def main():
 
     ncu_commands = []
     generated_code_paths = []
-    
+
     # get all generated code paths in the generated_code directory
     for path in Path("generated_code").glob("**/*.py"):
         generated_code_paths.append(path)
 
     for prompt in prompts_dict:
         name = prompt["name"]
-        
+
         # code path for ai generated code
         gen_ai_path = f"generated_code/{name}_ai_generated.py"
         # code path for reference code
@@ -30,16 +31,22 @@ def main():
             continue
 
         ncu_command_generated = [
-            'ncu',  # Nsight Compute executable
-            '-k', name,
-            '--log-file', f"{name}_ai_generated.ncu-rep",
-            'python', gen_ai_path  # Command to run your Triton script
+            "ncu",  # Nsight Compute executable
+            "-k",
+            name,
+            "--log-file",
+            f"{name}_ai_generated.ncu-rep",
+            "python",
+            gen_ai_path,  # Command to run your Triton script
         ]
         ncu_command_reference = [
-            'ncu',  # Nsight Compute executable
-            '-k', name,
-            '--log-file', f"{name}_reference.ncu-rep",
-            'python', ref_path  # Command to run your Triton script
+            "ncu",  # Nsight Compute executable
+            "-k",
+            name,
+            "--log-file",
+            f"{name}_reference.ncu-rep",
+            "python",
+            ref_path,  # Command to run your Triton script
         ]
         ncu_commands.append(ncu_command_generated)
         ncu_commands.append(ncu_command_reference)
@@ -47,8 +54,10 @@ def main():
     # run all ncu commands
     # TODO: run in parallel
     for command in ncu_commands:
-        print(f"Running command: {command}")
+        cmd_as_str = " ".join(command)
+        print(f"Running command: {cmd_as_str}")
         subprocess.run(command, check=True, capture_output=True, text=True)
+
 
 if __name__ == "__main__":
     main()
