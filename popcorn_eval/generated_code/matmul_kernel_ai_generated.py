@@ -91,8 +91,7 @@ def matmul_kernel(
         GROUP_SIZE_M: tl.constexpr,
         ACTIVATION: tl.constexpr
 ):
-    # Compute matrix multiplication with optional activation
-    # Program ID and grid configuration 
+    # Program ID and grid configuration
     pid = tl.program_id(axis=0)
     num_pid_m = tl.cdiv(M, BLOCK_SIZE_M)
     num_pid_n = tl.cdiv(N, BLOCK_SIZE_N)
@@ -100,48 +99,51 @@ def matmul_kernel(
     group_id = pid // num_pid_in_group
     first_pid_m = group_id * GROUP_SIZE_M
     
-    # Grid remap to improve L2 cache usage
+    # 2D thread indices
     pid_m = first_pid_m + (pid % GROUP_SIZE_M)
     pid_n = (pid % num_pid_in_group) // GROUP_SIZE_M
-
-    # Offset calculations
+    
+    # Compute starting block indices
     offs_am = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
     offs_bn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
     offs_k = tl.arange(0, BLOCK_SIZE_K)
-
-    # Bounds check
-    mask_m = offs_am < M
-    mask_n = offs_bn < N
-
-    # Pointer calculations
-    a_block_ptr = a_ptr + offs_am[:, None] * stride_am + offs_k[None, :] * stride_ak
-    b_block_ptr = b_ptr + offs_k[:, None] * stride_bk + offs_bn[None, :] * stride_bn
-
+    
+    # Pointer offsets
+    a_ptrs = a_ptr + offs_am[:, None] * stride_am + offs_k[None, :] * stride_ak
+    b_ptrs = b_ptr + offs_k[:, None] * stride_bk + offs_bn[None, :] * stride_bn
+    
     # Initialize accumulator
     acc = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
-
-    # Iterate over K dimension 
+    
+    # Block-level matrix multiplication
     for k in range(0, tl.cdiv(K, BLOCK_SIZE_K)):
-        # Load A and B blocks
-        a_block = tl.load(a_block_ptr, mask=mask_m[:, None] & (offs_k[None, :] < K), other=0.0)
-        b_block = tl.load(b_block_ptr, mask=(offs_k[:, None] < K) & mask_n[None, :], other=0.0)
-
-        # Matrix multiplication
-        acc += tl.dot(a_block, b_block)
-
+        # Boundary checks and loads
+        a_mask = (offs_am[:, None] < M) & (offs_k[None, :] < K)
+        b_mask = (offs_k[:, None] < K) & (offs_bn[None, :] < N)
+        
+        a = tl.load(a_ptrs, mask=a_mask, other=0.0)
+        b = tl.load(b_ptrs, mask=b_mask, other=0.0)
+        
+        # Perform matrix multiplication
+        acc += tl.dot(a, b)
+        
         # Update pointers
-        a_block_ptr += BLOCK_SIZE_K * stride_ak
-        b_block_ptr += BLOCK_SIZE_K * stride_bk
-
-    # Apply activation if specified
+        a_ptrs += BLOCK_SIZE_K * stride_ak
+        b_ptrs += BLOCK_SIZE_K * stride_bk
+    
+    # Apply optional activation
     if ACTIVATION == 'relu':
         acc = tl.maximum(acc, 0)
     elif ACTIVATION == 'sigmoid':
         acc = 1 / (1 + tl.exp(-acc))
-
-    # Store result
-    c_block_ptr = c_ptr + offs_am[:, None] * stride_cm + offs_bn[None, :] * stride_cn
-    tl.store(c_block_ptr, acc, mask=mask_m[:, None] & mask_n[None, :])
+    
+    # Store result with boundary checks
+    offs_cm = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
+    offs_cn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
+    c_ptrs = c_ptr + offs_cm[:, None] * stride_cm + offs_cn[None, :] * stride_cn
+    c_mask = (offs_cm[:, None] < M) & (offs_cn[None, :] < N)
+    
+    tl.store(c_ptrs, acc, mask=c_mask)
 
 
 def matmul(a, b, activation=""):
@@ -164,12 +166,12 @@ def matmul(a, b, activation=""):
     )
     return c
 
-
-# %%
-# Unit Test
-# ---------
-#
-# We can test our custom matrix multiplication operation against a native torch implementation (i.e., cuBLAS).
+def _compare_triton_and_torch(triton_output, torch_output):
+    rtol = 0
+    if torch.allclose(triton_output, torch_output, atol=1e-2, rtol=rtol):
+        print("✅ Triton and Torch match")
+    else:
+        print("❌ Triton and Torch differ")
 
 if __name__ == "__main__":
 
@@ -178,13 +180,4 @@ if __name__ == "__main__":
     b = torch.randn((512, 512), device='cuda', dtype=torch.float16)
     triton_output = matmul(a, b)
     torch_output = torch.matmul(a, b)
-    print(f"triton_output_with_fp16_inputs={triton_output}")
-    print(f"torch_output_with_fp16_inputs={torch_output}")
-    # Bigger tolerance for AMD MI200 devices.
-    # MI200 devices use reduced precision fp16 and bf16 and flush input and
-    # output denormal values to zero. Detailed info is at: https://pytorch.org/docs/stable/notes/numerical_accuracy.html#reduced-precision-fp16-and-bf16-gemms-and-convolutions-on-amd-instinct-mi200-devices
-    rtol = 1e-2 if is_hip_mi200() else 0
-    if torch.allclose(triton_output, torch_output, atol=1e-2, rtol=rtol):
-        print("✅ Triton and Torch match")
-    else:
-        print("❌ Triton and Torch differ")
+    _compare_triton_and_torch(triton_output, torch_output)

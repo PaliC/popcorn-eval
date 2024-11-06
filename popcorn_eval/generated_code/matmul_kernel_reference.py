@@ -181,12 +181,12 @@ def matmul(a, b, activation=""):
     )
     return c
 
-
-# %%
-# Unit Test
-# ---------
-#
-# We can test our custom matrix multiplication operation against a native torch implementation (i.e., cuBLAS).
+def _compare_triton_and_torch(triton_output, torch_output):
+    rtol = 0
+    if torch.allclose(triton_output, torch_output, atol=1e-2, rtol=rtol):
+        print("✅ Triton and Torch match")
+    else:
+        print("❌ Triton and Torch differ")
 
 if __name__ == "__main__":
 
@@ -195,13 +195,4 @@ if __name__ == "__main__":
     b = torch.randn((512, 512), device='cuda', dtype=torch.float16)
     triton_output = matmul(a, b)
     torch_output = torch.matmul(a, b)
-    print(f"triton_output_with_fp16_inputs={triton_output}")
-    print(f"torch_output_with_fp16_inputs={torch_output}")
-    # Bigger tolerance for AMD MI200 devices.
-    # MI200 devices use reduced precision fp16 and bf16 and flush input and
-    # output denormal values to zero. Detailed info is at: https://pytorch.org/docs/stable/notes/numerical_accuracy.html#reduced-precision-fp16-and-bf16-gemms-and-convolutions-on-amd-instinct-mi200-devices
-    rtol = 1e-2 if is_hip_mi200() else 0
-    if torch.allclose(triton_output, torch_output, atol=1e-2, rtol=rtol):
-        print("✅ Triton and Torch match")
-    else:
-        print("❌ Triton and Torch differ")
+    _compare_triton_and_torch(triton_output, torch_output)
