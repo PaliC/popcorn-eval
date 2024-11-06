@@ -8,7 +8,7 @@ import tomli
 from dotenv import load_dotenv
 import anthropic
 import re
-
+import shutil
 def get_anthropic_response(prompt: Dict[str, str]) -> str:
     """Get response from Anthropic API using Claude model"""
     # Load environment variables from .env file
@@ -90,7 +90,6 @@ if __name__ == "__main__":
         name = prompt_dict["name"]
         reference_kernel = prompt_dict["reference_kernel"]
         generated_kernel = get_anthropic_response(prompt_dict)
-        print(generated_kernel)
 
         # parse out python code from generated_kernel
         generated_triton_kernel = extract_python_code(generated_kernel)
@@ -108,6 +107,9 @@ if __name__ == "__main__":
             f.write(template_code_generated)
         with open(f"generated_code/{name}_reference.py", "w") as f:
             f.write(template_code_reference)
+
+    # copy over _helper_functions.py to generated_code
+    shutil.copy("code_templates/_helper_functions.py", "generated_code/")
     
     
 

@@ -87,62 +87,67 @@ def matmul_kernel(
         stride_am, stride_ak,
         stride_bk, stride_bn,
         stride_cm, stride_cn,
-        BLOCK_SIZE_M: tl.constexpr, BLOCK_SIZE_N: tl.constexpr, BLOCK_SIZE_K: tl.constexpr,
+        BLOCK_SIZE_M: tl.constexpr, 
+        BLOCK_SIZE_N: tl.constexpr, 
+        BLOCK_SIZE_K: tl.constexpr,
         GROUP_SIZE_M: tl.constexpr,
         ACTIVATION: tl.constexpr
 ):
-    # Program ID and grid configuration
+    # Compute matrix multiplication for a subset of the input matrices
+    # Program ID indicates the current block being processed
     pid = tl.program_id(axis=0)
+    
+    # Compute block row and column indices
     num_pid_m = tl.cdiv(M, BLOCK_SIZE_M)
     num_pid_n = tl.cdiv(N, BLOCK_SIZE_N)
     num_pid_in_group = GROUP_SIZE_M * num_pid_n
     group_id = pid // num_pid_in_group
     first_pid_m = group_id * GROUP_SIZE_M
     
-    # 2D thread indices
+    # Compute row and column indices for the current block
     pid_m = first_pid_m + (pid % GROUP_SIZE_M)
     pid_n = (pid % num_pid_in_group) // GROUP_SIZE_M
     
-    # Compute starting block indices
+    # Compute starting offsets for A, B, and C
     offs_am = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
     offs_bn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
     offs_k = tl.arange(0, BLOCK_SIZE_K)
     
-    # Pointer offsets
+    # Boundary checks for matrix dimensions
     a_ptrs = a_ptr + offs_am[:, None] * stride_am + offs_k[None, :] * stride_ak
     b_ptrs = b_ptr + offs_k[:, None] * stride_bk + offs_bn[None, :] * stride_bn
-    
+
     # Initialize accumulator
     acc = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
     
-    # Block-level matrix multiplication
+    # Iterate over K dimension in blocks
     for k in range(0, tl.cdiv(K, BLOCK_SIZE_K)):
-        # Boundary checks and loads
+        # Load A and B blocks
         a_mask = (offs_am[:, None] < M) & (offs_k[None, :] < K)
         b_mask = (offs_k[:, None] < K) & (offs_bn[None, :] < N)
-        
         a = tl.load(a_ptrs, mask=a_mask, other=0.0)
         b = tl.load(b_ptrs, mask=b_mask, other=0.0)
         
-        # Perform matrix multiplication
+        # Matrix multiplication for current block
         acc += tl.dot(a, b)
         
-        # Update pointers
+        # Move pointers to next block
         a_ptrs += BLOCK_SIZE_K * stride_ak
         b_ptrs += BLOCK_SIZE_K * stride_bk
     
-    # Apply optional activation
-    if ACTIVATION == 'relu':
-        acc = tl.maximum(acc, 0)
-    elif ACTIVATION == 'sigmoid':
-        acc = 1 / (1 + tl.exp(-acc))
-    
-    # Store result with boundary checks
+    # Boundary check for output matrix
     offs_cm = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
     offs_cn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
     c_ptrs = c_ptr + offs_cm[:, None] * stride_cm + offs_cn[None, :] * stride_cn
     c_mask = (offs_cm[:, None] < M) & (offs_cn[None, :] < N)
     
+    # Optional activation function
+    if ACTIVATION == 'relu':
+        acc = tl.maximum(acc, 0)
+    elif ACTIVATION == 'sigmoid':
+        acc = 1 / (1 + tl.exp(-acc))
+    
+    # Store results
     tl.store(c_ptrs, acc, mask=c_mask)
 
 
