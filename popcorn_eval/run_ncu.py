@@ -47,7 +47,8 @@ def main():
     # run all ncu commands
     # TODO: run in parallel
     for command in ncu_commands:
-        subprocess.run(command, check=True)
+        print(f"Running command: {command}")
+        subprocess.run(command, check=True, capture_output=True, text=True)
 
 if __name__ == "__main__":
     main()
