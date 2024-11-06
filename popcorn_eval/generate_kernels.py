@@ -7,7 +7,7 @@ import os
 import tomli
 from dotenv import load_dotenv
 import anthropic
-import json
+import re
 
 def get_anthropic_response(prompt: Dict[str, str]) -> str:
     """Get response from Anthropic API using Claude model"""
@@ -66,16 +66,48 @@ def compose_prompt_for_completion(prompt_dict: Dict[str, str]) -> str:
     prompt = COMPLETION_PROMPT_TEMPLATE.replace(SYSTEM_PROMPT_TOKEN, system_prompt).replace(USER_PROMPT_TOKEN, user_prompt)
     return prompt
 
+def extract_python_code(text: str) -> str:
+    # extract python code from string
+    # code is of the form ```python ... ```
+    # only extract the first code block
 
+    # remove the first and last line
+    try:
+        python_code = re.search(r"```python\n((.*\n)*)```", text).group(1)
+    except AttributeError:
+        print(f"Could not find python code in {text}")
+        # if no match, return an exception raised with the message could not find python code
+        return "raise Exception(\"This file was not generated with valid python code\")"
+    return python_code
 
 if __name__ == "__main__":
     # grab first prompt in eval_prompts.toml
     with open("prompts/eval_prompts.toml", "rb") as f:
         all_prompts = tomli.load(f)["prompts"]
-        prompt_dict = all_prompts[0]
-    
-    response = get_anthropic_response(prompt_dict)
-    print(response)
+
+    for prompt_dict in all_prompts:
+        template_file = prompt_dict["template_file"]
+        name = prompt_dict["name"]
+        reference_kernel = prompt_dict["reference_kernel"]
+        generated_kernel = get_anthropic_response(prompt_dict)
+        print(generated_kernel)
+
+        # parse out python code from generated_kernel
+        generated_triton_kernel = extract_python_code(generated_kernel)
+        reference_triton_kernel = extract_python_code(reference_kernel)
+
+        # replace {{ GENERATED CODE }} with generated_kernel in the template file
+        with open(template_file, "r") as f:
+            template_code = f.read()
+
+        template_code_generated = template_code.replace("{{ GENERATED CODE }}", generated_triton_kernel)
+        template_code_reference = template_code.replace("{{ GENERATED CODE }}", reference_triton_kernel)
+
+        # write to file
+        with open(f"generated_code/{name}_ai_generated.py", "w") as f:
+            f.write(template_code_generated)
+        with open(f"generated_code/{name}_reference.py", "w") as f:
+            f.write(template_code_reference)
     
     
 
