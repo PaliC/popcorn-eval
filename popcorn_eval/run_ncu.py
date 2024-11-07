@@ -1,3 +1,4 @@
+import os
 import subprocess
 from pathlib import Path
 
@@ -7,6 +8,10 @@ import tomli
 def main():
     with open("prompts/eval_prompts.toml", "rb") as f:
         prompts_dict = tomli.load(f)["prompts"]
+
+    # create logs directory if it doesn't exist
+    if os.path.exists("logs") is False:
+        os.makedirs("logs")
 
     ncu_commands = []
     generated_code_paths = []

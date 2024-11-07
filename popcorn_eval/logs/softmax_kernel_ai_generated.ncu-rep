@@ -1,0 +1,5 @@
+==PROF== Connected to process 3374117 (/home/sahanp/.conda/envs/parity-bench/bin/python3.11)
+==PROF== Disconnected from process 3374117
+==ERROR== The application returned an error code (1).
+==WARNING== No kernels were profiled.
+==WARNING== Profiling kernels launched by child processes requires the --target-processes all option.
