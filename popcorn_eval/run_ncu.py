@@ -53,10 +53,16 @@ def main():
 
     # run all ncu commands
     # TODO: run in parallel
+    counter = 0
     for command in ncu_commands:
+        counter += 1
         cmd_as_str = " ".join(command)
-        print(f"Running command: {cmd_as_str}")
-        subprocess.run(command, check=True, capture_output=True, text=True)
+        print(f"Running command: {cmd_as_str} \n {counter} / {len(ncu_commands)}")
+        try:
+            subprocess.run(command, check=True, capture_output=True, text=True)
+        except subprocess.CalledProcessError as e:
+            print(f"An error occurred while running {cmd_as_str}")
+            print("Error message:", e.stderr)
 
 
 if __name__ == "__main__":
