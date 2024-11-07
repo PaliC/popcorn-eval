@@ -25,7 +25,7 @@ import triton.language as tl
 from _helper_functions import _compare_triton_and_torch
 
 
-{{ GENERATED CODE}}
+{{ GENERATED CODE }}
 
 
 # %%

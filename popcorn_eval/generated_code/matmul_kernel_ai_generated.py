@@ -87,68 +87,77 @@ def matmul_kernel(
         stride_am, stride_ak,
         stride_bk, stride_bn,
         stride_cm, stride_cn,
-        BLOCK_SIZE_M: tl.constexpr, 
-        BLOCK_SIZE_N: tl.constexpr, 
-        BLOCK_SIZE_K: tl.constexpr,
+        BLOCK_SIZE_M: tl.constexpr, BLOCK_SIZE_N: tl.constexpr, BLOCK_SIZE_K: tl.constexpr,
         GROUP_SIZE_M: tl.constexpr,
         ACTIVATION: tl.constexpr
 ):
-    # Compute matrix multiplication for a subset of the input matrices
-    # Program ID indicates the current block being processed
+    # Program ID for parallel computation
     pid = tl.program_id(axis=0)
     
-    # Compute block row and column indices
+    # Calculate group and block indices 
     num_pid_m = tl.cdiv(M, BLOCK_SIZE_M)
     num_pid_n = tl.cdiv(N, BLOCK_SIZE_N)
     num_pid_in_group = GROUP_SIZE_M * num_pid_n
     group_id = pid // num_pid_in_group
     first_pid_m = group_id * GROUP_SIZE_M
     
-    # Compute row and column indices for the current block
+    # Calculate block coordinates
     pid_m = first_pid_m + (pid % GROUP_SIZE_M)
     pid_n = (pid % num_pid_in_group) // GROUP_SIZE_M
     
-    # Compute starting offsets for A, B, and C
-    offs_am = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
-    offs_bn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
-    offs_k = tl.arange(0, BLOCK_SIZE_K)
+    # Compute block starting indices
+    block_start_m = pid_m * BLOCK_SIZE_M
+    block_start_n = pid_n * BLOCK_SIZE_N
     
-    # Boundary checks for matrix dimensions
-    a_ptrs = a_ptr + offs_am[:, None] * stride_am + offs_k[None, :] * stride_ak
-    b_ptrs = b_ptr + offs_k[:, None] * stride_bk + offs_bn[None, :] * stride_bn
-
-    # Initialize accumulator
+    # Initialize pointers
+    a_block_ptr = a_ptr + block_start_m * stride_am
+    b_block_ptr = b_ptr + block_start_n * stride_bn
+    
+    # Create accumulator for output
     acc = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
     
-    # Iterate over K dimension in blocks
+    # Iterate through K dimension in blocks
     for k in range(0, tl.cdiv(K, BLOCK_SIZE_K)):
         # Load A and B blocks
-        a_mask = (offs_am[:, None] < M) & (offs_k[None, :] < K)
-        b_mask = (offs_k[:, None] < K) & (offs_bn[None, :] < N)
-        a = tl.load(a_ptrs, mask=a_mask, other=0.0)
-        b = tl.load(b_ptrs, mask=b_mask, other=0.0)
+        a_block = tl.load(
+            a_block_ptr + tl.arange(0, BLOCK_SIZE_M)[:, None] * stride_am + 
+            tl.arange(0, BLOCK_SIZE_K)[None, :] * stride_ak,
+            mask=(block_start_m + tl.arange(0, BLOCK_SIZE_M)[:, None] < M) & 
+                 (k * BLOCK_SIZE_K + tl.arange(0, BLOCK_SIZE_K)[None, :] < K),
+            other=0.0
+        )
         
-        # Matrix multiplication for current block
-        acc += tl.dot(a, b)
+        b_block = tl.load(
+            b_block_ptr + tl.arange(0, BLOCK_SIZE_K)[:, None] * stride_bk + 
+            tl.arange(0, BLOCK_SIZE_N)[None, :] * stride_bn,
+            mask=(k * BLOCK_SIZE_K + tl.arange(0, BLOCK_SIZE_K)[:, None] < K) & 
+                 (block_start_n + tl.arange(0, BLOCK_SIZE_N)[None, :] < N),
+            other=0.0
+        )
         
-        # Move pointers to next block
-        a_ptrs += BLOCK_SIZE_K * stride_ak
-        b_ptrs += BLOCK_SIZE_K * stride_bk
+        # Matrix multiplication
+        acc += tl.dot(a_block, b_block)
+        
+        # Update block pointers
+        a_block_ptr += BLOCK_SIZE_K * stride_ak
+        b_block_ptr += BLOCK_SIZE_K * stride_bk
     
-    # Boundary check for output matrix
-    offs_cm = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
-    offs_cn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
-    c_ptrs = c_ptr + offs_cm[:, None] * stride_cm + offs_cn[None, :] * stride_cn
-    c_mask = (offs_cm[:, None] < M) & (offs_cn[None, :] < N)
-    
-    # Optional activation function
+    # Apply optional activation
     if ACTIVATION == 'relu':
         acc = tl.maximum(acc, 0)
     elif ACTIVATION == 'sigmoid':
         acc = 1 / (1 + tl.exp(-acc))
     
-    # Store results
-    tl.store(c_ptrs, acc, mask=c_mask)
+    # Store result
+    c_block_ptr = c_ptr + block_start_m * stride_cm + block_start_n * stride_cn
+    tl.store(
+        c_block_ptr + 
+        tl.arange(0, BLOCK_SIZE_M)[:, None] * stride_cm + 
+        tl.arange(0, BLOCK_SIZE_N)[None, :] * stride_cn,
+        acc,
+        mask=(block_start_m + tl.arange(0, BLOCK_SIZE_M)[:, None] < M) & 
+             (block_start_n + tl.arange(0, BLOCK_SIZE_N)[None, :] < N)
+    )
 
 
 def matmul(a, b, activation=""):

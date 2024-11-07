@@ -35,7 +35,7 @@ def main():
             "-k",
             name,
             "--log-file",
-            f"{name}_ai_generated.ncu-rep",
+            f"logs/{name}_ai_generated.ncu-rep",
             "python",
             gen_ai_path,  # Command to run your Triton script
         ]
@@ -44,7 +44,7 @@ def main():
             "-k",
             name,
             "--log-file",
-            f"{name}_reference.ncu-rep",
+            f"logs/{name}_reference.ncu-rep",
             "python",
             ref_path,  # Command to run your Triton script
         ]
