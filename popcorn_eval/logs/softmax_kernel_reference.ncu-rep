@@ -1,68 +1,39 @@
-==PROF== Connected to process 3375636 (/home/sahanp/.conda/envs/parity-bench/bin/python3.11)
-==PROF== Profiling "softmax_kernel": 0%....50%....100% - 8 passes
-==PROF== Disconnected from process 3375636
-[3375636] python3.11@127.0.0.1
-  softmax_kernel (1056, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 9.0
-    Section: GPU Speed Of Light Throughput
-    ----------------------- ------------- ------------
-    Metric Name               Metric Unit Metric Value
-    ----------------------- ------------- ------------
-    DRAM Frequency          cycle/nsecond         1.59
-    SM Frequency            cycle/nsecond         1.32
-    Elapsed Cycles                  cycle       15,844
-    Memory Throughput                   %        39.99
-    DRAM Throughput                     %        19.60
-    Duration                      usecond        11.94
-    L1/TEX Cache Throughput             %        60.42
-    L2 Cache Throughput                 %        34.25
-    SM Active Cycles                cycle    10,389.75
-    Compute (SM) Throughput             %        39.52
-    ----------------------- ------------- ------------
-
-    WRN   This kernel exhibits low compute throughput and memory bandwidth utilization relative to the peak performance 
-          of this device. Achieved compute throughput and/or memory bandwidth below 60.0% of peak typically indicate    
-          latency issues. Look at Scheduler Statistics and Warp State Statistics for potential reasons.                 
-
-    Section: Launch Statistics
-    -------------------------------- --------------- ---------------
-    Metric Name                          Metric Unit    Metric Value
-    -------------------------------- --------------- ---------------
-    Block Size                                                   256
-    Cluster Scheduling Policy                           PolicySpread
-    Cluster Size                                                   0
-    Function Cache Configuration                     CachePreferNone
-    Grid Size                                                  1,056
-    Registers Per Thread             register/thread              32
-    Shared Memory Configuration Size           Kbyte          135.17
-    Driver Shared Memory Per Block       Kbyte/block            1.02
-    Dynamic Shared Memory Per Block      Kbyte/block           12.32
-    Static Shared Memory Per Block        byte/block               0
-    Threads                                   thread         270,336
-    Waves Per SM                                                   1
-    -------------------------------- --------------- ---------------
-
-    Section: Occupancy
-    ------------------------------- ----------- ------------
-    Metric Name                     Metric Unit Metric Value
-    ------------------------------- ----------- ------------
-    Max Active Clusters                 cluster            0
-    Max Cluster Size                      block            8
-    Overall GPU Occupancy                     %            0
-    Cluster Occupancy                         %            0
-    Block Limit SM                        block           32
-    Block Limit Registers                 block            8
-    Block Limit Shared Mem                block           10
-    Block Limit Warps                     block            8
-    Theoretical Active Warps per SM        warp           64
-    Theoretical Occupancy                     %          100
-    Achieved Occupancy                        %        85.94
-    Achieved Active Warps Per SM           warp        55.00
-    ------------------------------- ----------- ------------
-
-    WRN   This kernel's theoretical occupancy is not impacted by any block limit. The difference between calculated     
-          theoretical (100.0%) and measured achieved occupancy (85.9%) can be the result of warp scheduling overheads   
-          or workload imbalances during the kernel execution. Load imbalances can occur between warps within a block    
-          as well as across blocks of the same kernel. See the CUDA Best Practices Guide                                
-          (https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#occupancy) for more details on           
-          optimizing occupancy.                                                                                         
-
+==PROF== Connected to process 1837823 (/home/sahanp/.conda/envs/parity-bench/bin/python3.11)
+==PROF== Disconnected from process 1837823
+"ID","Process ID","Process Name","Host Name","Kernel Name","Context","Stream","Block Size","Grid Size","Device","CC","Section Name","Metric Name","Metric Unit","Metric Value","Rule Name","Rule Type","Rule Description"
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","GPU Speed Of Light Throughput","DRAM Frequency","cycle/second","1,585,115,864.53",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","GPU Speed Of Light Throughput","SM Frequency","cycle/second","1,316,761,363.64",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","GPU Speed Of Light Throughput","Elapsed Cycles","cycle","15,895",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","GPU Speed Of Light Throughput","Memory Throughput","%","39.83",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","GPU Speed Of Light Throughput","DRAM Throughput","%","19.57",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","GPU Speed Of Light Throughput","Duration","nsecond","11,968",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","GPU Speed Of Light Throughput","L1/TEX Cache Throughput","%","60.31",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","GPU Speed Of Light Throughput","L2 Cache Throughput","%","33.91",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","GPU Speed Of Light Throughput","SM Active Cycles","cycle","10,405.69",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","GPU Speed Of Light Throughput","Compute (SM) Throughput","%","39.38",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","SpeedOfLight","","","","SOLBottleneck","WRN","This kernel exhibits low compute throughput and memory bandwidth utilization relative to the peak performance of this device. Achieved compute throughput and/or memory bandwidth below 60.0% of peak typically indicate latency issues. Look at Scheduler Statistics and Warp State Statistics for potential reasons."
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Block Size","","256",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Cluster Scheduling Policy","","PolicySpread",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Cluster Size","","0",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Function Cache Configuration","","CachePreferNone",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Grid Size","","1,056",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Registers Per Thread","register/thread","32",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Shared Memory Configuration Size","byte","135,168",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Driver Shared Memory Per Block","byte/block","1,024",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Dynamic Shared Memory Per Block","byte/block","12,320",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Static Shared Memory Per Block","byte/block","0",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Threads","thread","270,336",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Launch Statistics","Waves Per SM","","1",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Max Active Clusters","cluster","0",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Max Cluster Size","block","8",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Overall GPU Occupancy","%","0",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Cluster Occupancy","%","0",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Block Limit SM","block","32",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Block Limit Registers","block","8",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Block Limit Shared Mem","block","10",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Block Limit Warps","block","8",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Theoretical Active Warps per SM","warp","64",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Theoretical Occupancy","%","100",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Achieved Occupancy","%","86.01",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","Achieved Active Warps Per SM","warp","55.05",
+"0","1837823","python3.11","127.0.0.1","softmax_kernel","1","7","(256, 1, 1)","(1056, 1, 1)","0","9.0","Occupancy","","","","Occupancy","WRN","This kernel's theoretical occupancy is not impacted by any block limit. The difference between calculated theoretical (100.0%) and measured achieved occupancy (86.0%) can be the result of warp scheduling overheads or workload imbalances during the kernel execution. Load imbalances can occur between warps within a block as well as across blocks of the same kernel. See the CUDA Best Practices Guide (https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#occupancy) for more details on optimizing occupancy."

@@ -39,6 +39,7 @@ def main():
             "ncu",  # Nsight Compute executable
             "-k",
             name,
+            "--csv",
             "--log-file",
             f"logs/{name}_ai_generated.ncu-rep",
             "python",
@@ -48,6 +49,7 @@ def main():
             "ncu",  # Nsight Compute executable
             "-k",
             name,
+            "--csv",
             "--log-file",
             f"logs/{name}_reference.ncu-rep",
             "python",
