@@ -2,7 +2,7 @@ import torch
 
 import triton
 import triton.language as tl
-
+from _helper_functions import _compare_triton_and_torch
 
 def is_cuda():
     return triton.runtime.driver.active.get_current_target().backend == "cuda"
@@ -101,13 +101,7 @@ def matmul(a, b, activation=""):
         ACTIVATION=activation  #
     )
     return c
-
-def _compare_triton_and_torch(triton_output, torch_output):
-    rtol = 0
-    if torch.allclose(triton_output, torch_output, atol=1e-2, rtol=rtol):
-        print("✅ Triton and Torch match")
-    else:
-        print("❌ Triton and Torch differ")
+    # report cosine
 
 if __name__ == "__main__":
 
