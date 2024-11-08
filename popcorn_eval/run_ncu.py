@@ -5,6 +5,48 @@ from pathlib import Path
 import tomli
 
 
+def parse_profiler_csv(file_path):
+    """
+    Parse a CSV file that contains profiler data and convert it to a nested dictionary.
+    The CSV parsing starts after encountering 'Disconnected from process' line.
+
+    Args:
+        file_path (str): Path to the CSV file
+
+    Returns:
+        dict: A nested dictionary where:
+            - First level key is the ID
+            - Second level key is the Metric Name
+            - Values are tuples of (Metric Value, Metric Unit)
+    """
+    result = {}
+
+    with open(file_path, "r") as file:
+        # Skip until we find "Disconnected from process"
+        for line in file:
+            if "Disconnected from process" in line:
+                break
+
+        # Create CSV reader
+        reader = csv.DictReader(file)
+
+        # Process each row
+        for row in reader:
+            id_val = row["ID"]
+            metric_name = row["Metric Name"]
+            metric_value = row["Metric Value"]
+            metric_unit = row["Metric Unit"]
+
+            # Create nested dictionary structure
+            if id_val not in result:
+                result[id_val] = {}
+
+            # Store metric information as tuple
+            result[id_val][metric_name] = (metric_value, metric_unit)
+
+    return result
+
+
 def main():
     with open("prompts/eval_prompts.toml", "rb") as f:
         prompts_dict = tomli.load(f)["prompts"]
