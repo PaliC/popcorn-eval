@@ -138,7 +138,7 @@ def main():
     for log_pair in log_pairs:
         ai_generated_csv = parse_profiler_csv(log_pair[0])
         reference_csv = parse_profiler_csv(log_pair[1])
-        kernel_name = log_pair[0].split("_ai_generated")[0]
+        kernel_name = log_pair[0].split("/")[-1].split("_ai_generated")[0]
         ai_generated_dict = ai_generated_csv["0"]
         reference_dict = reference_csv["0"]
 
@@ -161,6 +161,29 @@ def main():
                     metric_info[1],
                 ]
                 csv_rows.append(csv_row)
+
+        # get scaled occupancy (Achieved Occupancy/Theoretical Occupancy)
+        ai_generated_occupancy = ai_generated_dict["Achieved Occupancy"][0]
+        reference_occupancy = reference_dict["Achieved Occupancy"][0]
+        ai_generated_theoretical_occupancy = ai_generated_dict["Theoretical Occupancy"][
+            0
+        ]
+        reference_theoretical_occupancy = reference_dict["Theoretical Occupancy"][0]
+        ai_generated_scaled_occupancy = float(ai_generated_occupancy) / float(
+            ai_generated_theoretical_occupancy
+        )
+        reference_scaled_occupancy = float(reference_occupancy) / float(
+            reference_theoretical_occupancy
+        )
+        csv_row = [
+            kernel_name,
+            "Achieved of Possible Occupancy",
+            ai_generated_scaled_occupancy,
+            reference_scaled_occupancy,
+            ai_generated_scaled_occupancy - reference_scaled_occupancy,
+            "%",
+        ]
+        csv_rows.append(csv_row)
 
         # write to csv
         with open("logs/ncu_results.csv", "w", newline="") as csvfile:
