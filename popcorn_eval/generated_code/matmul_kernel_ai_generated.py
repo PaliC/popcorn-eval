@@ -83,64 +83,63 @@ def get_autotune_config():
 @triton.jit
 def matmul_kernel(
         a_ptr, b_ptr, c_ptr,
-        M, N, K,
+        M, N, K, 
         stride_am, stride_ak,
-        stride_bk, stride_bn,
+        stride_bk, stride_bn, 
         stride_cm, stride_cn,
-        BLOCK_SIZE_M: tl.constexpr, BLOCK_SIZE_N: tl.constexpr, BLOCK_SIZE_K: tl.constexpr,
+        BLOCK_SIZE_M: tl.constexpr, 
+        BLOCK_SIZE_N: tl.constexpr, 
+        BLOCK_SIZE_K: tl.constexpr,
         GROUP_SIZE_M: tl.constexpr,
         ACTIVATION: tl.constexpr
 ):
-    # Program ID for parallel computation
+    # Program ID indicates which block we are processing
     pid = tl.program_id(axis=0)
-    
-    # Calculate group and block indices 
     num_pid_m = tl.cdiv(M, BLOCK_SIZE_M)
     num_pid_n = tl.cdiv(N, BLOCK_SIZE_N)
     num_pid_in_group = GROUP_SIZE_M * num_pid_n
     group_id = pid // num_pid_in_group
     first_pid_m = group_id * GROUP_SIZE_M
     
-    # Calculate block coordinates
+    # Per-thread indices
     pid_m = first_pid_m + (pid % GROUP_SIZE_M)
     pid_n = (pid % num_pid_in_group) // GROUP_SIZE_M
     
-    # Compute block starting indices
-    block_start_m = pid_m * BLOCK_SIZE_M
-    block_start_n = pid_n * BLOCK_SIZE_N
+    # Bounds check
+    if pid_m >= num_pid_m:
+        return
     
-    # Initialize pointers
-    a_block_ptr = a_ptr + block_start_m * stride_am
-    b_block_ptr = b_ptr + block_start_n * stride_bn
+    # Offset calculations
+    offs_am = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
+    offs_bn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
+    offs_k = tl.arange(0, BLOCK_SIZE_K)
     
-    # Create accumulator for output
+    # Pointer offsets
+    a_ptrs = a_ptr + offs_am[:, None] * stride_am + offs_k[None, :] * stride_ak
+    b_ptrs = b_ptr + offs_k[:, None] * stride_bk + offs_bn[None, :] * stride_bn
+    
+    # Initialize accumulator
     acc = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
     
-    # Iterate through K dimension in blocks
+    # Iterate over k dimension
     for k in range(0, tl.cdiv(K, BLOCK_SIZE_K)):
-        # Load A and B blocks
-        a_block = tl.load(
-            a_block_ptr + tl.arange(0, BLOCK_SIZE_M)[:, None] * stride_am + 
-            tl.arange(0, BLOCK_SIZE_K)[None, :] * stride_ak,
-            mask=(block_start_m + tl.arange(0, BLOCK_SIZE_M)[:, None] < M) & 
-                 (k * BLOCK_SIZE_K + tl.arange(0, BLOCK_SIZE_K)[None, :] < K),
-            other=0.0
-        )
+        a_mask = (offs_am[:, None] < M) & (offs_k[None, :] < K)
+        b_mask = (offs_k[:, None] < K) & (offs_bn[None, :] < N)
         
-        b_block = tl.load(
-            b_block_ptr + tl.arange(0, BLOCK_SIZE_K)[:, None] * stride_bk + 
-            tl.arange(0, BLOCK_SIZE_N)[None, :] * stride_bn,
-            mask=(k * BLOCK_SIZE_K + tl.arange(0, BLOCK_SIZE_K)[:, None] < K) & 
-                 (block_start_n + tl.arange(0, BLOCK_SIZE_N)[None, :] < N),
-            other=0.0
-        )
+        # Load A and B matrices
+        a = tl.load(a_ptrs, mask=a_mask, other=0)
+        b = tl.load(b_ptrs, mask=b_mask, other=0)
         
         # Matrix multiplication
-        acc += tl.dot(a_block, b_block)
+        acc += tl.dot(a, b)
         
-        # Update block pointers
-        a_block_ptr += BLOCK_SIZE_K * stride_ak
-        b_block_ptr += BLOCK_SIZE_K * stride_bk
+        # Update pointers
+        a_ptrs += BLOCK_SIZE_K * stride_ak
+        b_ptrs += BLOCK_SIZE_K * stride_bk
+    
+    # Output pointer
+    c_ptrs = c_ptr + offs_am[:, None] * stride_cm + offs_bn[None, :] * stride_cn
+    c_mask = (offs_am[:, None] < M) & (offs_bn[None, :] < N)
     
     # Apply optional activation
     if ACTIVATION == 'relu':
@@ -149,15 +148,7 @@ def matmul_kernel(
         acc = 1 / (1 + tl.exp(-acc))
     
     # Store result
-    c_block_ptr = c_ptr + block_start_m * stride_cm + block_start_n * stride_cn
-    tl.store(
-        c_block_ptr + 
-        tl.arange(0, BLOCK_SIZE_M)[:, None] * stride_cm + 
-        tl.arange(0, BLOCK_SIZE_N)[None, :] * stride_cn,
-        acc,
-        mask=(block_start_m + tl.arange(0, BLOCK_SIZE_M)[:, None] < M) & 
-             (block_start_n + tl.arange(0, BLOCK_SIZE_N)[None, :] < N)
-    )
+    tl.store(c_ptrs, acc, mask=c_mask)
 
 
 def matmul(a, b, activation=""):

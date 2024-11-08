@@ -1,41 +1,40 @@
-
+import os
+import re
+import shutil
 from datetime import datetime
 from typing import Dict
 
-import os
+import anthropic
 
 import tomli
 from dotenv import load_dotenv
-import anthropic
-import re
-import shutil
+
+
 def get_anthropic_response(prompt: Dict[str, str]) -> str:
     """Get response from Anthropic API using Claude model"""
     # Load environment variables from .env file
     load_dotenv()
-    
+
     # Get API key from environment
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
         raise ValueError("ANTHROPIC_API_KEY not found in environment variables")
-        
+
     # Initialize Anthropic client
     client = anthropic.Anthropic(api_key=api_key)
     user_prompt = compose_prompt_for_completion(prompt)
     system_prompt = prompt["system_prompt"]
     user_prompt = prompt["user_prompt"]
-    
+
     # Get completion from Claude
     message = client.messages.create(
         model="claude-3-5-haiku-20241022",
         max_tokens=4096,
         system=system_prompt,
-        messages=[{"role": "user", "content": user_prompt}]
+        messages=[{"role": "user", "content": user_prompt}],
     )
-    
+
     return message.content[0].text
-
-
 
 
 # get todays date in the format Day Month Year
@@ -59,12 +58,16 @@ COMPLETION_PROMPT_TEMPLATE = f"""
 
 """
 
+
 def compose_prompt_for_completion(prompt_dict: Dict[str, str]) -> str:
     system_prompt = prompt_dict["system_prompt"]
     user_prompt = prompt_dict["user_prompt"]
 
-    prompt = COMPLETION_PROMPT_TEMPLATE.replace(SYSTEM_PROMPT_TOKEN, system_prompt).replace(USER_PROMPT_TOKEN, user_prompt)
+    prompt = COMPLETION_PROMPT_TEMPLATE.replace(
+        SYSTEM_PROMPT_TOKEN, system_prompt
+    ).replace(USER_PROMPT_TOKEN, user_prompt)
     return prompt
+
 
 def extract_python_code(text: str) -> str:
     # extract python code from string
@@ -77,8 +80,9 @@ def extract_python_code(text: str) -> str:
     except AttributeError:
         print(f"Could not find python code in {text}")
         # if no match, return an exception raised with the message could not find python code
-        return "raise Exception(\"This file was not generated with valid python code\")"
+        return 'raise Exception("This file was not generated with valid python code")'
     return python_code
+
 
 if __name__ == "__main__":
     # grab first prompt in eval_prompts.toml
@@ -86,6 +90,8 @@ if __name__ == "__main__":
         all_prompts = tomli.load(f)["prompts"]
 
     for prompt_dict in all_prompts:
+        if prompt_dict.get("skip", False):
+            continue
         template_file = prompt_dict["template_file"]
         name = prompt_dict["name"]
         reference_kernel = prompt_dict["reference_kernel"]
@@ -99,8 +105,12 @@ if __name__ == "__main__":
         with open(template_file, "r") as f:
             template_code = f.read()
 
-        template_code_generated = template_code.replace("{{ GENERATED CODE }}", generated_triton_kernel)
-        template_code_reference = template_code.replace("{{ GENERATED CODE }}", reference_triton_kernel)
+        template_code_generated = template_code.replace(
+            "{{ GENERATED CODE }}", generated_triton_kernel
+        )
+        template_code_reference = template_code.replace(
+            "{{ GENERATED CODE }}", reference_triton_kernel
+        )
 
         # write to file
         with open(f"generated_code/{name}_ai_generated.py", "w") as f:
@@ -110,6 +120,3 @@ if __name__ == "__main__":
 
     # copy over _helper_functions.py to generated_code
     shutil.copy("code_templates/_helper_functions.py", "generated_code/")
-    
-    
-

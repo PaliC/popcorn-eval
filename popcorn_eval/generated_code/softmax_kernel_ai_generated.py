@@ -59,39 +59,45 @@ def naive_softmax(x):
 @triton.jit
 def softmax_kernel(output_ptr, input_ptr, input_row_stride, output_row_stride, n_rows, n_cols, BLOCK_SIZE: tl.constexpr,
                    num_stages: tl.constexpr):
-    # Get row index for this block
-    row_idx = tl.program_id(0)
+    # Get current row and program ID
+    row_idx = tl.get_program_id(0)
     
-    # Skip if row index is out of bounds
-    if row_idx >= n_rows:
-        return
-    
-    # Offset input and output pointers to current row
-    row_input_ptr = input_ptr + row_idx * input_row_stride
-    row_output_ptr = output_ptr + row_idx * output_row_stride
-    
-    # Initialize max value for numerical stability
-    row_max = float('-inf')
-    
-    # First pass: find max value in the row
-    for off in range(0, n_cols, BLOCK_SIZE):
-        cols = tl.min(BLOCK_SIZE, n_cols - off)
-        a = tl.load(row_input_ptr + off, mask=off + tl.arange(0, BLOCK_SIZE) < n_cols)
-        row_max = tl.maximum(row_max, tl.max(a, axis=0))
-    
-    # Second pass: compute exp(x - max_x) and sum
-    row_sum = 0.0
-    for off in range(0, n_cols, BLOCK_SIZE):
-        cols = tl.min(BLOCK_SIZE, n_cols - off)
-        a = tl.load(row_input_ptr + off, mask=off + tl.arange(0, BLOCK_SIZE) < n_cols)
+    # Bounds check 
+    if row_idx < n_rows:
+        # Pointer to start of current row
+        row_ptr = input_ptr + row_idx * input_row_stride
+        output_row_ptr = output_ptr + row_idx * output_row_stride
         
-        # Subtract max for numerical stability
-        exp_a = tl.exp(a - row_max)
-        row_sum += tl.sum(exp_a, axis=0)
+        # Initialize max value for numerical stability
+        max_val = float('-inf')
         
-        # Store results for this block
-        tl.store(row_output_ptr + off, exp_a / row_sum, 
-                 mask=off + tl.arange(0, BLOCK_SIZE) < n_cols)
+        # Find max value in row 
+        for off in range(0, n_cols, BLOCK_SIZE):
+            mask = (off + tl.arange(0, BLOCK_SIZE) < n_cols)
+            row_vals = tl.load(row_ptr + off, mask=mask, other=float('-inf'))
+            max_val = tl.maximum(max_val, tl.max(row_vals, axis=0))
+        
+        # Compute exp and sum 
+        exp_sum = 0.0
+        for off in range(0, n_cols, BLOCK_SIZE):
+            mask = (off + tl.arange(0, BLOCK_SIZE) < n_cols)
+            row_vals = tl.load(row_ptr + off, mask=mask, other=float('-inf'))
+            
+            # Subtract max for numerical stability
+            exp_vals = tl.exp(row_vals - max_val)
+            exp_sum += tl.sum(exp_vals, axis=0)
+        
+        # Compute softmax probabilities
+        for off in range(0, n_cols, BLOCK_SIZE):
+            mask = (off + tl.arange(0, BLOCK_SIZE) < n_cols)
+            row_vals = tl.load(row_ptr + off, mask=mask, other=float('-inf'))
+            
+            # Subtract max and compute softmax
+            exp_vals = tl.exp(row_vals - max_val)
+            softmax_vals = exp_vals / exp_sum
+            
+            # Store results
+            tl.store(output_row_ptr + off, softmax_vals, mask=mask)
 
 
 

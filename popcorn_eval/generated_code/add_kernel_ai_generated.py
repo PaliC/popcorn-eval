@@ -26,31 +26,26 @@ from _helper_functions import _compare_triton_and_torch
 
 
 @triton.jit
-def add_kernel(x_ptr,  # Input vector 1 pointer
-               y_ptr,  # Input vector 2 pointer 
-               output_ptr,  # Output vector pointer
-               n_elements,  # Total vector size
-               BLOCK_SIZE: tl.constexpr  # Elements per thread block
-               ):
-    # Calculate the start index for this program
+def add_kernel(x_ptr, y_ptr, output_ptr, n_elements, BLOCK_SIZE: tl.constexpr):
+    # Compute program's start index
     pid = tl.program_id(axis=0)
     block_start = pid * BLOCK_SIZE
     
-    # Create offset tensor for vectorized memory access
-    offs = block_start + tl.arange(0, BLOCK_SIZE)
+    # Create offsets for loading inputs 
+    offsets = block_start + tl.arange(0, BLOCK_SIZE)
     
-    # Boundary check to prevent out-of-bounds access
-    mask = offs < n_elements
+    # Boundary check to prevent out-of-bounds memory access
+    mask = offsets < n_elements
     
-    # Load input values 
-    x = tl.load(x_ptr + offs, mask=mask)
-    y = tl.load(y_ptr + offs, mask=mask)
+    # Load input vectors
+    x = tl.load(x_ptr + offsets, mask=mask)
+    y = tl.load(y_ptr + offsets, mask=mask)
     
     # Perform elementwise addition
     output = x + y
     
-    # Store result back to output pointer
-    tl.store(output_ptr + offs, output, mask=mask)
+    # Store result 
+    tl.store(output_ptr + offsets, output, mask=mask)
 
 
 

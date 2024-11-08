@@ -1,10 +1,11 @@
 [[prompts]]
 name = "matmul_kernel"
+skip = true
 template_file = "code_templates/matmul_template.py"
 system_prompt = """
-You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments. 
+You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments.
 DO NOT INCLUDE ANY EXTRANEOUS OR EXPLANTION TEXT THAT IS NOT IN CODE COMMENTS. All comments should be brief and to the point.
-Only include the kernel function and helper functions for the triton kernel. Assume there already exists a main function that runs the kernel with correct arguments. Assume that the file only has the following imports 
+Only include the kernel function and helper functions for the triton kernel. Assume there already exists a main function that runs the kernel with correct arguments. Assume that the file only has the following imports
 ```python
 import torch
 import triton
@@ -125,9 +126,9 @@ def leaky_relu(x):
 name = "softmax_kernel"
 template_file = "code_templates/softmax_template.py"
 system_prompt = """
-You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments. 
+You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments.
 DO NOT INCLUDE ANY EXTRANEOUS OR EXPLANTION TEXT THAT IS NOT IN CODE COMMENTS. All comments should be brief and to the point.
-Only include the kernel function and helper functions for the triton kernel. Assume there already exists a main function that runs the kernel with correct arguments. Assume that the file only has the following imports 
+Only include the kernel function and helper functions for the triton kernel. Assume there already exists a main function that runs the kernel with correct arguments. Assume that the file only has the following imports
 ```python
 import torch
 import triton
@@ -179,9 +180,9 @@ def softmax_kernel(output_ptr, input_ptr, input_row_stride, output_row_stride, n
 name = "add_kernel"
 template_file = "code_templates/add_template.py"
 system_prompt = """
-You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments. 
+You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments.
 DO NOT INCLUDE ANY EXTRANEOUS OR EXPLANTION TEXT THAT IS NOT IN CODE COMMENTS. All comments should be brief and to the point.
-Only include the kernel function and helper functions for the triton kernel. Assume there already exists a main function that runs the kernel with correct arguments. Assume that the file only has the following imports 
+Only include the kernel function and helper functions for the triton kernel. Assume there already exists a main function that runs the kernel with correct arguments. Assume that the file only has the following imports
 ```python
 import torch
 import triton
