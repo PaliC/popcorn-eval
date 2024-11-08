@@ -62,6 +62,7 @@ Currently we are using Anthropic's API to generate kernels. However, we plan on 
 - [ ] Add more prompts
 - [ ] Create a summary for the results produced in `popcorn_eval/logs`
 - [ ] Create summary of failed prompts / generations
+- [ ] Make log parser work on failures
 
 ## Contributing
 
