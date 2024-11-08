@@ -1,0 +1,33 @@
+kernel_name,Metric Name,AI generated Metric Value,Reference Metric Value,Difference,Metric Unit
+logs/add_kernel,DRAM Frequency,1584016393.44,1582677165.35,1339228.0900001526,cycle/second
+logs/add_kernel,SM Frequency,1341156506.15,1340858759.84,297746.3100001812,cycle/second
+logs/add_kernel,Elapsed Cycles,5240,5456,-216.0,cycle
+logs/add_kernel,Memory Throughput,13.07,12.57,0.5,%
+logs/add_kernel,DRAM Throughput,8.33,8.00,0.33000000000000007,%
+logs/add_kernel,Duration,3904,4064,-160.0,nsecond
+logs/add_kernel,L1/TEX Cache Throughput,9.51,9.52,-0.009999999999999787,%
+logs/add_kernel,L2 Cache Throughput,20.39,19.64,0.75,%
+logs/add_kernel,SM Active Cycles,1246.08,1245.28,0.7999999999999545,cycle
+logs/add_kernel,Compute (SM) Throughput,0.79,0.76,0.030000000000000027,%
+logs/add_kernel,Block Size,128,128,0.0,
+logs/add_kernel,Cluster Size,0,0,0.0,
+logs/add_kernel,Grid Size,97,97,0.0,
+logs/add_kernel,Registers Per Thread,26,26,0.0,register/thread
+logs/add_kernel,Shared Memory Configuration Size,32768,32768,0.0,byte
+logs/add_kernel,Driver Shared Memory Per Block,1024,1024,0.0,byte/block
+logs/add_kernel,Dynamic Shared Memory Per Block,0,0,0.0,byte/block
+logs/add_kernel,Static Shared Memory Per Block,0,0,0.0,byte/block
+logs/add_kernel,Threads,12416,12416,0.0,thread
+logs/add_kernel,Waves Per SM,0.05,0.05,0.0,
+logs/add_kernel,Max Active Clusters,0,0,0.0,cluster
+logs/add_kernel,Max Cluster Size,8,8,0.0,block
+logs/add_kernel,Overall GPU Occupancy,0,0,0.0,%
+logs/add_kernel,Cluster Occupancy,0,0,0.0,%
+logs/add_kernel,Block Limit SM,32,32,0.0,block
+logs/add_kernel,Block Limit Registers,16,16,0.0,block
+logs/add_kernel,Block Limit Shared Mem,32,32,0.0,block
+logs/add_kernel,Block Limit Warps,16,16,0.0,block
+logs/add_kernel,Theoretical Active Warps per SM,64,64,0.0,warp
+logs/add_kernel,Theoretical Occupancy,100,100,0.0,%
+logs/add_kernel,Achieved Occupancy,5.95,5.99,-0.040000000000000036,%
+logs/add_kernel,Achieved Active Warps Per SM,3.81,3.83,-0.020000000000000018,warp

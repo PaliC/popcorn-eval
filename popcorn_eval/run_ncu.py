@@ -6,6 +6,14 @@ from pathlib import Path
 import tomli
 
 
+def is_float(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
+
+
 def parse_profiler_csv(file_path):
     """
     Parse a CSV file that contains profiler data and convert it to a nested dictionary.
@@ -130,12 +138,19 @@ def main():
     for log_pair in log_pairs:
         ai_generated_csv = parse_profiler_csv(log_pair[0])
         reference_csv = parse_profiler_csv(log_pair[1])
-        kernel_name = log_pair[0].split("_")[0]
-        print(f"Processing {kernel_name}")
-        for metric_name, metric_info in ai_generated_csv.items():
-            if metric_name in reference_csv:
+        kernel_name = log_pair[0].split("_ai_generated")[0]
+        ai_generated_dict = ai_generated_csv["0"]
+        reference_dict = reference_csv["0"]
+
+        for metric_name, metric_info in ai_generated_dict.items():
+            if metric_name in reference_dict:
                 ai_generated_value = metric_info[0]
-                reference_value = reference_csv[metric_name][0]
+                reference_value = reference_dict[metric_name][0]
+                # remove commas from the values
+                ai_generated_value = ai_generated_value.replace(",", "")
+                reference_value = reference_value.replace(",", "")
+                if not is_float(ai_generated_value) or not is_float(reference_value):
+                    continue
                 difference = float(ai_generated_value) - float(reference_value)
                 csv_row = [
                     kernel_name,
