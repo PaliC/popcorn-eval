@@ -1,3 +1,4 @@
+import csv
 import os
 import subprocess
 from pathlib import Path
@@ -57,6 +58,7 @@ def main():
 
     ncu_commands = []
     generated_code_paths = []
+    log_pairs = []
 
     # get all generated code paths in the generated_code directory
     for path in Path("generated_code").glob("**/*.py"):
@@ -99,6 +101,9 @@ def main():
         ]
         ncu_commands.append(ncu_command_generated)
         ncu_commands.append(ncu_command_reference)
+        log_pairs.append(
+            (f"logs/{name}_ai_generated.ncu-rep", f"logs/{name}_reference.ncu-rep")
+        )
 
     # run all ncu commands
     # TODO: run in parallel
@@ -112,6 +117,40 @@ def main():
         except subprocess.CalledProcessError as e:
             print(f"An error occurred while running {cmd_as_str}")
             print("Error message:", e.stderr)
+    csv_rows = []
+    csv_columns = [
+        "kernel_name",
+        "Metric Name",
+        "AI generated Metric Value",
+        "Reference Metric Value",
+        "Difference",
+        "Metric Unit",
+    ]
+    csv_rows.append(csv_columns)
+    for log_pair in log_pairs:
+        ai_generated_csv = parse_profiler_csv(log_pair[0])
+        reference_csv = parse_profiler_csv(log_pair[1])
+        kernel_name = log_pair[0].split("_")[0]
+        print(f"Processing {kernel_name}")
+        for metric_name, metric_info in ai_generated_csv.items():
+            if metric_name in reference_csv:
+                ai_generated_value = metric_info[0]
+                reference_value = reference_csv[metric_name][0]
+                difference = float(ai_generated_value) - float(reference_value)
+                csv_row = [
+                    kernel_name,
+                    metric_name,
+                    ai_generated_value,
+                    reference_value,
+                    difference,
+                    metric_info[1],
+                ]
+                csv_rows.append(csv_row)
+
+        # write to csv
+        with open("logs/ncu_results.csv", "w", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerows(csv_rows)
 
 
 if __name__ == "__main__":
