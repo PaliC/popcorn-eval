@@ -1,7 +1,9 @@
 import csv
 import os
 import subprocess
+from collections import defaultdict
 from pathlib import Path
+from typing import DefaultDict
 
 import tomli
 
@@ -67,6 +69,7 @@ def main():
     ncu_commands = []
     generated_code_paths = []
     log_pairs = []
+    cosine_similarity_values = defaultdict(lambda: {})
 
     # get all generated code paths in the generated_code directory
     for path in Path("generated_code").glob("**/*.py"):
@@ -116,12 +119,27 @@ def main():
     # run all ncu commands
     # TODO: run in parallel
     counter = 0
+    log_to_cosine_similarity = {}
     for command in ncu_commands:
         counter += 1
         cmd_as_str = " ".join(command)
         print(f"Running command: {cmd_as_str} \n {counter} / {len(ncu_commands)}")
         try:
-            subprocess.run(command, check=True, capture_output=True, text=True)
+            capture = subprocess.run(
+                command,
+                check=True,
+                stdout=subprocess.PIPE,
+            )
+            for line in capture.stdout.decode().splitlines():
+                if "Cosine similarity" in line:
+                    cosine_similarity = line.split(":")[1].strip()
+                    cosine_similarity = cosine_similarity.replace(",", "")
+                    log_name = command[5]
+                    if is_float(cosine_similarity):
+                        log_to_cosine_similarity[log_name] = cosine_similarity
+                    else:
+                        log_to_cosine_similarity[log_name] = "N/A"
+
         except subprocess.CalledProcessError as e:
             print(f"An error occurred while running {cmd_as_str}")
             print("Error message:", e.stderr)
@@ -182,6 +200,19 @@ def main():
             reference_scaled_occupancy,
             ai_generated_scaled_occupancy - reference_scaled_occupancy,
             "%",
+        ]
+        csv_rows.append(csv_row)
+
+        # get cosine similarity
+        cosine_similarity_ai_generated = log_to_cosine_similarity[log_pair[0]]
+        cosine_similarity_reference = log_to_cosine_similarity[log_pair[1]]
+        csv_row = [
+            kernel_name,
+            "Cosine Similarity",
+            cosine_similarity_ai_generated,
+            cosine_similarity_reference,
+            float(cosine_similarity_ai_generated) - float(cosine_similarity_reference),
+            "",
         ]
         csv_rows.append(csv_row)
 

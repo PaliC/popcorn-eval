@@ -27,24 +27,24 @@ from _helper_functions import _compare_triton_and_torch
 
 @triton.jit
 def add_kernel(x_ptr, y_ptr, output_ptr, n_elements, BLOCK_SIZE: tl.constexpr):
-    # Compute program's start index
+    # Compute the start index for this program
     pid = tl.program_id(axis=0)
     block_start = pid * BLOCK_SIZE
     
-    # Create offsets for loading inputs 
+    # Create an offset array for vectorized access
     offsets = block_start + tl.arange(0, BLOCK_SIZE)
     
-    # Boundary check to prevent out-of-bounds memory access
+    # Create a mask to handle boundary conditions
     mask = offsets < n_elements
     
-    # Load input vectors
+    # Load x and y values, using the mask to avoid out-of-bounds access
     x = tl.load(x_ptr + offsets, mask=mask)
     y = tl.load(y_ptr + offsets, mask=mask)
     
     # Perform elementwise addition
     output = x + y
     
-    # Store result 
+    # Store the result, again using the mask
     tl.store(output_ptr + offsets, output, mask=mask)
 
 

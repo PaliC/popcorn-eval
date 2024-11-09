@@ -1,14 +1,14 @@
 kernel_name,Metric Name,AI generated Metric Value,Reference Metric Value,Difference,Metric Unit
-add_kernel,DRAM Frequency,1574803149.61,1564814814.81,9988334.799999952,cycle/second
-add_kernel,SM Frequency,1334461122.05,1335596478.17,-1135356.120000124,cycle/second
-add_kernel,Elapsed Cycles,5431,5392,39.0,cycle
-add_kernel,Memory Throughput,12.73,12.79,-0.05999999999999872,%
-add_kernel,DRAM Throughput,8.04,8.16,-0.120000000000001,%
-add_kernel,Duration,4064,4032,32.0,nsecond
-add_kernel,L1/TEX Cache Throughput,9.48,9.08,0.40000000000000036,%
-add_kernel,L2 Cache Throughput,19.67,19.85,-0.17999999999999972,%
-add_kernel,SM Active Cycles,1250.22,1304.94,-54.72000000000003,cycle
-add_kernel,Compute (SM) Throughput,0.77,0.77,0.0,%
+add_kernel,DRAM Frequency,1569333333.33,1567460317.46,1873015.8699998856,cycle/second
+add_kernel,SM Frequency,1332968750,1333457341.27,-488591.2699999809,cycle/second
+add_kernel,Elapsed Cycles,5341,5382,-41.0,cycle
+add_kernel,Memory Throughput,12.92,12.76,0.16000000000000014,%
+add_kernel,DRAM Throughput,8.20,8.15,0.049999999999998934,%
+add_kernel,Duration,4000,4032,-32.0,nsecond
+add_kernel,L1/TEX Cache Throughput,9.47,9.25,0.22000000000000064,%
+add_kernel,L2 Cache Throughput,20.15,19.77,0.379999999999999,%
+add_kernel,SM Active Cycles,1251.86,1281.73,-29.87000000000012,cycle
+add_kernel,Compute (SM) Throughput,0.78,0.77,0.010000000000000009,%
 add_kernel,Block Size,128,128,0.0,
 add_kernel,Cluster Size,0,0,0.0,
 add_kernel,Grid Size,97,97,0.0,
@@ -29,6 +29,7 @@ add_kernel,Block Limit Shared Mem,32,32,0.0,block
 add_kernel,Block Limit Warps,16,16,0.0,block
 add_kernel,Theoretical Active Warps per SM,64,64,0.0,warp
 add_kernel,Theoretical Occupancy,100,100,0.0,%
-add_kernel,Achieved Occupancy,5.97,5.92,0.04999999999999982,%
-add_kernel,Achieved Active Warps Per SM,3.82,3.79,0.029999999999999805,warp
-add_kernel,Achieved of Possible Occupancy,0.059699999999999996,0.0592,0.0004999999999999935,%
+add_kernel,Achieved Occupancy,6.00,5.95,0.04999999999999982,%
+add_kernel,Achieved Active Warps Per SM,3.84,3.81,0.029999999999999805,warp
+add_kernel,Achieved of Possible Occupancy,0.06,0.059500000000000004,0.0004999999999999935,%
+add_kernel,Cosine Similarity,1.0,1.0,0.0,
