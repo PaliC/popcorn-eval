@@ -159,6 +159,8 @@ def main():
         kernel_name = log_pair[0].split("/")[-1].split("_ai_generated")[0]
         ai_generated_dict = ai_generated_csv["0"]
         reference_dict = reference_csv["0"]
+        if len(ai_generated_dict) > 1 or len(reference_dict) > 1:
+            print(f"Skipping {kernel_name} because it has more than one kernel launch")
 
         for metric_name, metric_info in ai_generated_dict.items():
             if metric_name in reference_dict:
