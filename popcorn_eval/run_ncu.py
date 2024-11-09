@@ -33,6 +33,13 @@ def parse_profiler_csv(file_path):
     result = {}
 
     with open(file_path, "r") as file:
+        # check if the file contains "The application returned an error code in the file" line if so return an empty dictionary
+        for line in file:
+            if "he application returned an error code" in line:
+                return {}
+
+    with open(file_path, "r") as file:
+
         # Skip until we find "Disconnected from process"
         for line in file:
             if "Disconnected from process" in line:
@@ -157,63 +164,89 @@ def main():
         ai_generated_csv = parse_profiler_csv(log_pair[0])
         reference_csv = parse_profiler_csv(log_pair[1])
         kernel_name = log_pair[0].split("/")[-1].split("_ai_generated")[0]
-        ai_generated_dict = ai_generated_csv["0"]
+
+        if len(ai_generated_csv) == 0:
+            ai_generated_dict = {}
+        else:
+            ai_generated_dict = ai_generated_csv["0"]
+        print(reference_csv)
         reference_dict = reference_csv["0"]
         if len(ai_generated_dict) > 1 or len(reference_dict) > 1:
             print(f"Skipping {kernel_name} because it has more than one kernel launch")
 
-        for metric_name, metric_info in ai_generated_dict.items():
-            if metric_name in reference_dict:
-                ai_generated_value = metric_info[0]
-                reference_value = reference_dict[metric_name][0]
+        for metric_name, metric_info in reference_dict.items():
+            reference_value = reference_dict[metric_name][0]
+            reference_value = reference_value.replace(",", "")
+            if not is_float(reference_value):
+                continue
+            if metric_name not in ai_generated_dict:
+                ai_generated_value = "N/A"
+                difference = "N/A"
+            else:
+                ai_generated_value = ai_generated_dict[metric_name][0]
                 # remove commas from the values
                 ai_generated_value = ai_generated_value.replace(",", "")
-                reference_value = reference_value.replace(",", "")
-                if not is_float(ai_generated_value) or not is_float(reference_value):
-                    continue
                 difference = float(ai_generated_value) - float(reference_value)
-                csv_row = [
-                    kernel_name,
-                    metric_name,
-                    ai_generated_value,
-                    reference_value,
-                    difference,
-                    metric_info[1],
-                ]
-                csv_rows.append(csv_row)
+            csv_row = [
+                kernel_name,
+                metric_name,
+                ai_generated_value,
+                reference_value,
+                difference,
+                metric_info[1],
+            ]
+            csv_rows.append(csv_row)
 
-        # get scaled occupancy (Achieved Occupancy/Theoretical Occupancy)
-        ai_generated_occupancy = ai_generated_dict["Achieved Occupancy"][0]
         reference_occupancy = reference_dict["Achieved Occupancy"][0]
-        ai_generated_theoretical_occupancy = ai_generated_dict["Theoretical Occupancy"][
-            0
-        ]
         reference_theoretical_occupancy = reference_dict["Theoretical Occupancy"][0]
-        ai_generated_scaled_occupancy = float(ai_generated_occupancy) / float(
-            ai_generated_theoretical_occupancy
-        )
         reference_scaled_occupancy = float(reference_occupancy) / float(
             reference_theoretical_occupancy
         )
+
+        if (
+            "Theoretical Occupancy" not in ai_generated_dict
+            or "Achieved Occupancy" not in ai_generated_dict
+        ):
+            ai_generated_occupancy = "N/A"
+            ai_generated_theoretical_occupancy = "N/A"
+            ai_generated_scaled_occupancy = "N/A"
+            scaled_diff = "N/A"
+        else:
+            # get scaled occupancy (Achieved Occupancy/Theoretical Occupancy)
+            ai_generated_occupancy = ai_generated_dict["Achieved Occupancy"][0]
+            ai_generated_theoretical_occupancy = ai_generated_dict[
+                "Theoretical Occupancy"
+            ][0]
+            ai_generated_scaled_occupancy = float(ai_generated_occupancy) / float(
+                ai_generated_theoretical_occupancy
+            )
+            scaled_diff = ai_generated_scaled_occupancy - reference_scaled_occupancy
         csv_row = [
             kernel_name,
             "Achieved of Possible Occupancy",
             ai_generated_scaled_occupancy,
             reference_scaled_occupancy,
-            ai_generated_scaled_occupancy - reference_scaled_occupancy,
+            scaled_diff,
             "%",
         ]
         csv_rows.append(csv_row)
 
         # get cosine similarity
-        cosine_similarity_ai_generated = log_to_cosine_similarity[log_pair[0]]
         cosine_similarity_reference = log_to_cosine_similarity[log_pair[1]]
+        if log_pair[0] not in log_to_cosine_similarity:
+            cosine_similarity_ai_generated = "N/A"
+            cosine_similarity_diff = "N/A"
+        else:
+            cosine_similarity_ai_generated = log_to_cosine_similarity[log_pair[0]]
+            cosine_similarity_diff = float(cosine_similarity_ai_generated) - float(
+                cosine_similarity_reference
+            )
         csv_row = [
             kernel_name,
             "Cosine Similarity",
             cosine_similarity_ai_generated,
             cosine_similarity_reference,
-            float(cosine_similarity_ai_generated) - float(cosine_similarity_reference),
+            cosine_similarity_diff,
             "",
         ]
         csv_rows.append(csv_row)

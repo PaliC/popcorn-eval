@@ -26,25 +26,32 @@ from _helper_functions import _compare_triton_and_torch
 
 
 @triton.jit
-def add_kernel(x_ptr, y_ptr, output_ptr, n_elements, BLOCK_SIZE: tl.constexpr):
-    # Compute the start index for this program
+def add_kernel(x_ptr,  # Input vector 1 pointer
+               y_ptr,  # Input vector 2 pointer
+               output_ptr,  # Output vector pointer
+               n_elements,  # Total number of vector elements
+               BLOCK_SIZE: tl.constexpr  # Elements processed per thread
+               ):
+    # Calculate global program index
     pid = tl.program_id(axis=0)
+    
+    # Calculate block start offset 
     block_start = pid * BLOCK_SIZE
     
-    # Create an offset array for vectorized access
+    # Create offset range within block
     offsets = block_start + tl.arange(0, BLOCK_SIZE)
     
-    # Create a mask to handle boundary conditions
+    # Create mask to handle boundary conditions
     mask = offsets < n_elements
     
-    # Load x and y values, using the mask to avoid out-of-bounds access
+    # Load elements from input vectors
     x = tl.load(x_ptr + offsets, mask=mask)
     y = tl.load(y_ptr + offsets, mask=mask)
     
     # Perform elementwise addition
     output = x + y
     
-    # Store the result, again using the mask
+    # Store result in output vector
     tl.store(output_ptr + offsets, output, mask=mask)
 
 
