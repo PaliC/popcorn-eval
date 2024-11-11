@@ -442,3 +442,79 @@ reference_kernel = """
 
 ```
 """
+
+[[prompts]]
+name = "constant_add"
+template_file = "code_templates/constant_add_template.py"
+system_prompt = """
+You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments.
+DO NOT INCLUDE ANY EXTRANEOUS OR EXPLANTION TEXT THAT IS NOT IN CODE COMMENTS. All comments should be brief and to the point.
+Only include the kernel function and helper functions for the triton kernel. Assume there already exists a main function that runs the kernel with correct arguments. Assume that the file only has the following imports
+```python
+import torch
+import triton
+import triton.language as tl
+```
+"""
+user_prompt = """
+Write a triton kernel function that performs an elementwise addition operation given one input vector. It should add a constant value of 10 to each element of the input vector. The kernel should have the function signature:
+```python
+def constant_add_kernel(x_ptr, z_ptr, N0, B0: tl.constexpr):
+```
+"""
+reference_kernel = """
+```python
+@triton.jit
+def constant_add_kernel(x_ptr, z_ptr, N0, B0: tl.constexpr):
+    range = tl.arange(0, B0)
+    x = tl.load(x_ptr + range)
+    x += 10
+    tl.store(z_ptr + range, x)
+```
+"""
+
+[[prompts]]
+name = "outer_vector_add_kernel"
+template_file = "code_templates/outer_vector_add_template.py"
+system_prompt = """
+You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments.
+DO NOT INCLUDE ANY EXTRANEOUS OR EXPLANTION TEXT THAT IS NOT IN CODE COMMENTS. All comments should be brief and to the point.
+Only include the kernel function and helper functions for the triton kernel. Assume there already exists a main function that runs the kernel with correct arguments. Assume that the file only has the following imports
+```python
+import torch
+import triton
+import triton.language as tl
+```
+"""
+user_prompt = """
+Write a triton kernel function that performs an elementwise addition operation given two input vectors. 
+
+The triton kernel should have the same functionality as the following code which uses pytorch
+```python
+def outer_vector_add(x: Float32[Tensor, "32"], y: Float32[Tensor, "32"]) -> Float32[Tensor, "32 32"]:
+    return x[None, :] + y[:, None]
+```
+
+Block size B0 is always the same as vector x length N0. Block size B1 is always the same as vector y length N1.
+
+The kernel should have the function signature:
+```python
+def outer_vector_add_kernel(x_ptr, y_ptr, z_ptr, N0, B0: tl.constexpr):
+```
+"""
+reference_kernel = """
+```python
+@triton.jit
+def outer_vector_add_kernel(x_ptr, y_ptr, z_ptr, N0, N1, B0: tl.constexpr, B1: tl.constexpr):
+    range0 = tl.arange(0, B0)
+    range1 = tl.arange(0, B1)
+
+    x = tl.load(x_ptr + range0)
+    y = tl.load(y_ptr + range1)
+    z = x[None, :] + y[:, None]
+
+    range_block = range1[:, None] * N0 + range0[None, :]
+    tl.store(z_ptr + range_block, z)
+    return
+```
+"""

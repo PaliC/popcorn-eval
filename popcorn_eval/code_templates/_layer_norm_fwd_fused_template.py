@@ -16,33 +16,6 @@ except ModuleNotFoundError:
         
 {{ GENERATED CODE }}
 
-
-@triton.jit
-def _layer_norm_bwd_dwdb(DW,  # pointer to the partial sum of weights gradient
-                         DB,  # pointer to the partial sum of biases gradient
-                         FINAL_DW,  # pointer to the weights gradient
-                         FINAL_DB,  # pointer to the biases gradient
-                         M,  # GROUP_SIZE_M
-                         N,  # number of columns
-                         BLOCK_SIZE_M: tl.constexpr, BLOCK_SIZE_N: tl.constexpr):
-    # Map the program id to the elements of DW and DB it should compute.
-    pid = tl.program_id(0)
-    cols = pid * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
-    dw = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
-    db = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
-    # Iterate through the rows of DW and DB to sum the partial sums.
-    for i in range(0, M, BLOCK_SIZE_M):
-        rows = i + tl.arange(0, BLOCK_SIZE_M)
-        mask = (rows[:, None] < M) & (cols[None, :] < N)
-        offs = rows[:, None] * N + cols[None, :]
-        dw += tl.load(DW + offs, mask=mask, other=0.)
-        db += tl.load(DB + offs, mask=mask, other=0.)
-    # Write the final sum to the output.
-    sum_dw = tl.sum(dw, axis=0)
-    sum_db = tl.sum(db, axis=0)
-    tl.store(FINAL_DW + cols, sum_dw, mask=cols < N)
-    tl.store(FINAL_DB + cols, sum_db, mask=cols < N)
-
 class LayerNorm(torch.autograd.Function):
 
     @staticmethod
@@ -72,41 +45,6 @@ class LayerNorm(torch.autograd.Function):
         ctx.eps = eps
         return y
 
-    @staticmethod
-    def backward(ctx, dy):
-        x, w, b, m, v = ctx.saved_tensors
-        # heuristics for amount of parallel reduction stream for DW/DB
-        N = w.shape[0]
-        GROUP_SIZE_M = 64
-        if N <= 8192: GROUP_SIZE_M = 96
-        if N <= 4096: GROUP_SIZE_M = 128
-        if N <= 1024: GROUP_SIZE_M = 256
-        # allocate output
-        locks = torch.zeros(2 * GROUP_SIZE_M, dtype=torch.int32, device=w.device)
-        _dw = torch.zeros((GROUP_SIZE_M, N), dtype=x.dtype, device=w.device)
-        _db = torch.zeros((GROUP_SIZE_M, N), dtype=x.dtype, device=w.device)
-        dw = torch.empty((N, ), dtype=w.dtype, device=w.device)
-        db = torch.empty((N, ), dtype=w.dtype, device=w.device)
-        dx = torch.empty_like(dy)
-        # enqueue kernel using forward pass heuristics
-        # also compute partial sums for DW and DB
-        x_arg = x.reshape(-1, x.shape[-1])
-        M, N = x_arg.shape
-        _layer_norm_bwd_dx_fused[(M, )](  #
-            dx, dy, _dw, _db, x, w, m, v, locks,  #
-            x_arg.stride(0), N,  #
-            BLOCK_SIZE_N=ctx.BLOCK_SIZE,  #
-            GROUP_SIZE_M=GROUP_SIZE_M,  #
-            num_warps=ctx.num_warps)
-        grid = lambda meta: [triton.cdiv(N, meta['BLOCK_SIZE_N'])]
-        # accumulate partial sums in separate kernel
-        _layer_norm_bwd_dwdb[grid](
-            _dw, _db, dw, db, min(GROUP_SIZE_M, M), N,  #
-            BLOCK_SIZE_M=32,  #
-            BLOCK_SIZE_N=128, num_ctas=1)
-        return dx, None, dw, db, None
-
-
 layer_norm = LayerNorm.apply
 
 def test_layer_norm(M, N, dtype, eps=1e-5, device='cuda'):
@@ -121,17 +59,6 @@ def test_layer_norm(M, N, dtype, eps=1e-5, device='cuda'):
     # forward pass
     y_tri = layer_norm(x, w_shape, weight, bias, eps)
     y_ref = torch.nn.functional.layer_norm(x, w_shape, weight, bias, eps).to(dtype)
-    # backward pass (triton)
-    y_tri.backward(dy, retain_graph=True)
-    dx_tri, dw_tri, db_tri = [_.grad.clone() for _ in [x, weight, bias]]
-    x.grad, weight.grad, bias.grad = None, None, None
-    # backward pass (torch)
-    y_ref.backward(dy, retain_graph=True)
-    dx_ref, dw_ref, db_ref = [_.grad.clone() for _ in [x, weight, bias]]
-    # compare
 
-    # put y_tri, dx_tri, dw_tri, db_tri in a single tensor to test cosine similarity
-    triton_output = torch.cat([y_tri, dx_tri, dw_tri, db_tri], dim=0)
-    torch_output = torch.cat([y_ref, dx_ref, dw_ref, db_ref], dim=0)
-    _compare_triton_and_torch(triton_output, torch_output)
+    _compare_triton_and_torch(y_tri, y_ref)
 
