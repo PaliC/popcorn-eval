@@ -3,6 +3,7 @@ import triton.language as tl
 import torch
 import inspect
 from _helper_functions import _compare_triton_and_torch
+from jaxtyping import Float32, Int32
 
 # taken from https://github.com/srush/Triton-Puzzles
 
@@ -43,7 +44,7 @@ def simple_fa_spec(q: Float32[Tensor, "200"], k: Float32[Tensor, "200"], v: Floa
     soft =  x_exp  / x_exp.sum(1, keepdim=True)
     return (v[None, :] * soft).sum(1)
 
-{{ GENERATED_CODE }}
+{{ GENERATED CODE }}
     
 if __name__ == "__main__":
     test(softmax_kernel, softmax_spec, B={"B0": 1, "B1":32},

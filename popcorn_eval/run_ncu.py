@@ -76,6 +76,7 @@ def main():
     ncu_commands = []
     generated_code_paths = []
     log_pairs = []
+    compiling_kernels = set()
     cosine_similarity_values = defaultdict(lambda: {})
 
     # get all generated code paths in the generated_code directory
@@ -123,10 +124,17 @@ def main():
             (f"logs/{name}_ai_generated.ncu-rep", f"logs/{name}_reference.ncu-rep")
         )
 
+        with open(gen_ai_path, "w") as f:
+            source_code = f.read()
+        # check if the file compiles
+        compile(source=source_code, filename=gen_ai_path, mode="exec")
+        compiling_kernels.add(name)
+
     # run all ncu commands
     # TODO: run in parallel
     counter = 0
     log_to_cosine_similarity = {}
+    compiling_files = set()
     for command in ncu_commands:
         counter += 1
         cmd_as_str = " ".join(command)
@@ -141,7 +149,6 @@ def main():
                 if "Cosine similarity" in line:
                     cosine_similarity = line.split(":")[1].strip()
                     cosine_similarity = cosine_similarity.replace(",", "")
-                    log_name = command[5]
                     if is_float(cosine_similarity):
                         log_to_cosine_similarity[log_name] = cosine_similarity
                     else:
@@ -250,6 +257,18 @@ def main():
             "",
         ]
         csv_rows.append(csv_row)
+
+        if kernel_name in compiling_kernels:
+            csv_rows.append(
+                [
+                    kernel_name,
+                    "gen-ai-compiles",
+                    kernel_name in compiling_kernels,
+                    "True",
+                    "N/A",
+                    "",
+                ]
+            )
 
         # write to csv
         with open("logs/ncu_results.csv", "w", newline="") as csvfile:

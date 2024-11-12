@@ -1,14 +1,14 @@
 kernel_name,Metric Name,AI generated Metric Value,Reference Metric Value,Difference,Metric Unit
-softmax_kernel,DRAM Frequency,N/A,1580821917.81,N/A,cycle/second
-softmax_kernel,SM Frequency,N/A,1316352739.73,N/A,cycle/second
-softmax_kernel,Elapsed Cycles,N/A,15508,N/A,cycle
-softmax_kernel,Memory Throughput,N/A,40.82,N/A,%
-softmax_kernel,DRAM Throughput,N/A,20.11,N/A,%
-softmax_kernel,Duration,N/A,11680,N/A,nsecond
-softmax_kernel,L1/TEX Cache Throughput,N/A,60.72,N/A,%
-softmax_kernel,L2 Cache Throughput,N/A,34.60,N/A,%
-softmax_kernel,SM Active Cycles,N/A,10336.45,N/A,cycle
-softmax_kernel,Compute (SM) Throughput,N/A,40.37,N/A,%
+softmax_kernel,DRAM Frequency,N/A,1581062670.30,N/A,cycle/second
+softmax_kernel,SM Frequency,N/A,1314022053.81,N/A,cycle/second
+softmax_kernel,Elapsed Cycles,N/A,15555,N/A,cycle
+softmax_kernel,Memory Throughput,N/A,40.69,N/A,%
+softmax_kernel,DRAM Throughput,N/A,19.99,N/A,%
+softmax_kernel,Duration,N/A,11744,N/A,nsecond
+softmax_kernel,L1/TEX Cache Throughput,N/A,59.94,N/A,%
+softmax_kernel,L2 Cache Throughput,N/A,34.81,N/A,%
+softmax_kernel,SM Active Cycles,N/A,10474.09,N/A,cycle
+softmax_kernel,Compute (SM) Throughput,N/A,40.21,N/A,%
 softmax_kernel,Block Size,N/A,256,N/A,
 softmax_kernel,Cluster Size,N/A,0,N/A,
 softmax_kernel,Grid Size,N/A,1056,N/A,
@@ -29,20 +29,20 @@ softmax_kernel,Block Limit Shared Mem,N/A,10,N/A,block
 softmax_kernel,Block Limit Warps,N/A,8,N/A,block
 softmax_kernel,Theoretical Active Warps per SM,N/A,64,N/A,warp
 softmax_kernel,Theoretical Occupancy,N/A,100,N/A,%
-softmax_kernel,Achieved Occupancy,N/A,85.99,N/A,%
-softmax_kernel,Achieved Active Warps Per SM,N/A,55.04,N/A,warp
-softmax_kernel,Achieved of Possible Occupancy,N/A,0.8599,N/A,%
+softmax_kernel,Achieved Occupancy,N/A,85.97,N/A,%
+softmax_kernel,Achieved Active Warps Per SM,N/A,55.02,N/A,warp
+softmax_kernel,Achieved of Possible Occupancy,N/A,0.8597,N/A,%
 softmax_kernel,Cosine Similarity,N/A,N/A,N/A,
-add_kernel,DRAM Frequency,1580645161.29,1569105691.06,11539470.23000002,cycle/second
-add_kernel,SM Frequency,1334110383.06,1336636178.86,-2525795.7999999523,cycle/second
-add_kernel,Elapsed Cycles,5302,5264,38.0,cycle
-add_kernel,Memory Throughput,13.03,13.02,0.009999999999999787,%
-add_kernel,DRAM Throughput,8.21,8.34,-0.129999999999999,%
-add_kernel,Duration,3968,3936,32.0,nsecond
-add_kernel,L1/TEX Cache Throughput,9.35,8.56,0.7899999999999991,%
-add_kernel,L2 Cache Throughput,20.28,20.34,-0.05999999999999872,%
-add_kernel,SM Active Cycles,1267.06,1384.83,-117.76999999999998,cycle
-add_kernel,Compute (SM) Throughput,0.78,0.79,-0.010000000000000009,%
+add_kernel,DRAM Frequency,1574803149.61,1574803149.61,0.0,cycle/second
+add_kernel,SM Frequency,1334092027.56,1333569143.70,522883.8599998951,cycle/second
+add_kernel,Elapsed Cycles,5429,5427,2.0,cycle
+add_kernel,Memory Throughput,12.62,12.64,-0.02000000000000135,%
+add_kernel,DRAM Throughput,8.04,8.04,0.0,%
+add_kernel,Duration,4064,4064,0.0,nsecond
+add_kernel,L1/TEX Cache Throughput,9.54,9.43,0.10999999999999943,%
+add_kernel,L2 Cache Throughput,19.67,19.72,-0.04999999999999716,%
+add_kernel,SM Active Cycles,1242.44,1256.35,-13.909999999999854,cycle
+add_kernel,Compute (SM) Throughput,0.77,0.77,0.0,%
 add_kernel,Block Size,128,128,0.0,
 add_kernel,Cluster Size,0,0,0.0,
 add_kernel,Grid Size,97,97,0.0,
@@ -63,7 +63,7 @@ add_kernel,Block Limit Shared Mem,32,32,0.0,block
 add_kernel,Block Limit Warps,16,16,0.0,block
 add_kernel,Theoretical Active Warps per SM,64,64,0.0,warp
 add_kernel,Theoretical Occupancy,100,100,0.0,%
-add_kernel,Achieved Occupancy,6.00,6.01,-0.009999999999999787,%
-add_kernel,Achieved Active Warps Per SM,3.84,3.85,-0.010000000000000231,warp
-add_kernel,Achieved of Possible Occupancy,0.06,0.0601,-0.00010000000000000286,%
+add_kernel,Achieved Occupancy,5.98,5.99,-0.009999999999999787,%
+add_kernel,Achieved Active Warps Per SM,3.82,3.83,-0.010000000000000231,warp
+add_kernel,Achieved of Possible Occupancy,0.059800000000000006,0.0599,-9.999999999999593e-05,%
 add_kernel,Cosine Similarity,1.0,1.0,0.0,

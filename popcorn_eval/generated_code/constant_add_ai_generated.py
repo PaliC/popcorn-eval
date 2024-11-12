@@ -35,18 +35,10 @@ def test(puzzle, puzzle_spec, nelem={}, B={"B0": 32}):
     z_ = puzzle_spec(*tt_args)
     _compare_triton_and_torch(z_, z)
 
-def outer_matmul_bwd_spec(x: Float32[Tensor, "90 100"], y: Float32[Tensor, "90"],
-                             dz: Float32[Tensor, "90 100"]) -> Float32[Tensor, "90 100"]:
-    x = x.clone()
-    y = y.clone()
-    x = x.requires_grad_(True)
-    y = y.requires_grad_(True)
-    z = torch.relu(x * y[:, None])
-    z.backward(dz)
-    dx = x.grad
-    return dx
+def constant_add(x, y):
+    return x + 10
 
-{{ GENERATED_CODE }}
+{{ GENERATED CODE }}
     
 if __name__ == "__main__":
-    test(outer_matmul_bwd_spec, outer_matmul_bwd_kernel, nelem={"N0": 32})
+    test(constant_add, constant_add_kernel, nelem={"N0": 32})

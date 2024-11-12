@@ -237,7 +237,7 @@ def add_kernel(x_ptr,  # *Pointer* to first input vector.
 
 [[prompts]]
 name = "_layer_norm_fwd_fused_kernel"
-template_file = "code_templates/layer_norm_template.py"
+template_file = "code_templates/_layer_norm_fwd_fused_template.py"
 system_prompt = """
 You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments.
 DO NOT INCLUDE ANY EXTRANEOUS OR EXPLANTION TEXT THAT IS NOT IN CODE COMMENTS. All comments should be brief and to the point.
@@ -321,7 +321,7 @@ def _layer_norm_fwd_fused(
 
 [[prompts]]
 name = "_layer_norm_bwd_dx_fused"
-template_file = "code_templates/_layer_norm_bwd_dx_fused.py"
+template_file = "code_templates/_layer_norm_bwd_dx_fused_template.py"
 system_prompt = """
 You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments.
 DO NOT INCLUDE ANY EXTRANEOUS OR EXPLANTION TEXT THAT IS NOT IN CODE COMMENTS. All comments should be brief and to the point.
@@ -416,7 +416,7 @@ def _layer_norm_bwd_dx_fused(DX,  # pointer to the input gradient
 
 [[prompts]]
 name = "_layer_norm_bwd_dwdb"
-template_file = "code_templates/_layer_norm_bwd_dwdb.py"
+template_file = "code_templates/_layer_norm_bwd_dwdb_template.py"
 system_prompt = """
 You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments.
 DO NOT INCLUDE ANY EXTRANEOUS OR EXPLANTION TEXT THAT IS NOT IN CODE COMMENTS. All comments should be brief and to the point.
@@ -495,7 +495,7 @@ import triton.language as tl
 If a function is given, respect the function signature.
 """
 user_prompt = """
-Write a triton kernel function that performs an elementwise addition operation given two input vectors. 
+Write a triton kernel function that performs an elementwise addition operation given two input vectors.
 
 The triton kernel should have the same functionality as the following code which uses pytorch
 ```python
@@ -575,7 +575,7 @@ def outer_matmul_kernel(x_ptr, y_ptr, z_ptr, N0, N1, B0: tl.constexpr, B1: tl.co
 
 [[prompts]]
 name = "outer_matmul_bwd_kernel"
-template_file = "code_templates/outer_matmul_bwd.py"
+template_file = "code_templates/outer_matmul_bwd_template.py"
 system_prompt = """
 You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments.
 DO NOT INCLUDE ANY EXTRANEOUS OR EXPLANTION TEXT THAT IS NOT IN CODE COMMENTS. All comments should be brief and to the point.
@@ -589,7 +589,7 @@ import triton.language as tl
 If a function is given, respect the function signature.
 """
 user_prompt = """
-Write a triton kernel function that performs the backward pass of the outer matmul operation. 
+Write a triton kernel function that performs the backward pass of the outer matmul operation.
 It should use two program blocks. Block size B0 is always less than the vector x length N0. Block size B1 is always less than vector y length N1. Chain rule backward dz is of shape N0
 The kernel should have the function signature:
 ```python
@@ -688,7 +688,7 @@ import triton.language as tl
 If a function is given, respect the function signature.
 """
 user_prompt = """
-Write a triton kernel function that performs a simple feedforward operation specifically for a scaler version of flash attention. 
+Write a triton kernel function that performs a simple feedforward operation specifically for a scaler version of flash attention.
 Specifically, It should use zero programs. Block size B0 represents k of length N0. Block size B0 represents q of length N0.
 Block size B0 represents v of length N0. Sequence length is T. Process it B1 < T elements at a time. The operation should only use 1 for loop.
 Note that: "$$z_{i} = \\sum_{j} \\text{softmax}(q_1 k_1, \\ldots, q_T k_T)_j v_{j} \\text{ for } i = 1\\ldots N_0$$\n",
