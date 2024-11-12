@@ -3,6 +3,7 @@ import triton.language as tl
 import torch
 import inspect
 from _helper_functions import _compare_triton_and_torch
+from jaxtyping import Float32, Int32, Tensor
 
 # taken from https://github.com/srush/Triton-Puzzles
 

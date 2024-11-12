@@ -1,14 +1,14 @@
 kernel_name,Metric Name,AI generated Metric Value,Reference Metric Value,Difference,Metric Unit
-softmax_kernel,DRAM Frequency,N/A,1581062670.30,N/A,cycle/second
-softmax_kernel,SM Frequency,N/A,1314022053.81,N/A,cycle/second
-softmax_kernel,Elapsed Cycles,N/A,15555,N/A,cycle
-softmax_kernel,Memory Throughput,N/A,40.69,N/A,%
-softmax_kernel,DRAM Throughput,N/A,19.99,N/A,%
-softmax_kernel,Duration,N/A,11744,N/A,nsecond
-softmax_kernel,L1/TEX Cache Throughput,N/A,59.94,N/A,%
-softmax_kernel,L2 Cache Throughput,N/A,34.81,N/A,%
-softmax_kernel,SM Active Cycles,N/A,10474.09,N/A,cycle
-softmax_kernel,Compute (SM) Throughput,N/A,40.21,N/A,%
+softmax_kernel,DRAM Frequency,N/A,1592991913.75,N/A,cycle/second
+softmax_kernel,SM Frequency,N/A,1319817638.14,N/A,cycle/second
+softmax_kernel,Elapsed Cycles,N/A,15804,N/A,cycle
+softmax_kernel,Memory Throughput,N/A,40.06,N/A,%
+softmax_kernel,DRAM Throughput,N/A,19.63,N/A,%
+softmax_kernel,Duration,N/A,11872,N/A,nsecond
+softmax_kernel,L1/TEX Cache Throughput,N/A,60.83,N/A,%
+softmax_kernel,L2 Cache Throughput,N/A,34.44,N/A,%
+softmax_kernel,SM Active Cycles,N/A,10316.30,N/A,cycle
+softmax_kernel,Compute (SM) Throughput,N/A,39.61,N/A,%
 softmax_kernel,Block Size,N/A,256,N/A,
 softmax_kernel,Cluster Size,N/A,0,N/A,
 softmax_kernel,Grid Size,N/A,1056,N/A,
@@ -29,20 +29,21 @@ softmax_kernel,Block Limit Shared Mem,N/A,10,N/A,block
 softmax_kernel,Block Limit Warps,N/A,8,N/A,block
 softmax_kernel,Theoretical Active Warps per SM,N/A,64,N/A,warp
 softmax_kernel,Theoretical Occupancy,N/A,100,N/A,%
-softmax_kernel,Achieved Occupancy,N/A,85.97,N/A,%
-softmax_kernel,Achieved Active Warps Per SM,N/A,55.02,N/A,warp
-softmax_kernel,Achieved of Possible Occupancy,N/A,0.8597,N/A,%
+softmax_kernel,Achieved Occupancy,N/A,85.89,N/A,%
+softmax_kernel,Achieved Active Warps Per SM,N/A,54.97,N/A,warp
+softmax_kernel,Achieved of Possible Occupancy,N/A,0.8589,N/A,%
 softmax_kernel,Cosine Similarity,N/A,N/A,N/A,
-add_kernel,DRAM Frequency,1574803149.61,1574803149.61,0.0,cycle/second
-add_kernel,SM Frequency,1334092027.56,1333569143.70,522883.8599998951,cycle/second
-add_kernel,Elapsed Cycles,5429,5427,2.0,cycle
-add_kernel,Memory Throughput,12.62,12.64,-0.02000000000000135,%
-add_kernel,DRAM Throughput,8.04,8.04,0.0,%
-add_kernel,Duration,4064,4064,0.0,nsecond
-add_kernel,L1/TEX Cache Throughput,9.54,9.43,0.10999999999999943,%
-add_kernel,L2 Cache Throughput,19.67,19.72,-0.04999999999999716,%
-add_kernel,SM Active Cycles,1242.44,1256.35,-13.909999999999854,cycle
-add_kernel,Compute (SM) Throughput,0.77,0.77,0.0,%
+softmax_kernel,gen-ai-compiles,True,True,N/A,
+add_kernel,DRAM Frequency,1585937500,1570666666.67,15270833.329999924,cycle/second
+add_kernel,SM Frequency,1333404541.02,1336093750,-2689208.980000019,cycle/second
+add_kernel,Elapsed Cycles,5468,5353,115.0,cycle
+add_kernel,Memory Throughput,12.64,12.91,-0.2699999999999996,%
+add_kernel,DRAM Throughput,7.93,8.19,-0.2599999999999998,%
+add_kernel,Duration,4096,4000,96.0,nsecond
+add_kernel,L1/TEX Cache Throughput,9.46,9.51,-0.049999999999998934,%
+add_kernel,L2 Cache Throughput,19.61,20.07,-0.46000000000000085,%
+add_kernel,SM Active Cycles,1252.45,1246.39,6.059999999999945,cycle
+add_kernel,Compute (SM) Throughput,0.76,0.78,-0.020000000000000018,%
 add_kernel,Block Size,128,128,0.0,
 add_kernel,Cluster Size,0,0,0.0,
 add_kernel,Grid Size,97,97,0.0,
@@ -63,7 +64,8 @@ add_kernel,Block Limit Shared Mem,32,32,0.0,block
 add_kernel,Block Limit Warps,16,16,0.0,block
 add_kernel,Theoretical Active Warps per SM,64,64,0.0,warp
 add_kernel,Theoretical Occupancy,100,100,0.0,%
-add_kernel,Achieved Occupancy,5.98,5.99,-0.009999999999999787,%
+add_kernel,Achieved Occupancy,5.97,5.98,-0.010000000000000675,%
 add_kernel,Achieved Active Warps Per SM,3.82,3.83,-0.010000000000000231,warp
-add_kernel,Achieved of Possible Occupancy,0.059800000000000006,0.0599,-9.999999999999593e-05,%
+add_kernel,Achieved of Possible Occupancy,0.059699999999999996,0.059800000000000006,-0.0001000000000000098,%
 add_kernel,Cosine Similarity,1.0,1.0,0.0,
+add_kernel,gen-ai-compiles,True,True,N/A,

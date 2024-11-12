@@ -124,7 +124,7 @@ def main():
             (f"logs/{name}_ai_generated.ncu-rep", f"logs/{name}_reference.ncu-rep")
         )
 
-        with open(gen_ai_path, "w") as f:
+        with open(gen_ai_path, "r") as f:
             source_code = f.read()
         # check if the file compiles
         compile(source=source_code, filename=gen_ai_path, mode="exec")
@@ -138,6 +138,7 @@ def main():
     for command in ncu_commands:
         counter += 1
         cmd_as_str = " ".join(command)
+        log_name = command[5]
         print(f"Running command: {cmd_as_str} \n {counter} / {len(ncu_commands)}")
         try:
             capture = subprocess.run(

@@ -10,7 +10,9 @@ import tomli
 from dotenv import load_dotenv
 
 
-def get_anthropic_response(prompt: Dict[str, str]) -> str:
+def get_anthropic_response(
+    prompt: Dict[str, str], model_name="claude-3-5-haiku-20241022"
+) -> str:
     """Get response from Anthropic API using Claude model"""
     # Load environment variables from .env file
     load_dotenv()
@@ -28,7 +30,7 @@ def get_anthropic_response(prompt: Dict[str, str]) -> str:
 
     # Get completion from Claude
     message = client.messages.create(
-        model="claude-3-5-haiku-20241022",
+        model=model_name,
         max_tokens=4096,
         system=system_prompt,
         messages=[{"role": "user", "content": user_prompt}],
@@ -88,14 +90,17 @@ if __name__ == "__main__":
     # grab first prompt in eval_prompts.toml
     with open("prompts/eval_prompts.toml", "rb") as f:
         all_prompts = tomli.load(f)["prompts"]
-
+    model_name = "claude-3-5-haiku-20241022"
+    experiment_directory_name = (
+        f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_{model_name}"
+    )
     for prompt_dict in all_prompts:
         if prompt_dict.get("skip", False):
             continue
         template_file = prompt_dict["template_file"]
         name = prompt_dict["name"]
         reference_kernel = prompt_dict["reference_kernel"]
-        generated_kernel = get_anthropic_response(prompt_dict)
+        generated_kernel = get_anthropic_response(prompt_dict, model_name=model_name)
 
         # parse out python code from generated_kernel
         generated_triton_kernel = extract_python_code(generated_kernel)
@@ -111,12 +116,24 @@ if __name__ == "__main__":
         template_code_reference = template_code.replace(
             "{{ GENERATED CODE }}", reference_triton_kernel
         )
+        # experiment directory name should be the date and time of the experiment + model name
+        # create experiment directory
+        os.makedirs(f"generated_code/{experiment_directory_name}", exist_ok=True)
 
+        # copy over _helper_functions.py to generated_code
+        experiment_directory_name = f""
         # write to file
-        with open(f"generated_code/{name}_ai_generated.py", "w") as f:
+        with open(
+            f"generated_code/{experiment_directory_name}/{name}_ai_generated.py", "w"
+        ) as f:
             f.write(template_code_generated)
-        with open(f"generated_code/{name}_reference.py", "w") as f:
+        with open(
+            f"generated_code/{experiment_directory_name}/{name}_reference.py", "w"
+        ) as f:
             f.write(template_code_reference)
 
     # copy over _helper_functions.py to generated_code
-    shutil.copy("code_templates/_helper_functions.py", "generated_code/")
+    shutil.copy(
+        f"code_templates/{experiment_directory_name}/_helper_functions.py",
+        "generated_code/",
+    )
