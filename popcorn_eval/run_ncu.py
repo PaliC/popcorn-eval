@@ -3,7 +3,6 @@ import os
 import subprocess
 from collections import defaultdict
 from pathlib import Path
-from typing import DefaultDict
 
 import tomli
 
@@ -64,77 +63,65 @@ def parse_profiler_csv(file_path):
 
     return result
 
+# returns a list of ncu commands, log pairs, and compilable generated code paths
+def get_ncu_commands_for_generated_code():
+    # look in generated_code directory for all the generated code
+    suffix_list = ["_reference.py", "_ai_generated.py"]
+    paths = []
+    ncu_commands = []
+    logs = []
+    compilable_kernels = set()
+    for suffix in suffix_list:
+        for path in Path("generated_code").glob(f"**/*{suffix}"):
+            paths.append(path)
+    
+    for path in paths:
+        experiment_directory_name = path.parent.name
+        kernel_name = path.name.split("_")[-1]
+        # clean up kernel name by removing the suffix
+        for suffix in suffix_list:
+            kernel_name = kernel_name.replace(suffix, "")
+        ncu_command = [
+            "ncu",
+            "-k",
+            kernel_name,
+            "--csv",
+            "--log-file",
+            f"logs/{experiment_directory_name}/{kernel_name}.ncu-rep",
+            "python",
+            path,
+        ]
+        logs.append(f"logs/{experiment_directory_name}/{kernel_name}.ncu-rep")
+        ncu_commands.append(ncu_command)
+        ai_generated_suffix = "_ai_generated.py"
+        if path.name.endswith(ai_generated_suffix):
+            with open(path, "r") as f:
+                source_code = f.read()
+            try:
+                compile(source=source_code, filename=path, mode="exec")
+                compilable_kernels.add(kernel_name)
+            except(SyntaxError, MemoryError):
+                pass
+
+    # sort logs and take pairs as log_pairs
+    logs.sort()
+    log_pairs = list(zip(logs[::2], logs[1::2]))
+
+    return ncu_commands, log_pairs, compilable_kernels
 
 def main():
-    with open("prompts/eval_prompts.toml", "rb") as f:
-        prompts_dict = tomli.load(f)["prompts"]
 
     # create logs directory if it doesn't exist
     if os.path.exists("logs") is False:
         os.makedirs("logs")
 
-    ncu_commands = []
-    generated_code_paths = []
-    log_pairs = []
-    compiling_kernels = set()
-    cosine_similarity_values = defaultdict(lambda: {})
-
     # get all generated code paths in the generated_code directory
-    for path in Path("generated_code").glob("**/*.py"):
-        generated_code_paths.append(path)
-
-    for prompt in prompts_dict:
-        name = prompt["name"]
-
-        # code path for ai generated code
-        gen_ai_path = f"generated_code/{name}_ai_generated.py"
-        # code path for reference code
-        ref_path = f"generated_code/{name}_reference.py"
-
-        # check if both paths exist otherwise skip
-        if not Path(gen_ai_path).exists() or not Path(ref_path).exists():
-            print(f"Skipping {name} because one or both paths do not exist")
-            print(f"There should be files called {gen_ai_path} and {ref_path}")
-            print("You may need to run generate_kernels.py to create these files")
-            continue
-
-        ncu_command_generated = [
-            "ncu",  # Nsight Compute executable
-            "-k",
-            name,
-            "--csv",
-            "--log-file",
-            f"logs/{name}_ai_generated.ncu-rep",
-            "python",
-            gen_ai_path,  # Command to run your Triton script
-        ]
-        ncu_command_reference = [
-            "ncu",  # Nsight Compute executable
-            "-k",
-            name,
-            "--csv",
-            "--log-file",
-            f"logs/{name}_reference.ncu-rep",
-            "python",
-            ref_path,  # Command to run your Triton script
-        ]
-        ncu_commands.append(ncu_command_generated)
-        ncu_commands.append(ncu_command_reference)
-        log_pairs.append(
-            (f"logs/{name}_ai_generated.ncu-rep", f"logs/{name}_reference.ncu-rep")
-        )
-
-        with open(gen_ai_path, "r") as f:
-            source_code = f.read()
-        # check if the file compiles
-        compile(source=source_code, filename=gen_ai_path, mode="exec")
-        compiling_kernels.add(name)
+    ncu_commands, log_pairs, compiling_kernels = get_ncu_commands_for_generated_code()
 
     # run all ncu commands
     # TODO: run in parallel
     counter = 0
     log_to_cosine_similarity = {}
-    compiling_files = set()
     for command in ncu_commands:
         counter += 1
         cmd_as_str = " ".join(command)
@@ -167,8 +154,10 @@ def main():
         "Difference",
         "Metric Unit",
     ]
-    csv_rows.append(csv_columns)
+    experiment_dict_to_csv_rows = defaultdict(lambda: [])
     for log_pair in log_pairs:
+        experiment_directory_name = log_pair[0].split("/")[-2]
+        os.makedirs(f"logs/{experiment_directory_name}", exist_ok=True)
         ai_generated_csv = parse_profiler_csv(log_pair[0])
         reference_csv = parse_profiler_csv(log_pair[1])
         kernel_name = log_pair[0].split("/")[-1].split("_ai_generated")[0]
@@ -203,7 +192,7 @@ def main():
                 difference,
                 metric_info[1],
             ]
-            csv_rows.append(csv_row)
+            experiment_dict_to_csv_rows[experiment_directory_name].append(csv_row)
 
         reference_occupancy = reference_dict["Achieved Occupancy"][0]
         reference_theoretical_occupancy = reference_dict["Theoretical Occupancy"][0]
@@ -237,7 +226,7 @@ def main():
             scaled_diff,
             "%",
         ]
-        csv_rows.append(csv_row)
+        experiment_dict_to_csv_rows[experiment_directory_name].append(csv_row)
 
         # get cosine similarity
         cosine_similarity_reference = log_to_cosine_similarity[log_pair[1]]
@@ -257,10 +246,10 @@ def main():
             cosine_similarity_diff,
             "",
         ]
-        csv_rows.append(csv_row)
+        experiment_dict_to_csv_rows[experiment_directory_name].append(csv_row)
 
         if kernel_name in compiling_kernels:
-            csv_rows.append(
+            experiment_dict_to_csv_rows[experiment_directory_name].append(
                 [
                     kernel_name,
                     "gen-ai-compiles",
@@ -271,10 +260,12 @@ def main():
                 ]
             )
 
-        # write to csv
-        with open("logs/ncu_results.csv", "w", newline="") as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerows(csv_rows)
+        # write to csvs
+        for experiment_directory_name, csv_rows in experiment_dict_to_csv_rows.items():
+            with open(f"logs/{experiment_directory_name}/00_ncu_results.csv", "w", newline="") as csvfile:
+                writer = csv.writer(csvfile)
+                csv_rows.insert(0, csv_columns)
+                writer.writerows(csv_rows)
 
 
 if __name__ == "__main__":
