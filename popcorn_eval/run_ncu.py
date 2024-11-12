@@ -78,7 +78,7 @@ def get_ncu_commands_for_generated_code():
 
     for path in paths:
         experiment_directory_name = path.parent.name
-        kernel_name = path.name.split("_")[-1]
+        kernel_name = path.name.split("/")[-1]
         # clean up kernel name by removing the suffix
         for suffix in suffix_list:
             kernel_name = kernel_name.replace(suffix, "")
