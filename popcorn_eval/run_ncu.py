@@ -63,6 +63,7 @@ def parse_profiler_csv(file_path):
 
     return result
 
+
 # returns a list of ncu commands, log pairs, and compilable generated code paths
 def get_ncu_commands_for_generated_code():
     # look in generated_code directory for all the generated code
@@ -74,13 +75,14 @@ def get_ncu_commands_for_generated_code():
     for suffix in suffix_list:
         for path in Path("generated_code").glob(f"**/*{suffix}"):
             paths.append(path)
-    
+
     for path in paths:
         experiment_directory_name = path.parent.name
         kernel_name = path.name.split("_")[-1]
         # clean up kernel name by removing the suffix
         for suffix in suffix_list:
             kernel_name = kernel_name.replace(suffix, "")
+        # string represention of path
         ncu_command = [
             "ncu",
             "-k",
@@ -89,7 +91,7 @@ def get_ncu_commands_for_generated_code():
             "--log-file",
             f"logs/{experiment_directory_name}/{kernel_name}.ncu-rep",
             "python",
-            path,
+            str(path),
         ]
         logs.append(f"logs/{experiment_directory_name}/{kernel_name}.ncu-rep")
         ncu_commands.append(ncu_command)
@@ -100,7 +102,7 @@ def get_ncu_commands_for_generated_code():
             try:
                 compile(source=source_code, filename=path, mode="exec")
                 compilable_kernels.add(kernel_name)
-            except(SyntaxError, MemoryError):
+            except (SyntaxError, MemoryError):
                 pass
 
     # sort logs and take pairs as log_pairs
@@ -108,6 +110,7 @@ def get_ncu_commands_for_generated_code():
     log_pairs = list(zip(logs[::2], logs[1::2]))
 
     return ncu_commands, log_pairs, compilable_kernels
+
 
 def main():
 
@@ -262,7 +265,9 @@ def main():
 
         # write to csvs
         for experiment_directory_name, csv_rows in experiment_dict_to_csv_rows.items():
-            with open(f"logs/{experiment_directory_name}/00_ncu_results.csv", "w", newline="") as csvfile:
+            with open(
+                f"logs/{experiment_directory_name}/00_ncu_results.csv", "w", newline=""
+            ) as csvfile:
                 writer = csv.writer(csvfile)
                 csv_rows.insert(0, csv_columns)
                 writer.writerows(csv_rows)

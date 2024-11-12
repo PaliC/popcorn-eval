@@ -120,8 +120,6 @@ if __name__ == "__main__":
         # create experiment directory
         os.makedirs(f"generated_code/{experiment_directory_name}", exist_ok=True)
 
-        # copy over _helper_functions.py to generated_code
-        experiment_directory_name = f""
         # write to file
         with open(
             f"generated_code/{experiment_directory_name}/{name}_ai_generated.py", "w"
@@ -134,6 +132,6 @@ if __name__ == "__main__":
 
     # copy over _helper_functions.py to generated_code
     shutil.copy(
-        f"code_templates/{experiment_directory_name}/_helper_functions.py",
-        "generated_code/",
+        "code_templates/_helper_functions.py",
+        f"generated_code/{experiment_directory_name}",
     )
