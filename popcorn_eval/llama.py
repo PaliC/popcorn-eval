@@ -1,5 +1,6 @@
 import datetime
 import os
+from typing import Callable, Dict, Tuple
 
 import torch
 import torchtune.generation
@@ -125,9 +126,19 @@ if __name__ == "__main__":
 
             Cutting Knowledge Date: December 2023
             Today Date: 29 October 2024
-            You are an AI assistant who helps software engineers write triton kernels which is a type of gpu kernel written in python.t<|eot_id|><|start_header_id|>user<|end_header_id|>
+            You are an AI assistant who helps software engineers write triton kernels which is a type of gpu kernel written in python.<|eot_id|><|start_header_id|>user<|end_header_id|>
             Write a Triton kernel function that performs matrix multiplication on two 1024x1024 matrices A and B, resulting in a 1024x1024 output matrix C, using BLOCK_SIZE_M = 128, BLOCK_SIZE_N = 128, and BLOCK_SIZE_K = 32; ensure each block in C is calculated from corresponding blocks in A and B with a tiled approach; use tl.load with masking to handle boundaries, accumulate partial sums, and store the result in C; include Python host code to launch the kernel with proper grid/block sizes, and verify correctness by comparing with torch.matmul, ensuring accuracy within 1e-4.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
             """
+    prompt_dict = {
+        "system_prompt": f"""
+            Cutting Knowledge Date: December 2023
+            Today Date: 29 October 2024
+            You are an AI assistant who helps software engineers write triton kernels which is a type of gpu kernel written in python.
+            """,
+        "user_prompt": f"""
+            Write a Triton kernel function that performs matrix multiplication on two 1024x1024 matrices A and B, resulting in a 1024x1024 output matrix C, using BLOCK_SIZE_M = 128, BLOCK_SIZE_N = 128, and BLOCK_SIZE_K = 32; ensure each block in C is calculated from corresponding blocks in A and B with a tiled approach; use tl.load with masking to handle boundaries, accumulate partial sums, and store the result in C; include Python host code to launch the kernel with proper grid/block sizes, and verify correctness by comparing with torch.matmul, ensuring accuracy within 1e-4.
+        """,
+    }
     tokenizer = torchtune.models.llama3.llama3_tokenizer(
         "/tmp/Llama-3.2-3B/original/tokenizer.model"
     )
@@ -136,7 +147,8 @@ if __name__ == "__main__":
             "/tmp/Llama-3.2-3B/hf_model_0001_0.pt",
             "/tmp/Llama-3.2-3B/hf_model_0002_0.pt",
         ],
-        prompt=prompt,
+        prompt_dict=prompt_dict,
         tokenizer=tokenizer,
+        model_name="llama3_2_3b",
     )
     print(text)
