@@ -4,72 +4,13 @@ import shutil
 from datetime import datetime
 from typing import Dict
 
-import anthropic
+from anthropic_api import get_anthropic_response
+from llama import generate_text_from_llama
 
 import tomli
 from dotenv import load_dotenv
-
-
-def get_anthropic_response(
-    prompt: Dict[str, str], model_name="claude-3-5-haiku-20241022"
-) -> str:
-    """Get response from Anthropic API using Claude model"""
-    # Load environment variables from .env file
-    load_dotenv()
-
-    # Get API key from environment
-    api_key = os.getenv("ANTHROPIC_API_KEY")
-    if not api_key:
-        raise ValueError("ANTHROPIC_API_KEY not found in environment variables")
-
-    # Initialize Anthropic client
-    client = anthropic.Anthropic(api_key=api_key)
-    user_prompt = compose_prompt_for_completion(prompt)
-    system_prompt = prompt["system_prompt"]
-    user_prompt = prompt["user_prompt"]
-
-    # Get completion from Claude
-    message = client.messages.create(
-        model=model_name,
-        max_tokens=4096,
-        system=system_prompt,
-        messages=[{"role": "user", "content": user_prompt}],
-    )
-
-    return message.content[0].text
-
-
-# get todays date in the format Day Month Year
-TODAY_DATE = datetime.now().strftime("%d %B %Y")
-CUTOFF_KNOWLEDGE_DATE = "December 2023"
-SYSTEM_PROMPT_TOKEN = "[[SYSTEM_PROMPT]]"
-USER_PROMPT_TOKEN = "[[USER_PROMPT]]"
-
-COMPLETION_PROMPT_TEMPLATE = f"""
-
-  <|begin_of_text|><|start_header_id|>system<|end_header_id|>
-
-  Cutting Knowledge Date: {CUTOFF_KNOWLEDGE_DATE}
-  Today Date: {TODAY_DATE}
-
-  {SYSTEM_PROMPT_TOKEN}
-  <|eot_id|><|start_header_id|>user<|end_header_id|>
-
-  {USER_PROMPT_TOKEN}
-  <|eot_id|><|start_header_id|>assistant<|end_header_id|>
-
-"""
-
-
-def compose_prompt_for_completion(prompt_dict: Dict[str, str]) -> str:
-    system_prompt = prompt_dict["system_prompt"]
-    user_prompt = prompt_dict["user_prompt"]
-
-    prompt = COMPLETION_PROMPT_TEMPLATE.replace(
-        SYSTEM_PROMPT_TOKEN, system_prompt
-    ).replace(USER_PROMPT_TOKEN, user_prompt)
-    return prompt
-
+import argparse
+from torchtune.models.llama3 import llama3_tokenizer
 
 def extract_python_code(text: str) -> str:
     # extract python code from string
@@ -85,22 +26,61 @@ def extract_python_code(text: str) -> str:
         return 'raise Exception("This file was not generated with valid python code")'
     return python_code
 
+def get_tokenizer(tokenizer_path: str, model_name: str):
+    # check if path is valid
+    if not os.path.exists(tokenizer_path):
+        raise ValueError(f"Tokenizer path {tokenizer_path} does not exist")
+    
+    if "llama3" in model_name:
+        return llama3_tokenizer(tokenizer_path)
+    else:
+        raise ValueError(f"Tokenizer for {model_name} not supported")
 
-if __name__ == "__main__":
+def route_to_model(model_name: str, prompt: str, checkpoint_files: Optional[str] = None, tokenizer_path: Optional[str] = None):
+    if "llama3_2" in model_name:
+        if checkpoint_files is None:
+            raise ValueError("Checkpoint files are required for llama3_2")
+        if tokenizer_path is None:
+            raise ValueError("Tokenizer path is required for llama3_2")
+        tokenizer = get_tokenizer(tokenizer_path, model_name)
+        return generate_text_from_llama(prompt, checkpoint_files, tokenizer=tokenizer, model_name=model_name)
+    elif "claude" in model_name:
+        return get_anthropic_response(prompt, model_name)
+    else:
+        raise ValueError(f"Model {model_name} not supported")
+
+def main():
+    
+    # get model name and checkpoint files from args
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model_name", type=str, required=True)
+    parser.add_argument("--checkpoint_files", type=str, required=False)
+    parser.add_argument("--tokenizer_path", type=str, required=False)
+    parser.add_argument("--output_dir", type=str, required=False)
+    args = parser.parse_args()
+
+    model_name = args.model_name
+    checkpoint_files = args.checkpoint_files
+    tokenizer_path = args.tokenizer_path
+
+
     # grab first prompt in eval_prompts.toml
     with open("prompts/eval_prompts.toml", "rb") as f:
         all_prompts = tomli.load(f)["prompts"]
-    model_name = "claude-3-5-haiku-20241022"
-    experiment_directory_name = (
-        f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_{model_name}"
-    )
+    # model_name = "claude-3-5-haiku-20241022"
+    if args.output_dir is None:
+        experiment_directory_name = (
+            f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_{model_name}"
+        )
+    else:
+        experiment_directory_name = args.output_dir
     for prompt_dict in all_prompts:
         if prompt_dict.get("skip", False):
             continue
         template_file = prompt_dict["template_file"]
         name = prompt_dict["name"]
         reference_kernel = prompt_dict["reference_kernel"]
-        generated_kernel = get_anthropic_response(prompt_dict, model_name=model_name)
+        generated_kernel = route_to_model(model_name, prompt_dict, checkpoint_files, tokenizer_path)
 
         # parse out python code from generated_kernel
         generated_triton_kernel = extract_python_code(generated_kernel)
@@ -135,3 +115,6 @@ if __name__ == "__main__":
         "code_templates/_helper_functions.py",
         f"generated_code/{experiment_directory_name}",
     )
+
+if __name__ == "__main__":
+    main()
