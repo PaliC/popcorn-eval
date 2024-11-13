@@ -1,7 +1,9 @@
+import inspect
 import sys
 
 import torch
 import torch.nn.functional as F
+import triton
 
 
 def _compare_triton_and_torch(triton_output, torch_output):
@@ -27,7 +29,6 @@ def _test_puzzle(puzzle, puzzle_spec, nelem={}, B={"B0": 32}):
     signature = inspect.signature(puzzle_spec)
     args = {}
     for n, p in signature.parameters.items():
-        print(p)
         args[n + "_ptr"] = ([d.size for d in p.annotation.dims], p)
     args["z_ptr"] = ([d.size for d in signature.return_annotation.dims], None)
 
@@ -42,8 +43,7 @@ def _test_puzzle(puzzle, puzzle_spec, nelem={}, B={"B0": 32}):
         triton.cdiv(nelem.get("N2", 1), meta.get("B2", 1)),
     )
 
-    # for k, v in args.items():
-    #    print(k, v)
+    # puzzle[grid](*tt_args, **B, **nelem)
     puzzle[grid](*tt_args, **B, **nelem)
     z = tt_args[-1]
     tt_args = tt_args[:-1]

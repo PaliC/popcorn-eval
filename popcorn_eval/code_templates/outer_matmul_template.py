@@ -14,4 +14,4 @@ def outer_matmul_spec(x: Float32[Tensor, "100"], y: Float32[Tensor, "90"]) -> Fl
 {{ GENERATED CODE }}
     
 if __name__ == "__main__":
-    _test_puzzle(outer_matmul_kernel,outer_matmul_spec nelem={"N0": 100, "N1": 90})
+    _test_puzzle(outer_matmul_kernel,outer_matmul_spec, nelem={"N0": 100, "N1": 90})

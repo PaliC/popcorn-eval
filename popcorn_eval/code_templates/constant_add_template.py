@@ -14,4 +14,4 @@ def constant_add(x: Float32[Tensor, "32"]) -> Float32[Tensor, "32"]:
 {{ GENERATED CODE }}
     
 if __name__ == "__main__":
-    _test_puzzle(constant_add, constant_add_kernel, nelem={"N0": 32})
+    _test_puzzle(constant_add_kernel, constant_add, nelem={"N0": 32})

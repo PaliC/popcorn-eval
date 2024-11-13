@@ -15,4 +15,4 @@ def outer_vector_add(x: Float32[Tensor, "32"], y: Float32[Tensor, "32"]) -> Floa
 {{ GENERATED CODE }}
     
 if __name__ == "__main__":
-    _test_puzzle(outer_vector_add_kernel, outer_vector_add, nelem={"N0": 32})
+    _test_puzzle(outer_vector_add_kernel, outer_vector_add, nelem={"N0": 32, "N1": 32})

@@ -593,14 +593,18 @@ Write a triton kernel function that performs the backward pass of the outer matm
 It should use two program blocks. Block size B0 is always less than the vector x length N0. Block size B1 is always less than vector y length N1. Chain rule backward dz is of shape N0
 The kernel should have the function signature:
 ```python
-def outer_matmul_bwd_kernel(x_ptr, y_ptr, z_ptr, N0, N1, B0: tl.constexpr, B1: tl.constexpr):
+def outer_matmul_bwd_kernel(
+    x_ptr, y_ptr, dz_ptr, dx_ptr, N0, N1, B0: tl.constexpr, B1: tl.constexpr
+):
 ```
 """
 reference_kernel = """
 ```python
 
 @triton.jit
-def outer_matmul_bwd_kernel(x_ptr, y_ptr, z_ptr, N0, N1, B0: tl.constexpr, B1: tl.constexpr):
+def outer_matmul_bwd_kernel(
+    x_ptr, y_ptr, dz_ptr, dx_ptr, N0, N1, B0: tl.constexpr, B1: tl.constexpr
+):
     pid_0 = tl.program_id(0)
     pid_1 = tl.program_id(1)
 
@@ -652,28 +656,41 @@ reference_kernel = """
 ```python
 @triton.jit
 def long_sum_kernel(x_ptr, z_ptr, N0, N1, T, B0: tl.constexpr, B1: tl.constexpr):
+    # Get program ID for the row dimension
     pid_0 = tl.program_id(0)
 
-    range_0 = pid_0 * B0 + tl.arange(0, B0)
-    mask_0 = range_0 < N0
-    _sum = tl.arange(0, B0) * 0.0
+    # Calculate row offset and check if it's valid
+    row_idx = pid_0 * B0 + tl.arange(0, B0)
+    row_mask = row_idx < N0
 
-    for offset_col in tl.static_range(0, T, B1):
-        range_1 = offset_col + tl.arange(0, B1)
-        range_block = range_0[:, None] * T + range_1[None, :]  # (B0, B1)
-        mask_block = mask_0[:, None] & (range_1[None, :] < T)
+    # Initialize accumulator for the sum
+    accumulator = tl.zeros([B0], dtype=tl.float32)
 
-        x_block = tl.load(x_ptr + range_block, mask=mask_block, other=0.0)
-        _sum += tl.sum(x_block, axis=1)
+    # Loop over columns in blocks
+    for col_offset in range(0, T, B1):
+        # Calculate column indices and mask for this block
+        col_idx = col_offset + tl.arange(0, B1)
+        col_mask = col_idx < T
 
-    tl.store(z_ptr + range_0, _sum, mask=mask_0)
+        # Calculate the offsets into the input array
+        offsets = row_idx[:, None] * T + col_idx[None, :]
 
-    return
+        # Load values from input, masking invalid locations
+        block = tl.load(
+            x_ptr + offsets, mask=row_mask[:, None] & col_mask[None, :], other=0.0
+        )
+
+        # Add to accumulator
+        accumulator += tl.sum(block, axis=1)
+
+    # Store final results
+    tl.store(z_ptr + row_idx, accumulator, mask=row_mask)
 ```
 """
 
 [[prompts]]
 name = "simple_fa_kernel"
+skip = true
 template_file = "code_templates/simple_fa_template.py"
 system_prompt = """
 You are a helpful assistant which writes kernels for a programming gpus. Specifically you write kernels in the triton python DSL. All of your reponses should only contain runnable python code with valid comments.
