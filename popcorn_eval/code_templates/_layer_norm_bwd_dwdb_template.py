@@ -214,8 +214,8 @@ def test_layer_norm(M, N, dtype, eps=1e-5, device='cuda'):
     # compare
 
     # put y_tri, dx_tri, dw_tri, db_tri in a single tensor to test cosine similarity
-    triton_output = torch.cat([dx_tri, dw_tri, db_tri], dim=0)
-    torch_output = torch.cat([dx_ref, dw_ref, db_ref], dim=0)
+    triton_output = torch.cat([torch.flatten(dx_tri), dw_tri, db_tri], dim=0)
+    torch_output = torch.cat([torch.flatten(dx_ref), dw_ref, db_ref], dim=0)
     _compare_triton_and_torch(triton_output, torch_output)
 
 if __name__ == '__main__':

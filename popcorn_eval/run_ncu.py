@@ -133,6 +133,8 @@ def main():
         counter += 1
         cmd_as_str = " ".join(command)
         log_name = command[5]
+        experiment_directory_name = log_name.split("/")[-2]
+        os.makedirs(f"logs/{experiment_directory_name}", exist_ok=True)
         print(f"Running command: {cmd_as_str} \n {counter} / {len(ncu_commands)}")
         try:
             capture = subprocess.run(
@@ -163,14 +165,8 @@ def main():
     ]
     experiment_dict_to_csv_rows = defaultdict(lambda: [])
     for log_pair in log_pairs:
-        experiment_directory_name = log_pair[0].split("/")[-2]
-        os.makedirs(f"logs/{experiment_directory_name}", exist_ok=True)
         ai_generated_csv = parse_profiler_csv(log_pair[0])
         reference_csv = parse_profiler_csv(log_pair[1])
-        print("===============================================================")
-        print(log_pair)
-        print(ai_generated_csv)
-        print(reference_csv)
         kernel_name = log_pair[0].split("/")[-1].split("_ai_generated")[0]
 
         if len(ai_generated_csv) == 0:
@@ -178,8 +174,10 @@ def main():
         else:
             ai_generated_dict = ai_generated_csv["0"]
         reference_dict = reference_csv["0"]
-        if len(ai_generated_dict) > 1 or len(reference_dict) > 1:
-            print(f"Skipping {kernel_name} because it has more than one kernel launch")
+        if len(ai_generated_csv.keys()) > 1 or len(reference_csv.keys()) > 1:
+            print(
+                f"Skipping {kernel_name} because it has more than one kernel launch. The reference kernel is {len(reference_csv.keys())} and the ai generated kernel is {len(ai_generated_csv.keys())}"
+            )
 
         for metric_name, metric_info in reference_dict.items():
             reference_value = reference_dict[metric_name][0]
@@ -240,7 +238,10 @@ def main():
 
         # get cosine similarity
         cosine_similarity_reference = log_to_cosine_similarity[log_pair[1]]
-        if log_pair[0] not in log_to_cosine_similarity:
+        if (
+            log_pair[0] not in log_to_cosine_similarity
+            or log_to_cosine_similarity[log_pair[0]] == "N/A"
+        ):
             cosine_similarity_ai_generated = "N/A"
             cosine_similarity_diff = "N/A"
         else:
@@ -262,7 +263,7 @@ def main():
             experiment_dict_to_csv_rows[experiment_directory_name].append(
                 [
                     kernel_name,
-                    "gen-ai-compiles",
+                    "compiles",
                     kernel_name in compiling_kernels,
                     "True",
                     "N/A",
@@ -270,14 +271,15 @@ def main():
                 ]
             )
 
-        # write to csvs
-        for experiment_directory_name, csv_rows in experiment_dict_to_csv_rows.items():
-            with open(
-                f"logs/{experiment_directory_name}/00_ncu_results.csv", "w", newline=""
-            ) as csvfile:
-                writer = csv.writer(csvfile)
-                csv_rows.insert(0, csv_columns)
-                writer.writerows(csv_rows)
+    # write to csvs
+    for experiment_directory_name, csv_rows in experiment_dict_to_csv_rows.items():
+        with open(
+            f"logs/{experiment_directory_name}/_00_ncu_results.csv", "w", newline=""
+        ) as csvfile:
+            print(f"Writing to {experiment_directory_name}")
+            writer = csv.writer(csvfile)
+            csv_rows.insert(0, csv_columns)
+            writer.writerows(csv_rows)
 
 
 if __name__ == "__main__":
