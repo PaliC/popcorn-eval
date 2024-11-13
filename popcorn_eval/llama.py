@@ -1,3 +1,4 @@
+import datetime
 import os
 
 import torch
@@ -17,12 +18,11 @@ from torchtune.models.llama3_2 import (
 
 from torchtune.training import FullModelHFCheckpointer, ModelType
 from torchtune.utils import get_device
-import datetime
 
 END_OF_HEADER_ID_TOKEN = "<|end_header_id|>"
 
 # get todays date in the format Day Month Year
-TODAY_DATE = datetime.now().strftime("%d %B %Y")
+TODAY_DATE = datetime.datetime.now().strftime("%d %B %Y")
 CUTOFF_KNOWLEDGE_DATE = "December 2023"
 SYSTEM_PROMPT_TOKEN = "[[SYSTEM_PROMPT]]"
 USER_PROMPT_TOKEN = "[[USER_PROMPT]]"
@@ -43,6 +43,7 @@ COMPLETION_PROMPT_TEMPLATE = f"""
 """
 END_OF_HEADER_ID_TOKEN = "<|end_header_id|>"
 
+
 def compose_prompt_for_completion(prompt_dict: Dict[str, str]) -> str:
     system_prompt = prompt_dict["system_prompt"]
     user_prompt = prompt_dict["user_prompt"]
@@ -51,6 +52,7 @@ def compose_prompt_for_completion(prompt_dict: Dict[str, str]) -> str:
         SYSTEM_PROMPT_TOKEN, system_prompt
     ).replace(USER_PROMPT_TOKEN, user_prompt)
     return prompt
+
 
 # given a string referencing a model name, it grabs the model class and model_type
 def get_model_class_and_type(model_name: str) -> Tuple[Callable, ModelType]:
@@ -65,10 +67,10 @@ def get_model_class_and_type(model_name: str) -> Tuple[Callable, ModelType]:
         "qlora_llama3_2_3b": qlora_llama3_2_3b,
     }
     if model_name in model_name_to_class_llama3_2:
-        return model_name_to_class_llama3_2[model_name], 'LLAMA3_2'
+        return model_name_to_class_llama3_2[model_name], "LLAMA3_2"
     else:
         raise ValueError(f"Model {model_name} not found")
-    
+
 
 def generate_text_from_llama(
     checkpoint_files,
