@@ -16,8 +16,6 @@ def generate_text(
     max_generated_tokens=2024,
     temperature=0.0,
 ):
-    if torch.cuda.is_available():
-        device = torch.device("cuda")
     # Parse checkpoint directory from first checkpoint file
     checkpoint_dir = "/".join(checkpoint_files[0].split("/")[:-1])
     if not checkpoint_dir:
@@ -26,7 +24,6 @@ def generate_text(
     # assert that all checkpoint files exist and have the same directory
     assert all(f.startswith(checkpoint_dir) for f in checkpoint_files)
     assert all(os.path.exists(f) for f in checkpoint_files)
-    print(f"device is {get_device('cuda')}")
     tokenizer = torchtune.models.llama3.llama3_tokenizer(
         "/tmp/Llama-3.2-3B/original/tokenizer.model"
     )
@@ -42,9 +39,6 @@ def generate_text(
 
     model = llama3_2_3b().to("cuda")
     model.load_state_dict(torchtune_sd["model"])
-    print("Model loaded successfully!")
-    quantize_(model, int8_weight_only())
-    print("model has been quantized")
 
     generated_text = torchtune.generation.generate(
         model=model,
