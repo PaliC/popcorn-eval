@@ -1,1 +1,3 @@
 .env
+popcorn_eval/generated_code/
+popcorn_eval/logs/
