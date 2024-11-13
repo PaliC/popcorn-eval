@@ -40,4 +40,4 @@ def generate_text(checkpoint_files, prompt="Hello, how are you?", model_type=Mod
     return generated_text
 
 if __name__ == "__main__":
-    generate_text(checkpoint_files=["/tmp/Llama-3.2-3B/hf_model_0001_0.pt", "/tmp/Llama-3.2-3B/hf_model_0002_0.pt"], output_file="output.txt", prompt="Hello, how are you?")
+    generate_text(checkpoint_files=["/tmp/Llama-3.2-3B/hf_model_0001_0.pt", "/tmp/Llama-3.2-3B/hf_model_0002_0.pt"], prompt="Hello, how are you?")
