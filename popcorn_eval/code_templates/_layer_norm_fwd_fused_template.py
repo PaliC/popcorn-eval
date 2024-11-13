@@ -62,3 +62,5 @@ def test_layer_norm(M, N, dtype, eps=1e-5, device='cuda'):
 
     _compare_triton_and_torch(y_tri, y_ref)
 
+if __name__ == '__main__':
+    test_layer_norm(1024, 1024, torch.float32, eps=1e-5, device='cuda')

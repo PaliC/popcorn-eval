@@ -218,3 +218,5 @@ def test_layer_norm(M, N, dtype, eps=1e-5, device='cuda'):
     torch_output = torch.cat([dx_ref, dw_ref, db_ref], dim=0)
     _compare_triton_and_torch(triton_output, torch_output)
 
+if __name__ == '__main__':
+    test_layer_norm(1024, 1024, torch.float32, eps=1e-5, device='cuda')

@@ -79,6 +79,8 @@ def get_ncu_commands_for_generated_code():
     for path in paths:
         experiment_directory_name = path.parent.name
         kernel_name = path.name.split("/")[-1]
+        # chop off .py from file name name
+        kernal_name_with_suffix = path.name.split("/")[-1][:-3]
         # clean up kernel name by removing the suffix
         for suffix in suffix_list:
             kernel_name = kernel_name.replace(suffix, "")
@@ -89,11 +91,13 @@ def get_ncu_commands_for_generated_code():
             kernel_name,
             "--csv",
             "--log-file",
-            f"logs/{experiment_directory_name}/{kernel_name}.ncu-rep",
+            f"logs/{experiment_directory_name}/{kernal_name_with_suffix}.ncu-rep",
             "python",
             str(path),
         ]
-        logs.append(f"logs/{experiment_directory_name}/{kernel_name}.ncu-rep")
+        logs.append(
+            f"logs/{experiment_directory_name}/{kernal_name_with_suffix}.ncu-rep"
+        )
         ncu_commands.append(ncu_command)
         ai_generated_suffix = "_ai_generated.py"
         if path.name.endswith(ai_generated_suffix):
@@ -163,13 +167,16 @@ def main():
         os.makedirs(f"logs/{experiment_directory_name}", exist_ok=True)
         ai_generated_csv = parse_profiler_csv(log_pair[0])
         reference_csv = parse_profiler_csv(log_pair[1])
+        print("===============================================================")
+        print(log_pair)
+        print(ai_generated_csv)
+        print(reference_csv)
         kernel_name = log_pair[0].split("/")[-1].split("_ai_generated")[0]
 
         if len(ai_generated_csv) == 0:
             ai_generated_dict = {}
         else:
             ai_generated_dict = ai_generated_csv["0"]
-        print(reference_csv)
         reference_dict = reference_csv["0"]
         if len(ai_generated_dict) > 1 or len(reference_dict) > 1:
             print(f"Skipping {kernel_name} because it has more than one kernel launch")
