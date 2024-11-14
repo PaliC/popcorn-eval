@@ -3,7 +3,7 @@
 #
 # This config assumes that you've run the following command before launching
 # this run:
-#   tune download meta-llama/Meta-Llama-3.1-70B --output-dir /tmp/Llama-3.1-70B  --ignore-patterns "original/consolidated*" --hf-token <HF_TOKEN>
+#   tune download meta-llama/Meta-Llama-3-70B-Instruct --output-dir /tmp/Llama-3.1-70B-Instruct/  --ignore-patterns "original/consolidated*" --hf-token <HF_TOKEN>
 #
 # To launch on 8 devices, run the following command from root:
 #   tune run --nproc_per_node 8 full_finetune_distributed --config llama3/70B_full
@@ -21,7 +21,7 @@ shuffle: True
 # Tokenizer
 tokenizer:
   _component_: torchtune.models.llama3.llama3_tokenizer
-  path: //tmp/Llama-3.1-70B/original/tokenizer.model
+  path: /tmp/Llama-3.1-70B-Instruct//original/tokenizer.model
   max_seq_len: null
 
 # Dataset
@@ -38,7 +38,7 @@ model:
 
 checkpointer:
   _component_: torchtune.training.FullModelHFCheckpointer
-  checkpoint_dir: /tmp/Llama-3.1-70B
+  checkpoint_dir: /tmp/Llama-3.1-70B-Instruct/
   checkpoint_files: [
     model-00001-of-00030.safetensors,
     model-00002-of-00030.safetensors,
@@ -72,7 +72,7 @@ checkpointer:
     model-00030-of-00030.safetensors,
   ]
   recipe_checkpoint: null
-  output_dir: /tmp/Meta-Llama-3-70b
+  output_dir: /tmp/Meta-Llama-3-70b-Instruct
   model_type: LLAMA3
 resume_from_checkpoint: False
 
