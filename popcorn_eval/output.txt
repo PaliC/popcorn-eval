@@ -1,0 +1,467 @@
+Running command: ncu -k softmax_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/softmax_kernel_reference.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/softmax_kernel_reference.py 
+ 1 / 160
+Running command: ncu -k add_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/add_kernel_reference.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/add_kernel_reference.py 
+ 2 / 160
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_fwd_fused_reference.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_fwd_fused_reference.py 
+ 3 / 160
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dx_fused_reference.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dx_fused_reference.py 
+ 4 / 160
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dwdb_reference.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dwdb_reference.py 
+ 5 / 160
+Running command: ncu -k constant_add_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/constant_add_kernel_reference.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/constant_add_kernel_reference.py 
+ 6 / 160
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_vector_add_kernel_reference.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_vector_add_kernel_reference.py 
+ 7 / 160
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_matmul_kernel_reference.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_matmul_kernel_reference.py 
+ 8 / 160
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_matmul_bwd_kernel_reference.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_matmul_bwd_kernel_reference.py 
+ 9 / 160
+Running command: ncu -k long_sum_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/long_sum_kernel_reference.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/long_sum_kernel_reference.py 
+ 10 / 160
+Running command: ncu -k softmax_kernel --csv --log-file logs/finetuned_llama_3b/softmax_kernel_reference.ncu-rep python generated_code/finetuned_llama_3b/softmax_kernel_reference.py 
+ 11 / 160
+Running command: ncu -k add_kernel --csv --log-file logs/finetuned_llama_3b/add_kernel_reference.ncu-rep python generated_code/finetuned_llama_3b/add_kernel_reference.py 
+ 12 / 160
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama_3b/_layer_norm_fwd_fused_reference.ncu-rep python generated_code/finetuned_llama_3b/_layer_norm_fwd_fused_reference.py 
+ 13 / 160
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama_3b/_layer_norm_bwd_dx_fused_reference.ncu-rep python generated_code/finetuned_llama_3b/_layer_norm_bwd_dx_fused_reference.py 
+ 14 / 160
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama_3b/_layer_norm_bwd_dwdb_reference.ncu-rep python generated_code/finetuned_llama_3b/_layer_norm_bwd_dwdb_reference.py 
+ 15 / 160
+Running command: ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama_3b/constant_add_kernel_reference.ncu-rep python generated_code/finetuned_llama_3b/constant_add_kernel_reference.py 
+ 16 / 160
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama_3b/outer_vector_add_kernel_reference.ncu-rep python generated_code/finetuned_llama_3b/outer_vector_add_kernel_reference.py 
+ 17 / 160
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama_3b/outer_matmul_kernel_reference.ncu-rep python generated_code/finetuned_llama_3b/outer_matmul_kernel_reference.py 
+ 18 / 160
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama_3b/outer_matmul_bwd_kernel_reference.ncu-rep python generated_code/finetuned_llama_3b/outer_matmul_bwd_kernel_reference.py 
+ 19 / 160
+Running command: ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama_3b/long_sum_kernel_reference.ncu-rep python generated_code/finetuned_llama_3b/long_sum_kernel_reference.py 
+ 20 / 160
+Running command: ncu -k softmax_kernel --csv --log-file logs/base_llama_3b/softmax_kernel_reference.ncu-rep python generated_code/base_llama_3b/softmax_kernel_reference.py 
+ 21 / 160
+Running command: ncu -k add_kernel --csv --log-file logs/base_llama_3b/add_kernel_reference.ncu-rep python generated_code/base_llama_3b/add_kernel_reference.py 
+ 22 / 160
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/base_llama_3b/_layer_norm_fwd_fused_reference.ncu-rep python generated_code/base_llama_3b/_layer_norm_fwd_fused_reference.py 
+ 23 / 160
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/base_llama_3b/_layer_norm_bwd_dx_fused_reference.ncu-rep python generated_code/base_llama_3b/_layer_norm_bwd_dx_fused_reference.py 
+ 24 / 160
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/base_llama_3b/_layer_norm_bwd_dwdb_reference.ncu-rep python generated_code/base_llama_3b/_layer_norm_bwd_dwdb_reference.py 
+ 25 / 160
+Running command: ncu -k constant_add_kernel --csv --log-file logs/base_llama_3b/constant_add_kernel_reference.ncu-rep python generated_code/base_llama_3b/constant_add_kernel_reference.py 
+ 26 / 160
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/base_llama_3b/outer_vector_add_kernel_reference.ncu-rep python generated_code/base_llama_3b/outer_vector_add_kernel_reference.py 
+ 27 / 160
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/base_llama_3b/outer_matmul_kernel_reference.ncu-rep python generated_code/base_llama_3b/outer_matmul_kernel_reference.py 
+ 28 / 160
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/base_llama_3b/outer_matmul_bwd_kernel_reference.ncu-rep python generated_code/base_llama_3b/outer_matmul_bwd_kernel_reference.py 
+ 29 / 160
+Running command: ncu -k long_sum_kernel --csv --log-file logs/base_llama_3b/long_sum_kernel_reference.ncu-rep python generated_code/base_llama_3b/long_sum_kernel_reference.py 
+ 30 / 160
+Running command: ncu -k softmax_kernel --csv --log-file logs/claude_haiku/softmax_kernel_reference.ncu-rep python generated_code/claude_haiku/softmax_kernel_reference.py 
+ 31 / 160
+Running command: ncu -k add_kernel --csv --log-file logs/claude_haiku/add_kernel_reference.ncu-rep python generated_code/claude_haiku/add_kernel_reference.py 
+ 32 / 160
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/claude_haiku/_layer_norm_fwd_fused_reference.ncu-rep python generated_code/claude_haiku/_layer_norm_fwd_fused_reference.py 
+ 33 / 160
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/claude_haiku/_layer_norm_bwd_dx_fused_reference.ncu-rep python generated_code/claude_haiku/_layer_norm_bwd_dx_fused_reference.py 
+ 34 / 160
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/claude_haiku/_layer_norm_bwd_dwdb_reference.ncu-rep python generated_code/claude_haiku/_layer_norm_bwd_dwdb_reference.py 
+ 35 / 160
+Running command: ncu -k constant_add_kernel --csv --log-file logs/claude_haiku/constant_add_kernel_reference.ncu-rep python generated_code/claude_haiku/constant_add_kernel_reference.py 
+ 36 / 160
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/claude_haiku/outer_vector_add_kernel_reference.ncu-rep python generated_code/claude_haiku/outer_vector_add_kernel_reference.py 
+ 37 / 160
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/claude_haiku/outer_matmul_kernel_reference.ncu-rep python generated_code/claude_haiku/outer_matmul_kernel_reference.py 
+ 38 / 160
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/claude_haiku/outer_matmul_bwd_kernel_reference.ncu-rep python generated_code/claude_haiku/outer_matmul_bwd_kernel_reference.py 
+ 39 / 160
+Running command: ncu -k long_sum_kernel --csv --log-file logs/claude_haiku/long_sum_kernel_reference.ncu-rep python generated_code/claude_haiku/long_sum_kernel_reference.py 
+ 40 / 160
+Running command: ncu -k softmax_kernel --csv --log-file logs/finetuned_llama3_1_70b/softmax_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b/softmax_kernel_reference.py 
+ 41 / 160
+Running command: ncu -k add_kernel --csv --log-file logs/finetuned_llama3_1_70b/add_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b/add_kernel_reference.py 
+ 42 / 160
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama3_1_70b/_layer_norm_fwd_fused_reference.ncu-rep python generated_code/finetuned_llama3_1_70b/_layer_norm_fwd_fused_reference.py 
+ 43 / 160
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama3_1_70b/_layer_norm_bwd_dx_fused_reference.ncu-rep python generated_code/finetuned_llama3_1_70b/_layer_norm_bwd_dx_fused_reference.py 
+ 44 / 160
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama3_1_70b/_layer_norm_bwd_dwdb_reference.ncu-rep python generated_code/finetuned_llama3_1_70b/_layer_norm_bwd_dwdb_reference.py 
+ 45 / 160
+Running command: ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama3_1_70b/constant_add_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b/constant_add_kernel_reference.py 
+ 46 / 160
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama3_1_70b/outer_vector_add_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b/outer_vector_add_kernel_reference.py 
+ 47 / 160
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama3_1_70b/outer_matmul_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b/outer_matmul_kernel_reference.py 
+ 48 / 160
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama3_1_70b/outer_matmul_bwd_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b/outer_matmul_bwd_kernel_reference.py 
+ 49 / 160
+Running command: ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama3_1_70b/long_sum_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b/long_sum_kernel_reference.py 
+ 50 / 160
+Running command: ncu -k softmax_kernel --csv --log-file logs/base_llama3_1_70b/softmax_kernel_reference.ncu-rep python generated_code/base_llama3_1_70b/softmax_kernel_reference.py 
+ 51 / 160
+Running command: ncu -k add_kernel --csv --log-file logs/base_llama3_1_70b/add_kernel_reference.ncu-rep python generated_code/base_llama3_1_70b/add_kernel_reference.py 
+ 52 / 160
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/base_llama3_1_70b/_layer_norm_fwd_fused_reference.ncu-rep python generated_code/base_llama3_1_70b/_layer_norm_fwd_fused_reference.py 
+ 53 / 160
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/base_llama3_1_70b/_layer_norm_bwd_dx_fused_reference.ncu-rep python generated_code/base_llama3_1_70b/_layer_norm_bwd_dx_fused_reference.py 
+ 54 / 160
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/base_llama3_1_70b/_layer_norm_bwd_dwdb_reference.ncu-rep python generated_code/base_llama3_1_70b/_layer_norm_bwd_dwdb_reference.py 
+ 55 / 160
+Running command: ncu -k constant_add_kernel --csv --log-file logs/base_llama3_1_70b/constant_add_kernel_reference.ncu-rep python generated_code/base_llama3_1_70b/constant_add_kernel_reference.py 
+ 56 / 160
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/base_llama3_1_70b/outer_vector_add_kernel_reference.ncu-rep python generated_code/base_llama3_1_70b/outer_vector_add_kernel_reference.py 
+ 57 / 160
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/base_llama3_1_70b/outer_matmul_kernel_reference.ncu-rep python generated_code/base_llama3_1_70b/outer_matmul_kernel_reference.py 
+ 58 / 160
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/base_llama3_1_70b/outer_matmul_bwd_kernel_reference.ncu-rep python generated_code/base_llama3_1_70b/outer_matmul_bwd_kernel_reference.py 
+ 59 / 160
+Running command: ncu -k long_sum_kernel --csv --log-file logs/base_llama3_1_70b/long_sum_kernel_reference.ncu-rep python generated_code/base_llama3_1_70b/long_sum_kernel_reference.py 
+ 60 / 160
+Running command: ncu -k softmax_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/softmax_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/softmax_kernel_reference.py 
+ 61 / 160
+Running command: ncu -k add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/add_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/add_kernel_reference.py 
+ 62 / 160
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/_layer_norm_fwd_fused_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/_layer_norm_fwd_fused_reference.py 
+ 63 / 160
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dx_fused_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dx_fused_reference.py 
+ 64 / 160
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dwdb_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dwdb_reference.py 
+ 65 / 160
+Running command: ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/constant_add_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/constant_add_kernel_reference.py 
+ 66 / 160
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/outer_vector_add_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/outer_vector_add_kernel_reference.py 
+ 67 / 160
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/outer_matmul_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/outer_matmul_kernel_reference.py 
+ 68 / 160
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/outer_matmul_bwd_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/outer_matmul_bwd_kernel_reference.py 
+ 69 / 160
+Running command: ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/long_sum_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/long_sum_kernel_reference.py 
+ 70 / 160
+Running command: ncu -k softmax_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/softmax_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/softmax_kernel_reference.py 
+ 71 / 160
+Running command: ncu -k add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/add_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/add_kernel_reference.py 
+ 72 / 160
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/_layer_norm_fwd_fused_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/_layer_norm_fwd_fused_reference.py 
+ 73 / 160
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dx_fused_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dx_fused_reference.py 
+ 74 / 160
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dwdb_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dwdb_reference.py 
+ 75 / 160
+Running command: ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/constant_add_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/constant_add_kernel_reference.py 
+ 76 / 160
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/outer_vector_add_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/outer_vector_add_kernel_reference.py 
+ 77 / 160
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/outer_matmul_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/outer_matmul_kernel_reference.py 
+ 78 / 160
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/outer_matmul_bwd_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/outer_matmul_bwd_kernel_reference.py 
+ 79 / 160
+Running command: ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/long_sum_kernel_reference.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/long_sum_kernel_reference.py 
+ 80 / 160
+Running command: ncu -k softmax_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/softmax_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/softmax_kernel_ai_generated.py 
+ 81 / 160
+An error occurred while running ncu -k softmax_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/softmax_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/softmax_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k add_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/add_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/add_kernel_ai_generated.py 
+ 82 / 160
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_fwd_fused_ai_generated.py 
+ 83 / 160
+An error occurred while running ncu -k _layer_norm_fwd_fused --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_fwd_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dx_fused_ai_generated.py 
+ 84 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dx_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dwdb_ai_generated.py 
+ 85 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/_layer_norm_bwd_dwdb_ai_generated.py
+Error message: None
+Running command: ncu -k constant_add_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/constant_add_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/constant_add_kernel_ai_generated.py 
+ 86 / 160
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_vector_add_kernel_ai_generated.py 
+ 87 / 160
+An error occurred while running ncu -k outer_vector_add_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_vector_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_matmul_kernel_ai_generated.py 
+ 88 / 160
+An error occurred while running ncu -k outer_matmul_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_matmul_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/outer_matmul_bwd_kernel_ai_generated.py 
+ 89 / 160
+Running command: ncu -k long_sum_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/long_sum_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/long_sum_kernel_ai_generated.py 
+ 90 / 160
+An error occurred while running ncu -k long_sum_kernel --csv --log-file logs/2024-11-12_17-49-06_claude-3-5-haiku-20241022/long_sum_kernel_ai_generated.ncu-rep python generated_code/2024-11-12_17-49-06_claude-3-5-haiku-20241022/long_sum_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k softmax_kernel --csv --log-file logs/finetuned_llama_3b/softmax_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/softmax_kernel_ai_generated.py 
+ 91 / 160
+An error occurred while running ncu -k softmax_kernel --csv --log-file logs/finetuned_llama_3b/softmax_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/softmax_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k add_kernel --csv --log-file logs/finetuned_llama_3b/add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/add_kernel_ai_generated.py 
+ 92 / 160
+An error occurred while running ncu -k add_kernel --csv --log-file logs/finetuned_llama_3b/add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama_3b/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/_layer_norm_fwd_fused_ai_generated.py 
+ 93 / 160
+An error occurred while running ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama_3b/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/_layer_norm_fwd_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama_3b/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/_layer_norm_bwd_dx_fused_ai_generated.py 
+ 94 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama_3b/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/_layer_norm_bwd_dx_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama_3b/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/_layer_norm_bwd_dwdb_ai_generated.py 
+ 95 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama_3b/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/_layer_norm_bwd_dwdb_ai_generated.py
+Error message: None
+Running command: ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama_3b/constant_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/constant_add_kernel_ai_generated.py 
+ 96 / 160
+An error occurred while running ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama_3b/constant_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/constant_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama_3b/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/outer_vector_add_kernel_ai_generated.py 
+ 97 / 160
+An error occurred while running ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama_3b/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/outer_vector_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama_3b/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/outer_matmul_kernel_ai_generated.py 
+ 98 / 160
+An error occurred while running ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama_3b/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/outer_matmul_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama_3b/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/outer_matmul_bwd_kernel_ai_generated.py 
+ 99 / 160
+An error occurred while running ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama_3b/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/outer_matmul_bwd_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama_3b/long_sum_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/long_sum_kernel_ai_generated.py 
+ 100 / 160
+An error occurred while running ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama_3b/long_sum_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama_3b/long_sum_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k softmax_kernel --csv --log-file logs/base_llama_3b/softmax_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/softmax_kernel_ai_generated.py 
+ 101 / 160
+An error occurred while running ncu -k softmax_kernel --csv --log-file logs/base_llama_3b/softmax_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/softmax_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k add_kernel --csv --log-file logs/base_llama_3b/add_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/add_kernel_ai_generated.py 
+ 102 / 160
+An error occurred while running ncu -k add_kernel --csv --log-file logs/base_llama_3b/add_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/base_llama_3b/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/base_llama_3b/_layer_norm_fwd_fused_ai_generated.py 
+ 103 / 160
+An error occurred while running ncu -k _layer_norm_fwd_fused --csv --log-file logs/base_llama_3b/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/base_llama_3b/_layer_norm_fwd_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/base_llama_3b/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/base_llama_3b/_layer_norm_bwd_dx_fused_ai_generated.py 
+ 104 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/base_llama_3b/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/base_llama_3b/_layer_norm_bwd_dx_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/base_llama_3b/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/base_llama_3b/_layer_norm_bwd_dwdb_ai_generated.py 
+ 105 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/base_llama_3b/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/base_llama_3b/_layer_norm_bwd_dwdb_ai_generated.py
+Error message: None
+Running command: ncu -k constant_add_kernel --csv --log-file logs/base_llama_3b/constant_add_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/constant_add_kernel_ai_generated.py 
+ 106 / 160
+An error occurred while running ncu -k constant_add_kernel --csv --log-file logs/base_llama_3b/constant_add_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/constant_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/base_llama_3b/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/outer_vector_add_kernel_ai_generated.py 
+ 107 / 160
+An error occurred while running ncu -k outer_vector_add_kernel --csv --log-file logs/base_llama_3b/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/outer_vector_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/base_llama_3b/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/outer_matmul_kernel_ai_generated.py 
+ 108 / 160
+An error occurred while running ncu -k outer_matmul_kernel --csv --log-file logs/base_llama_3b/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/outer_matmul_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/base_llama_3b/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/outer_matmul_bwd_kernel_ai_generated.py 
+ 109 / 160
+An error occurred while running ncu -k outer_matmul_bwd_kernel --csv --log-file logs/base_llama_3b/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/outer_matmul_bwd_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k long_sum_kernel --csv --log-file logs/base_llama_3b/long_sum_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/long_sum_kernel_ai_generated.py 
+ 110 / 160
+An error occurred while running ncu -k long_sum_kernel --csv --log-file logs/base_llama_3b/long_sum_kernel_ai_generated.ncu-rep python generated_code/base_llama_3b/long_sum_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k softmax_kernel --csv --log-file logs/claude_haiku/softmax_kernel_ai_generated.ncu-rep python generated_code/claude_haiku/softmax_kernel_ai_generated.py 
+ 111 / 160
+An error occurred while running ncu -k softmax_kernel --csv --log-file logs/claude_haiku/softmax_kernel_ai_generated.ncu-rep python generated_code/claude_haiku/softmax_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k add_kernel --csv --log-file logs/claude_haiku/add_kernel_ai_generated.ncu-rep python generated_code/claude_haiku/add_kernel_ai_generated.py 
+ 112 / 160
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/claude_haiku/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/claude_haiku/_layer_norm_fwd_fused_ai_generated.py 
+ 113 / 160
+An error occurred while running ncu -k _layer_norm_fwd_fused --csv --log-file logs/claude_haiku/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/claude_haiku/_layer_norm_fwd_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/claude_haiku/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/claude_haiku/_layer_norm_bwd_dx_fused_ai_generated.py 
+ 114 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/claude_haiku/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/claude_haiku/_layer_norm_bwd_dx_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/claude_haiku/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/claude_haiku/_layer_norm_bwd_dwdb_ai_generated.py 
+ 115 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/claude_haiku/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/claude_haiku/_layer_norm_bwd_dwdb_ai_generated.py
+Error message: None
+Running command: ncu -k constant_add_kernel --csv --log-file logs/claude_haiku/constant_add_kernel_ai_generated.ncu-rep python generated_code/claude_haiku/constant_add_kernel_ai_generated.py 
+ 116 / 160
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/claude_haiku/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/claude_haiku/outer_vector_add_kernel_ai_generated.py 
+ 117 / 160
+An error occurred while running ncu -k outer_vector_add_kernel --csv --log-file logs/claude_haiku/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/claude_haiku/outer_vector_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/claude_haiku/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/claude_haiku/outer_matmul_kernel_ai_generated.py 
+ 118 / 160
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/claude_haiku/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/claude_haiku/outer_matmul_bwd_kernel_ai_generated.py 
+ 119 / 160
+Running command: ncu -k long_sum_kernel --csv --log-file logs/claude_haiku/long_sum_kernel_ai_generated.ncu-rep python generated_code/claude_haiku/long_sum_kernel_ai_generated.py 
+ 120 / 160
+An error occurred while running ncu -k long_sum_kernel --csv --log-file logs/claude_haiku/long_sum_kernel_ai_generated.ncu-rep python generated_code/claude_haiku/long_sum_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k softmax_kernel --csv --log-file logs/finetuned_llama3_1_70b/softmax_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/softmax_kernel_ai_generated.py 
+ 121 / 160
+An error occurred while running ncu -k softmax_kernel --csv --log-file logs/finetuned_llama3_1_70b/softmax_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/softmax_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k add_kernel --csv --log-file logs/finetuned_llama3_1_70b/add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/add_kernel_ai_generated.py 
+ 122 / 160
+An error occurred while running ncu -k add_kernel --csv --log-file logs/finetuned_llama3_1_70b/add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama3_1_70b/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/_layer_norm_fwd_fused_ai_generated.py 
+ 123 / 160
+An error occurred while running ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama3_1_70b/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/_layer_norm_fwd_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama3_1_70b/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/_layer_norm_bwd_dx_fused_ai_generated.py 
+ 124 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama3_1_70b/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/_layer_norm_bwd_dx_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama3_1_70b/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/_layer_norm_bwd_dwdb_ai_generated.py 
+ 125 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama3_1_70b/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/_layer_norm_bwd_dwdb_ai_generated.py
+Error message: None
+Running command: ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama3_1_70b/constant_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/constant_add_kernel_ai_generated.py 
+ 126 / 160
+An error occurred while running ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama3_1_70b/constant_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/constant_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama3_1_70b/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/outer_vector_add_kernel_ai_generated.py 
+ 127 / 160
+An error occurred while running ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama3_1_70b/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/outer_vector_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama3_1_70b/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/outer_matmul_kernel_ai_generated.py 
+ 128 / 160
+An error occurred while running ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama3_1_70b/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/outer_matmul_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama3_1_70b/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/outer_matmul_bwd_kernel_ai_generated.py 
+ 129 / 160
+An error occurred while running ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama3_1_70b/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/outer_matmul_bwd_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama3_1_70b/long_sum_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/long_sum_kernel_ai_generated.py 
+ 130 / 160
+An error occurred while running ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama3_1_70b/long_sum_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b/long_sum_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k softmax_kernel --csv --log-file logs/base_llama3_1_70b/softmax_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/softmax_kernel_ai_generated.py 
+ 131 / 160
+An error occurred while running ncu -k softmax_kernel --csv --log-file logs/base_llama3_1_70b/softmax_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/softmax_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k add_kernel --csv --log-file logs/base_llama3_1_70b/add_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/add_kernel_ai_generated.py 
+ 132 / 160
+An error occurred while running ncu -k add_kernel --csv --log-file logs/base_llama3_1_70b/add_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/base_llama3_1_70b/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/_layer_norm_fwd_fused_ai_generated.py 
+ 133 / 160
+An error occurred while running ncu -k _layer_norm_fwd_fused --csv --log-file logs/base_llama3_1_70b/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/_layer_norm_fwd_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/base_llama3_1_70b/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/_layer_norm_bwd_dx_fused_ai_generated.py 
+ 134 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/base_llama3_1_70b/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/_layer_norm_bwd_dx_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/base_llama3_1_70b/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/_layer_norm_bwd_dwdb_ai_generated.py 
+ 135 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/base_llama3_1_70b/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/_layer_norm_bwd_dwdb_ai_generated.py
+Error message: None
+Running command: ncu -k constant_add_kernel --csv --log-file logs/base_llama3_1_70b/constant_add_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/constant_add_kernel_ai_generated.py 
+ 136 / 160
+An error occurred while running ncu -k constant_add_kernel --csv --log-file logs/base_llama3_1_70b/constant_add_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/constant_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/base_llama3_1_70b/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/outer_vector_add_kernel_ai_generated.py 
+ 137 / 160
+An error occurred while running ncu -k outer_vector_add_kernel --csv --log-file logs/base_llama3_1_70b/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/outer_vector_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/base_llama3_1_70b/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/outer_matmul_kernel_ai_generated.py 
+ 138 / 160
+An error occurred while running ncu -k outer_matmul_kernel --csv --log-file logs/base_llama3_1_70b/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/outer_matmul_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/base_llama3_1_70b/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/outer_matmul_bwd_kernel_ai_generated.py 
+ 139 / 160
+An error occurred while running ncu -k outer_matmul_bwd_kernel --csv --log-file logs/base_llama3_1_70b/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/outer_matmul_bwd_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k long_sum_kernel --csv --log-file logs/base_llama3_1_70b/long_sum_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/long_sum_kernel_ai_generated.py 
+ 140 / 160
+An error occurred while running ncu -k long_sum_kernel --csv --log-file logs/base_llama3_1_70b/long_sum_kernel_ai_generated.ncu-rep python generated_code/base_llama3_1_70b/long_sum_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k softmax_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/softmax_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/softmax_kernel_ai_generated.py 
+ 141 / 160
+An error occurred while running ncu -k softmax_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/softmax_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/softmax_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/add_kernel_ai_generated.py 
+ 142 / 160
+An error occurred while running ncu -k add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/_layer_norm_fwd_fused_ai_generated.py 
+ 143 / 160
+An error occurred while running ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/_layer_norm_fwd_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dx_fused_ai_generated.py 
+ 144 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dx_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dwdb_ai_generated.py 
+ 145 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/_layer_norm_bwd_dwdb_ai_generated.py
+Error message: None
+Running command: ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/constant_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/constant_add_kernel_ai_generated.py 
+ 146 / 160
+An error occurred while running ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/constant_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/constant_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/outer_vector_add_kernel_ai_generated.py 
+ 147 / 160
+An error occurred while running ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/outer_vector_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/outer_matmul_kernel_ai_generated.py 
+ 148 / 160
+An error occurred while running ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/outer_matmul_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/outer_matmul_bwd_kernel_ai_generated.py 
+ 149 / 160
+An error occurred while running ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/outer_matmul_bwd_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/long_sum_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/long_sum_kernel_ai_generated.py 
+ 150 / 160
+An error occurred while running ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_2/long_sum_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_2/long_sum_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k softmax_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/softmax_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/softmax_kernel_ai_generated.py 
+ 151 / 160
+An error occurred while running ncu -k softmax_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/softmax_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/softmax_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/add_kernel_ai_generated.py 
+ 152 / 160
+An error occurred while running ncu -k add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/_layer_norm_fwd_fused_ai_generated.py 
+ 153 / 160
+An error occurred while running ncu -k _layer_norm_fwd_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/_layer_norm_fwd_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/_layer_norm_fwd_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dx_fused_ai_generated.py 
+ 154 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dx_fused --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dx_fused_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dx_fused_ai_generated.py
+Error message: None
+Running command: ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dwdb_ai_generated.py 
+ 155 / 160
+An error occurred while running ncu -k _layer_norm_bwd_dwdb --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dwdb_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/_layer_norm_bwd_dwdb_ai_generated.py
+Error message: None
+Running command: ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/constant_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/constant_add_kernel_ai_generated.py 
+ 156 / 160
+An error occurred while running ncu -k constant_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/constant_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/constant_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/outer_vector_add_kernel_ai_generated.py 
+ 157 / 160
+An error occurred while running ncu -k outer_vector_add_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/outer_vector_add_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/outer_vector_add_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/outer_matmul_kernel_ai_generated.py 
+ 158 / 160
+An error occurred while running ncu -k outer_matmul_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/outer_matmul_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/outer_matmul_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/outer_matmul_bwd_kernel_ai_generated.py 
+ 159 / 160
+An error occurred while running ncu -k outer_matmul_bwd_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/outer_matmul_bwd_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/outer_matmul_bwd_kernel_ai_generated.py
+Error message: None
+Running command: ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/long_sum_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/long_sum_kernel_ai_generated.py 
+ 160 / 160
+An error occurred while running ncu -k long_sum_kernel --csv --log-file logs/finetuned_llama3_1_70b_epoch_1/long_sum_kernel_ai_generated.ncu-rep python generated_code/finetuned_llama3_1_70b_epoch_1/long_sum_kernel_ai_generated.py
+Error message: None
+Writing to finetuned_llama3_1_70b_epoch_1

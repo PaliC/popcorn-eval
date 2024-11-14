@@ -103,6 +103,11 @@ def get_ncu_commands_for_generated_code():
         if path.name.endswith(ai_generated_suffix):
             with open(path, "r") as f:
                 source_code = f.read()
+            if (
+                'raise Exception("This file was not generated with valid python code")'
+                in source_code
+            ):
+                continue
             try:
                 compile(source=source_code, filename=path, mode="exec")
                 compilable_kernels.add(kernel_name)
@@ -168,6 +173,7 @@ def main():
         ai_generated_csv = parse_profiler_csv(log_pair[0])
         reference_csv = parse_profiler_csv(log_pair[1])
         kernel_name = log_pair[0].split("/")[-1].split("_ai_generated")[0]
+        experiment_directory_name = log_pair[0].split("/")[-2]
 
         if len(ai_generated_csv) == 0:
             ai_generated_dict = {}
@@ -176,7 +182,8 @@ def main():
         try:
             reference_dict = reference_csv["0"]
         except KeyError:
-            print(reference_dict)
+            print(log_pair)
+            print(reference_csv)
             exit(0)
         if len(ai_generated_csv.keys()) > 1 or len(reference_csv.keys()) > 1:
             print(
@@ -276,11 +283,12 @@ def main():
             )
 
     # write to csvs
+    print(experiment_dict_to_csv_rows.keys())
     for experiment_directory_name, csv_rows in experiment_dict_to_csv_rows.items():
         with open(
             f"logs/{experiment_directory_name}/_00_ncu_results.csv", "w", newline=""
         ) as csvfile:
-            print(f"Writing to {experiment_directory_name}")
+            print(f"Writing to logs/{experiment_directory_name}")
             writer = csv.writer(csvfile)
             csv_rows.insert(0, csv_columns)
             writer.writerows(csv_rows)
