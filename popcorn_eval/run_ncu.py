@@ -173,7 +173,11 @@ def main():
             ai_generated_dict = {}
         else:
             ai_generated_dict = ai_generated_csv["0"]
-        reference_dict = reference_csv["0"]
+        try:
+            reference_dict = reference_csv["0"]
+        except KeyError:
+            print(reference_dict)
+            exit(0)
         if len(ai_generated_csv.keys()) > 1 or len(reference_csv.keys()) > 1:
             print(
                 f"Skipping {kernel_name} because it has more than one kernel launch. The reference kernel is {len(reference_csv.keys())} and the ai generated kernel is {len(ai_generated_csv.keys())}"
