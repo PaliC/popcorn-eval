@@ -1,0 +1,481 @@
+kernel_name,Metric Name,AI generated Metric Value,Reference Metric Value,Difference,Metric Unit
+_layer_norm_bwd_dwdb,DRAM Frequency,N/A,1589969265.16,N/A,hz
+_layer_norm_bwd_dwdb,SM Frequency,N/A,1347541649.20,N/A,hz
+_layer_norm_bwd_dwdb,Elapsed Cycles,N/A,51450,N/A,cycle
+_layer_norm_bwd_dwdb,Memory Throughput,N/A,2.26,N/A,%
+_layer_norm_bwd_dwdb,DRAM Throughput,N/A,2.26,N/A,%
+_layer_norm_bwd_dwdb,Duration,N/A,38176,N/A,ns
+_layer_norm_bwd_dwdb,L1/TEX Cache Throughput,N/A,6.90,N/A,%
+_layer_norm_bwd_dwdb,L2 Cache Throughput,N/A,2.87,N/A,%
+_layer_norm_bwd_dwdb,SM Active Cycles,N/A,2872.11,N/A,cycle
+_layer_norm_bwd_dwdb,Compute (SM) Throughput,N/A,0.26,N/A,%
+_layer_norm_bwd_dwdb,Block Size,N/A,128,N/A,
+_layer_norm_bwd_dwdb,Cluster Size,N/A,0,N/A,
+_layer_norm_bwd_dwdb,Grid Size,N/A,8,N/A,
+_layer_norm_bwd_dwdb,Registers Per Thread,N/A,96,N/A,register/thread
+_layer_norm_bwd_dwdb,Shared Memory Configuration Size,N/A,32768,N/A,byte
+_layer_norm_bwd_dwdb,Driver Shared Memory Per Block,N/A,1024,N/A,byte/block
+_layer_norm_bwd_dwdb,Dynamic Shared Memory Per Block,N/A,2048,N/A,byte/block
+_layer_norm_bwd_dwdb,Static Shared Memory Per Block,N/A,0,N/A,byte/block
+_layer_norm_bwd_dwdb,# SMs,N/A,132,N/A,SM
+_layer_norm_bwd_dwdb,Threads,N/A,1024,N/A,thread
+_layer_norm_bwd_dwdb,Uses Green Context,N/A,0,N/A,
+_layer_norm_bwd_dwdb,Waves Per SM,N/A,0.01,N/A,
+_layer_norm_bwd_dwdb,Max Active Clusters,N/A,0,N/A,cluster
+_layer_norm_bwd_dwdb,Max Cluster Size,N/A,8,N/A,block
+_layer_norm_bwd_dwdb,Overall GPU Occupancy,N/A,0,N/A,%
+_layer_norm_bwd_dwdb,Cluster Occupancy,N/A,0,N/A,%
+_layer_norm_bwd_dwdb,Block Limit Barriers,N/A,32,N/A,block
+_layer_norm_bwd_dwdb,Block Limit SM,N/A,32,N/A,block
+_layer_norm_bwd_dwdb,Block Limit Registers,N/A,5,N/A,block
+_layer_norm_bwd_dwdb,Block Limit Shared Mem,N/A,10,N/A,block
+_layer_norm_bwd_dwdb,Block Limit Warps,N/A,16,N/A,block
+_layer_norm_bwd_dwdb,Theoretical Active Warps per SM,N/A,20,N/A,warp
+_layer_norm_bwd_dwdb,Theoretical Occupancy,N/A,31.25,N/A,%
+_layer_norm_bwd_dwdb,Achieved Occupancy,N/A,6.25,N/A,%
+_layer_norm_bwd_dwdb,Achieved Active Warps Per SM,N/A,4.00,N/A,warp
+_layer_norm_bwd_dwdb,Average DRAM Active Cycles,N/A,1372.17,N/A,cycle
+_layer_norm_bwd_dwdb,Total DRAM Elapsed Cycles,N/A,2913536,N/A,cycle
+_layer_norm_bwd_dwdb,Average L1 Active Cycles,N/A,2872.11,N/A,cycle
+_layer_norm_bwd_dwdb,Total L1 Elapsed Cycles,N/A,6790584,N/A,cycle
+_layer_norm_bwd_dwdb,Average L2 Active Cycles,N/A,22578.27,N/A,cycle
+_layer_norm_bwd_dwdb,Total L2 Elapsed Cycles,N/A,4934304,N/A,cycle
+_layer_norm_bwd_dwdb,Average SM Active Cycles,N/A,2872.11,N/A,cycle
+_layer_norm_bwd_dwdb,Total SM Elapsed Cycles,N/A,6790584,N/A,cycle
+_layer_norm_bwd_dwdb,Average SMSP Active Cycles,N/A,2833.24,N/A,cycle
+_layer_norm_bwd_dwdb,Total SMSP Elapsed Cycles,N/A,27162336,N/A,cycle
+_layer_norm_bwd_dwdb,Achieved of Possible Occupancy,N/A,0.2,N/A,%
+_layer_norm_bwd_dwdb,Cosine Similarity,N/A,0.9999998807907104,N/A,
+_layer_norm_bwd_dwdb,compiles,True,True,N/A,
+_layer_norm_bwd_dx_fused,DRAM Frequency,N/A,1587734241.91,N/A,hz
+_layer_norm_bwd_dx_fused,SM Frequency,N/A,1339011925.04,N/A,hz
+_layer_norm_bwd_dx_fused,Elapsed Cycles,N/A,25248,N/A,cycle
+_layer_norm_bwd_dx_fused,Memory Throughput,N/A,38.07,N/A,%
+_layer_norm_bwd_dx_fused,DRAM Throughput,N/A,18.36,N/A,%
+_layer_norm_bwd_dx_fused,Duration,N/A,18784,N/A,ns
+_layer_norm_bwd_dx_fused,L1/TEX Cache Throughput,N/A,19.56,N/A,%
+_layer_norm_bwd_dx_fused,L2 Cache Throughput,N/A,62.29,N/A,%
+_layer_norm_bwd_dx_fused,SM Active Cycles,N/A,19563.58,N/A,cycle
+_layer_norm_bwd_dx_fused,Compute (SM) Throughput,N/A,10.57,N/A,%
+_layer_norm_bwd_dx_fused,Block Size,N/A,128,N/A,
+_layer_norm_bwd_dx_fused,Cluster Size,N/A,0,N/A,
+_layer_norm_bwd_dx_fused,Grid Size,N/A,1024,N/A,
+_layer_norm_bwd_dx_fused,Registers Per Thread,N/A,40,N/A,register/thread
+_layer_norm_bwd_dx_fused,Shared Memory Configuration Size,N/A,32768,N/A,byte
+_layer_norm_bwd_dx_fused,Driver Shared Memory Per Block,N/A,1024,N/A,byte/block
+_layer_norm_bwd_dx_fused,Dynamic Shared Memory Per Block,N/A,16,N/A,byte/block
+_layer_norm_bwd_dx_fused,Static Shared Memory Per Block,N/A,0,N/A,byte/block
+_layer_norm_bwd_dx_fused,# SMs,N/A,132,N/A,SM
+_layer_norm_bwd_dx_fused,Threads,N/A,131072,N/A,thread
+_layer_norm_bwd_dx_fused,Uses Green Context,N/A,0,N/A,
+_layer_norm_bwd_dx_fused,Waves Per SM,N/A,0.65,N/A,
+_layer_norm_bwd_dx_fused,Max Active Clusters,N/A,0,N/A,cluster
+_layer_norm_bwd_dx_fused,Max Cluster Size,N/A,8,N/A,block
+_layer_norm_bwd_dx_fused,Overall GPU Occupancy,N/A,0,N/A,%
+_layer_norm_bwd_dx_fused,Cluster Occupancy,N/A,0,N/A,%
+_layer_norm_bwd_dx_fused,Block Limit Barriers,N/A,32,N/A,block
+_layer_norm_bwd_dx_fused,Block Limit SM,N/A,32,N/A,block
+_layer_norm_bwd_dx_fused,Block Limit Registers,N/A,12,N/A,block
+_layer_norm_bwd_dx_fused,Block Limit Shared Mem,N/A,28,N/A,block
+_layer_norm_bwd_dx_fused,Block Limit Warps,N/A,16,N/A,block
+_layer_norm_bwd_dx_fused,Theoretical Active Warps per SM,N/A,48,N/A,warp
+_layer_norm_bwd_dx_fused,Theoretical Occupancy,N/A,75,N/A,%
+_layer_norm_bwd_dx_fused,Achieved Occupancy,N/A,34.70,N/A,%
+_layer_norm_bwd_dx_fused,Achieved Active Warps Per SM,N/A,22.21,N/A,warp
+_layer_norm_bwd_dx_fused,Average DRAM Active Cycles,N/A,5475.67,N/A,cycle
+_layer_norm_bwd_dx_fused,Total DRAM Elapsed Cycles,N/A,1431552,N/A,cycle
+_layer_norm_bwd_dx_fused,Average L1 Active Cycles,N/A,19563.58,N/A,cycle
+_layer_norm_bwd_dx_fused,Total L1 Elapsed Cycles,N/A,3319874,N/A,cycle
+_layer_norm_bwd_dx_fused,Average L2 Active Cycles,N/A,20905.42,N/A,cycle
+_layer_norm_bwd_dx_fused,Total L2 Elapsed Cycles,N/A,2412000,N/A,cycle
+_layer_norm_bwd_dx_fused,Average SM Active Cycles,N/A,19563.58,N/A,cycle
+_layer_norm_bwd_dx_fused,Total SM Elapsed Cycles,N/A,3319874,N/A,cycle
+_layer_norm_bwd_dx_fused,Average SMSP Active Cycles,N/A,18931.74,N/A,cycle
+_layer_norm_bwd_dx_fused,Total SMSP Elapsed Cycles,N/A,13279496,N/A,cycle
+_layer_norm_bwd_dx_fused,Achieved of Possible Occupancy,N/A,0.4626666666666667,N/A,%
+_layer_norm_bwd_dx_fused,Cosine Similarity,N/A,1.000000238418579,N/A,
+_layer_norm_bwd_dx_fused,compiles,True,True,N/A,
+_layer_norm_fwd_fused,DRAM Frequency,N/A,1583333333.33,N/A,hz
+_layer_norm_fwd_fused,SM Frequency,N/A,1322498139.88,N/A,hz
+_layer_norm_fwd_fused,Elapsed Cycles,N/A,10724,N/A,cycle
+_layer_norm_fwd_fused,Memory Throughput,N/A,24.29,N/A,%
+_layer_norm_fwd_fused,DRAM Throughput,N/A,21.49,N/A,%
+_layer_norm_fwd_fused,Duration,N/A,8064,N/A,ns
+_layer_norm_fwd_fused,L1/TEX Cache Throughput,N/A,40.03,N/A,%
+_layer_norm_fwd_fused,L2 Cache Throughput,N/A,33.72,N/A,%
+_layer_norm_fwd_fused,SM Active Cycles,N/A,6472.08,N/A,cycle
+_layer_norm_fwd_fused,Compute (SM) Throughput,N/A,24.40,N/A,%
+_layer_norm_fwd_fused,Block Size,N/A,128,N/A,
+_layer_norm_fwd_fused,Cluster Size,N/A,0,N/A,
+_layer_norm_fwd_fused,Grid Size,N/A,1024,N/A,
+_layer_norm_fwd_fused,Registers Per Thread,N/A,32,N/A,register/thread
+_layer_norm_fwd_fused,Shared Memory Configuration Size,N/A,32768,N/A,byte
+_layer_norm_fwd_fused,Driver Shared Memory Per Block,N/A,1024,N/A,byte/block
+_layer_norm_fwd_fused,Dynamic Shared Memory Per Block,N/A,16,N/A,byte/block
+_layer_norm_fwd_fused,Static Shared Memory Per Block,N/A,0,N/A,byte/block
+_layer_norm_fwd_fused,# SMs,N/A,132,N/A,SM
+_layer_norm_fwd_fused,Threads,N/A,131072,N/A,thread
+_layer_norm_fwd_fused,Uses Green Context,N/A,0,N/A,
+_layer_norm_fwd_fused,Waves Per SM,N/A,0.48,N/A,
+_layer_norm_fwd_fused,Max Active Clusters,N/A,0,N/A,cluster
+_layer_norm_fwd_fused,Max Cluster Size,N/A,8,N/A,block
+_layer_norm_fwd_fused,Overall GPU Occupancy,N/A,0,N/A,%
+_layer_norm_fwd_fused,Cluster Occupancy,N/A,0,N/A,%
+_layer_norm_fwd_fused,Block Limit Barriers,N/A,32,N/A,block
+_layer_norm_fwd_fused,Block Limit SM,N/A,32,N/A,block
+_layer_norm_fwd_fused,Block Limit Registers,N/A,16,N/A,block
+_layer_norm_fwd_fused,Block Limit Shared Mem,N/A,28,N/A,block
+_layer_norm_fwd_fused,Block Limit Warps,N/A,16,N/A,block
+_layer_norm_fwd_fused,Theoretical Active Warps per SM,N/A,64,N/A,warp
+_layer_norm_fwd_fused,Theoretical Occupancy,N/A,100,N/A,%
+_layer_norm_fwd_fused,Achieved Occupancy,N/A,42.52,N/A,%
+_layer_norm_fwd_fused,Achieved Active Warps Per SM,N/A,27.21,N/A,warp
+_layer_norm_fwd_fused,Average DRAM Active Cycles,N/A,2743.33,N/A,cycle
+_layer_norm_fwd_fused,Total DRAM Elapsed Cycles,N/A,612864,N/A,cycle
+_layer_norm_fwd_fused,Average L1 Active Cycles,N/A,6472.08,N/A,cycle
+_layer_norm_fwd_fused,Total L1 Elapsed Cycles,N/A,1407640,N/A,cycle
+_layer_norm_fwd_fused,Average L2 Active Cycles,N/A,6620.72,N/A,cycle
+_layer_norm_fwd_fused,Total L2 Elapsed Cycles,N/A,1034592,N/A,cycle
+_layer_norm_fwd_fused,Average SM Active Cycles,N/A,6472.08,N/A,cycle
+_layer_norm_fwd_fused,Total SM Elapsed Cycles,N/A,1407640,N/A,cycle
+_layer_norm_fwd_fused,Average SMSP Active Cycles,N/A,6567.52,N/A,cycle
+_layer_norm_fwd_fused,Total SMSP Elapsed Cycles,N/A,5630560,N/A,cycle
+_layer_norm_fwd_fused,Achieved of Possible Occupancy,N/A,0.4252,N/A,%
+_layer_norm_fwd_fused,Cosine Similarity,N/A,N/A,N/A,
+_layer_norm_fwd_fused,compiles,True,True,N/A,
+add_kernel,DRAM Frequency,1569333333.33,1576000000,-6666666.670000076,hz
+add_kernel,SM Frequency,1333625000,1338406250,-4781250.0,hz
+add_kernel,Elapsed Cycles,5344,5359,-15.0,cycle
+add_kernel,Memory Throughput,12.98,12.93,0.05000000000000071,%
+add_kernel,DRAM Throughput,8.20,8.16,0.03999999999999915,%
+add_kernel,Duration,4000,4000,0.0,ns
+add_kernel,L1/TEX Cache Throughput,8.59,7.69,0.8999999999999995,%
+add_kernel,L2 Cache Throughput,20.16,20.00,0.16000000000000014,%
+add_kernel,SM Active Cycles,1379.18,1541.25,-162.06999999999994,cycle
+add_kernel,Compute (SM) Throughput,0.77,0.77,0.0,%
+add_kernel,Block Size,128,128,0.0,
+add_kernel,Cluster Size,0,0,0.0,
+add_kernel,Grid Size,97,97,0.0,
+add_kernel,Registers Per Thread,26,26,0.0,register/thread
+add_kernel,Shared Memory Configuration Size,32768,32768,0.0,byte
+add_kernel,Driver Shared Memory Per Block,1024,1024,0.0,byte/block
+add_kernel,Dynamic Shared Memory Per Block,0,0,0.0,byte/block
+add_kernel,Static Shared Memory Per Block,0,0,0.0,byte/block
+add_kernel,# SMs,132,132,0.0,SM
+add_kernel,Threads,12416,12416,0.0,thread
+add_kernel,Uses Green Context,0,0,0.0,
+add_kernel,Waves Per SM,0.05,0.05,0.0,
+add_kernel,Max Active Clusters,0,0,0.0,cluster
+add_kernel,Max Cluster Size,8,8,0.0,block
+add_kernel,Overall GPU Occupancy,0,0,0.0,%
+add_kernel,Cluster Occupancy,0,0,0.0,%
+add_kernel,Block Limit Barriers,32,32,0.0,block
+add_kernel,Block Limit SM,32,32,0.0,block
+add_kernel,Block Limit Registers,16,16,0.0,block
+add_kernel,Block Limit Shared Mem,32,32,0.0,block
+add_kernel,Block Limit Warps,16,16,0.0,block
+add_kernel,Theoretical Active Warps per SM,64,64,0.0,warp
+add_kernel,Theoretical Occupancy,100,100,0.0,%
+add_kernel,Achieved Occupancy,5.96,6.05,-0.08999999999999986,%
+add_kernel,Achieved Active Warps Per SM,3.82,3.87,-0.050000000000000266,warp
+add_kernel,Average DRAM Active Cycles,514.83,514.67,0.16000000000008185,cycle
+add_kernel,Total DRAM Elapsed Cycles,301312,302592,-1280.0,cycle
+add_kernel,Average L1 Active Cycles,1379.18,1541.25,-162.06999999999994,cycle
+add_kernel,Total L1 Elapsed Cycles,704132,706676,-2544.0,cycle
+add_kernel,Average L2 Active Cycles,2588.97,2578.27,10.699999999999818,cycle
+add_kernel,Total L2 Elapsed Cycles,511968,514080,-2112.0,cycle
+add_kernel,Average SM Active Cycles,1379.18,1541.25,-162.06999999999994,cycle
+add_kernel,Total SM Elapsed Cycles,704132,706676,-2544.0,cycle
+add_kernel,Average SMSP Active Cycles,1296.23,1295.16,1.0699999999999363,cycle
+add_kernel,Total SMSP Elapsed Cycles,2816528,2826704,-10176.0,cycle
+add_kernel,Achieved of Possible Occupancy,0.0596,0.0605,-0.000899999999999998,%
+add_kernel,Cosine Similarity,1.0,1.0,0.0,
+add_kernel,compiles,True,True,N/A,
+constant_add_kernel,DRAM Frequency,1578078078.08,1591304347.83,-13226269.75,hz
+constant_add_kernel,SM Frequency,1334529842.34,1342798913.04,-8269070.700000048,hz
+constant_add_kernel,Elapsed Cycles,4743,4944,-201.0,cycle
+constant_add_kernel,Memory Throughput,11.35,10.88,0.46999999999999886,%
+constant_add_kernel,DRAM Throughput,0.04,0.03,0.010000000000000002,%
+constant_add_kernel,Duration,3552,3680,-128.0,ns
+constant_add_kernel,L1/TEX Cache Throughput,70.64,68.31,2.3299999999999983,%
+constant_add_kernel,L2 Cache Throughput,12.82,12.30,0.5199999999999996,%
+constant_add_kernel,SM Active Cycles,11.33,11.71,-0.3800000000000008,cycle
+constant_add_kernel,Compute (SM) Throughput,0.01,0.01,0.0,%
+constant_add_kernel,Block Size,128,128,0.0,
+constant_add_kernel,Cluster Size,0,0,0.0,
+constant_add_kernel,Grid Size,1,1,0.0,
+constant_add_kernel,Registers Per Thread,16,16,0.0,register/thread
+constant_add_kernel,Shared Memory Configuration Size,32768,32768,0.0,byte
+constant_add_kernel,Driver Shared Memory Per Block,1024,1024,0.0,byte/block
+constant_add_kernel,Dynamic Shared Memory Per Block,0,0,0.0,byte/block
+constant_add_kernel,Static Shared Memory Per Block,0,0,0.0,byte/block
+constant_add_kernel,# SMs,132,132,0.0,SM
+constant_add_kernel,Threads,128,128,0.0,thread
+constant_add_kernel,Uses Green Context,0,0,0.0,
+constant_add_kernel,Waves Per SM,0.00,0.00,0.0,
+constant_add_kernel,Max Active Clusters,0,0,0.0,cluster
+constant_add_kernel,Max Cluster Size,8,8,0.0,block
+constant_add_kernel,Overall GPU Occupancy,0,0,0.0,%
+constant_add_kernel,Cluster Occupancy,0,0,0.0,%
+constant_add_kernel,Block Limit Barriers,32,32,0.0,block
+constant_add_kernel,Block Limit SM,32,32,0.0,block
+constant_add_kernel,Block Limit Registers,32,32,0.0,block
+constant_add_kernel,Block Limit Shared Mem,32,32,0.0,block
+constant_add_kernel,Block Limit Warps,16,16,0.0,block
+constant_add_kernel,Theoretical Active Warps per SM,64,64,0.0,warp
+constant_add_kernel,Theoretical Occupancy,100,100,0.0,%
+constant_add_kernel,Achieved Occupancy,6.13,4.02,2.1100000000000003,%
+constant_add_kernel,Achieved Active Warps Per SM,3.92,2.58,1.3399999999999999,warp
+constant_add_kernel,Average DRAM Active Cycles,2,2,0.0,cycle
+constant_add_kernel,Total DRAM Elapsed Cycles,269056,281088,-12032.0,cycle
+constant_add_kernel,Average L1 Active Cycles,11.33,11.71,-0.3800000000000008,cycle
+constant_add_kernel,Total L1 Elapsed Cycles,625712,652270,-26558.0,cycle
+constant_add_kernel,Average L2 Active Cycles,1111.46,1180.21,-68.75,cycle
+constant_add_kernel,Total L2 Elapsed Cycles,453984,473280,-19296.0,cycle
+constant_add_kernel,Average SM Active Cycles,11.33,11.71,-0.3800000000000008,cycle
+constant_add_kernel,Total SM Elapsed Cycles,625712,652270,-26558.0,cycle
+constant_add_kernel,Average SMSP Active Cycles,11.21,7.79,3.420000000000001,cycle
+constant_add_kernel,Total SMSP Elapsed Cycles,2502848,2609080,-106232.0,cycle
+constant_add_kernel,Achieved of Possible Occupancy,0.0613,0.04019999999999999,0.021100000000000008,%
+constant_add_kernel,Cosine Similarity,1.0,1.0,0.0,
+constant_add_kernel,compiles,True,True,N/A,
+long_sum_kernel,DRAM Frequency,N/A,1580952380.95,N/A,hz
+long_sum_kernel,SM Frequency,N/A,1342243303.57,N/A,hz
+long_sum_kernel,Elapsed Cycles,N/A,9022,N/A,cycle
+long_sum_kernel,Memory Throughput,N/A,6.04,N/A,%
+long_sum_kernel,DRAM Throughput,N/A,0.04,N/A,%
+long_sum_kernel,Duration,N/A,6720,N/A,ns
+long_sum_kernel,L1/TEX Cache Throughput,N/A,4.72,N/A,%
+long_sum_kernel,L2 Cache Throughput,N/A,6.75,N/A,%
+long_sum_kernel,SM Active Cycles,N/A,169.35,N/A,cycle
+long_sum_kernel,Compute (SM) Throughput,N/A,0.06,N/A,%
+long_sum_kernel,Block Size,N/A,128,N/A,
+long_sum_kernel,Cluster Size,N/A,0,N/A,
+long_sum_kernel,Grid Size,N/A,4,N/A,
+long_sum_kernel,Registers Per Thread,N/A,20,N/A,register/thread
+long_sum_kernel,Shared Memory Configuration Size,N/A,32768,N/A,byte
+long_sum_kernel,Driver Shared Memory Per Block,N/A,1024,N/A,byte/block
+long_sum_kernel,Dynamic Shared Memory Per Block,N/A,4,N/A,byte/block
+long_sum_kernel,Static Shared Memory Per Block,N/A,0,N/A,byte/block
+long_sum_kernel,# SMs,N/A,132,N/A,SM
+long_sum_kernel,Threads,N/A,512,N/A,thread
+long_sum_kernel,Uses Green Context,N/A,0,N/A,
+long_sum_kernel,Waves Per SM,N/A,0.00,N/A,
+long_sum_kernel,Max Active Clusters,N/A,0,N/A,cluster
+long_sum_kernel,Max Cluster Size,N/A,8,N/A,block
+long_sum_kernel,Overall GPU Occupancy,N/A,0,N/A,%
+long_sum_kernel,Cluster Occupancy,N/A,0,N/A,%
+long_sum_kernel,Block Limit Barriers,N/A,32,N/A,block
+long_sum_kernel,Block Limit SM,N/A,32,N/A,block
+long_sum_kernel,Block Limit Registers,N/A,21,N/A,block
+long_sum_kernel,Block Limit Shared Mem,N/A,28,N/A,block
+long_sum_kernel,Block Limit Warps,N/A,16,N/A,block
+long_sum_kernel,Theoretical Active Warps per SM,N/A,64,N/A,warp
+long_sum_kernel,Theoretical Occupancy,N/A,100,N/A,%
+long_sum_kernel,Achieved Occupancy,N/A,6.22,N/A,%
+long_sum_kernel,Achieved Active Warps Per SM,N/A,3.98,N/A,warp
+long_sum_kernel,Average DRAM Active Cycles,N/A,4.17,N/A,cycle
+long_sum_kernel,Total DRAM Elapsed Cycles,N/A,509952,N/A,cycle
+long_sum_kernel,Average L1 Active Cycles,N/A,169.35,N/A,cycle
+long_sum_kernel,Total L1 Elapsed Cycles,N/A,1190630,N/A,cycle
+long_sum_kernel,Average L2 Active Cycles,N/A,1247.62,N/A,cycle
+long_sum_kernel,Total L2 Elapsed Cycles,N/A,864960,N/A,cycle
+long_sum_kernel,Average SM Active Cycles,N/A,169.35,N/A,cycle
+long_sum_kernel,Total SM Elapsed Cycles,N/A,1190630,N/A,cycle
+long_sum_kernel,Average SMSP Active Cycles,N/A,167.50,N/A,cycle
+long_sum_kernel,Total SMSP Elapsed Cycles,N/A,4762520,N/A,cycle
+long_sum_kernel,Achieved of Possible Occupancy,N/A,0.0622,N/A,%
+long_sum_kernel,Cosine Similarity,N/A,0.9999999403953552,N/A,
+long_sum_kernel,compiles,True,True,N/A,
+outer_matmul_bwd_kernel,DRAM Frequency,1593750000,1583333333.33,10416666.670000076,hz
+outer_matmul_bwd_kernel,SM Frequency,1339050292.97,1332733154.30,6317138.670000076,hz
+outer_matmul_bwd_kernel,Elapsed Cycles,5490,5463,27.0,cycle
+outer_matmul_bwd_kernel,Memory Throughput,9.85,10.49,-0.6400000000000006,%
+outer_matmul_bwd_kernel,DRAM Throughput,0.06,0.78,-0.72,%
+outer_matmul_bwd_kernel,Duration,4096,4096,0.0,ns
+outer_matmul_bwd_kernel,L1/TEX Cache Throughput,13.13,9.98,3.1500000000000004,%
+outer_matmul_bwd_kernel,L2 Cache Throughput,11.08,12.25,-1.17,%
+outer_matmul_bwd_kernel,SM Active Cycles,163.34,198.56,-35.22,cycle
+outer_matmul_bwd_kernel,Compute (SM) Throughput,0.39,0.27,0.12,%
+outer_matmul_bwd_kernel,Block Size,128,128,0.0,
+outer_matmul_bwd_kernel,Cluster Size,0,0,0.0,
+outer_matmul_bwd_kernel,Grid Size,12,12,0.0,
+outer_matmul_bwd_kernel,Registers Per Thread,28,40,-12.0,register/thread
+outer_matmul_bwd_kernel,Shared Memory Configuration Size,32768,32768,0.0,byte
+outer_matmul_bwd_kernel,Driver Shared Memory Per Block,1024,1024,0.0,byte/block
+outer_matmul_bwd_kernel,Dynamic Shared Memory Per Block,128,0,128.0,byte/block
+outer_matmul_bwd_kernel,Static Shared Memory Per Block,0,0,0.0,byte/block
+outer_matmul_bwd_kernel,# SMs,132,132,0.0,SM
+outer_matmul_bwd_kernel,Threads,1536,1536,0.0,thread
+outer_matmul_bwd_kernel,Uses Green Context,0,0,0.0,
+outer_matmul_bwd_kernel,Waves Per SM,0.01,0.01,0.0,
+outer_matmul_bwd_kernel,Max Active Clusters,0,0,0.0,cluster
+outer_matmul_bwd_kernel,Max Cluster Size,8,8,0.0,block
+outer_matmul_bwd_kernel,Overall GPU Occupancy,0,0,0.0,%
+outer_matmul_bwd_kernel,Cluster Occupancy,0,0,0.0,%
+outer_matmul_bwd_kernel,Block Limit Barriers,32,32,0.0,block
+outer_matmul_bwd_kernel,Block Limit SM,32,32,0.0,block
+outer_matmul_bwd_kernel,Block Limit Registers,16,12,4.0,block
+outer_matmul_bwd_kernel,Block Limit Shared Mem,28,32,-4.0,block
+outer_matmul_bwd_kernel,Block Limit Warps,16,16,0.0,block
+outer_matmul_bwd_kernel,Theoretical Active Warps per SM,64,48,16.0,warp
+outer_matmul_bwd_kernel,Theoretical Occupancy,100,75,25.0,%
+outer_matmul_bwd_kernel,Achieved Occupancy,6.09,6.00,0.08999999999999986,%
+outer_matmul_bwd_kernel,Achieved Active Warps Per SM,3.90,3.84,0.06000000000000005,warp
+outer_matmul_bwd_kernel,Average DRAM Active Cycles,3.83,50.67,-46.84,cycle
+outer_matmul_bwd_kernel,Total DRAM Elapsed Cycles,313344,311296,2048.0,cycle
+outer_matmul_bwd_kernel,Average L1 Active Cycles,163.34,198.56,-35.22,cycle
+outer_matmul_bwd_kernel,Total L1 Elapsed Cycles,724006,720578,3428.0,cycle
+outer_matmul_bwd_kernel,Average L2 Active Cycles,1256.56,2033.72,-777.1600000000001,cycle
+outer_matmul_bwd_kernel,Total L2 Elapsed Cycles,525696,522528,3168.0,cycle
+outer_matmul_bwd_kernel,Average SM Active Cycles,163.34,198.56,-35.22,cycle
+outer_matmul_bwd_kernel,Total SM Elapsed Cycles,724006,720578,3428.0,cycle
+outer_matmul_bwd_kernel,Average SMSP Active Cycles,158.88,190.19,-31.310000000000002,cycle
+outer_matmul_bwd_kernel,Total SMSP Elapsed Cycles,2896024,2882312,13712.0,cycle
+outer_matmul_bwd_kernel,Achieved of Possible Occupancy,0.060899999999999996,0.08,-0.019100000000000006,%
+outer_matmul_bwd_kernel,Cosine Similarity,N/A,N/A,N/A,
+outer_matmul_bwd_kernel,compiles,True,True,N/A,
+outer_matmul_kernel,DRAM Frequency,1578947368.42,1576023391.81,2923976.6100001335,hz
+outer_matmul_kernel,SM Frequency,1343236019.74,1334635416.67,8600603.069999933,hz
+outer_matmul_kernel,Elapsed Cycles,4903,4874,29.0,cycle
+outer_matmul_kernel,Memory Throughput,11.20,11.29,-0.08999999999999986,%
+outer_matmul_kernel,DRAM Throughput,0.05,0.06,-0.009999999999999995,%
+outer_matmul_kernel,Duration,3648,3648,0.0,ns
+outer_matmul_kernel,L1/TEX Cache Throughput,10.40,10.41,-0.009999999999999787,%
+outer_matmul_kernel,L2 Cache Throughput,13.06,12.93,0.13000000000000078,%
+outer_matmul_kernel,SM Active Cycles,141.31,142.96,-1.6500000000000057,cycle
+outer_matmul_kernel,Compute (SM) Throughput,0.21,0.19,0.01999999999999999,%
+outer_matmul_kernel,Block Size,128,128,0.0,
+outer_matmul_kernel,Cluster Size,0,0,0.0,
+outer_matmul_kernel,Grid Size,12,12,0.0,
+outer_matmul_kernel,Registers Per Thread,32,32,0.0,register/thread
+outer_matmul_kernel,Shared Memory Configuration Size,32768,32768,0.0,byte
+outer_matmul_kernel,Driver Shared Memory Per Block,1024,1024,0.0,byte/block
+outer_matmul_kernel,Dynamic Shared Memory Per Block,0,0,0.0,byte/block
+outer_matmul_kernel,Static Shared Memory Per Block,0,0,0.0,byte/block
+outer_matmul_kernel,# SMs,132,132,0.0,SM
+outer_matmul_kernel,Threads,1536,1536,0.0,thread
+outer_matmul_kernel,Uses Green Context,0,0,0.0,
+outer_matmul_kernel,Waves Per SM,0.01,0.01,0.0,
+outer_matmul_kernel,Max Active Clusters,0,0,0.0,cluster
+outer_matmul_kernel,Max Cluster Size,8,8,0.0,block
+outer_matmul_kernel,Overall GPU Occupancy,0,0,0.0,%
+outer_matmul_kernel,Cluster Occupancy,0,0,0.0,%
+outer_matmul_kernel,Block Limit Barriers,32,32,0.0,block
+outer_matmul_kernel,Block Limit SM,32,32,0.0,block
+outer_matmul_kernel,Block Limit Registers,16,16,0.0,block
+outer_matmul_kernel,Block Limit Shared Mem,32,32,0.0,block
+outer_matmul_kernel,Block Limit Warps,16,16,0.0,block
+outer_matmul_kernel,Theoretical Active Warps per SM,64,64,0.0,warp
+outer_matmul_kernel,Theoretical Occupancy,100,100,0.0,%
+outer_matmul_kernel,Achieved Occupancy,6.22,6.22,0.0,%
+outer_matmul_kernel,Achieved Active Warps Per SM,3.98,3.98,0.0,warp
+outer_matmul_kernel,Average DRAM Active Cycles,3.17,3.17,0.0,cycle
+outer_matmul_kernel,Total DRAM Elapsed Cycles,276480,275968,512.0,cycle
+outer_matmul_kernel,Average L1 Active Cycles,141.31,142.96,-1.6500000000000057,cycle
+outer_matmul_kernel,Total L1 Elapsed Cycles,646824,642688,4136.0,cycle
+outer_matmul_kernel,Average L2 Active Cycles,1375.62,1435.24,-59.62000000000012,cycle
+outer_matmul_kernel,Total L2 Elapsed Cycles,469440,466272,3168.0,cycle
+outer_matmul_kernel,Average SM Active Cycles,141.31,142.96,-1.6500000000000057,cycle
+outer_matmul_kernel,Total SM Elapsed Cycles,646824,642688,4136.0,cycle
+outer_matmul_kernel,Average SMSP Active Cycles,141.33,140.95,0.3800000000000239,cycle
+outer_matmul_kernel,Total SMSP Elapsed Cycles,2587296,2570752,16544.0,cycle
+outer_matmul_kernel,Achieved of Possible Occupancy,0.0622,0.0622,0.0,%
+outer_matmul_kernel,Cosine Similarity,N/A,N/A,N/A,
+outer_matmul_kernel,compiles,True,True,N/A,
+outer_vector_add_kernel,DRAM Frequency,N/A,1578947368.42,N/A,hz
+outer_vector_add_kernel,SM Frequency,N/A,1342893366.23,N/A,hz
+outer_vector_add_kernel,Elapsed Cycles,N/A,4901,N/A,cycle
+outer_vector_add_kernel,Memory Throughput,N/A,11.09,N/A,%
+outer_vector_add_kernel,DRAM Throughput,N/A,0.03,N/A,%
+outer_vector_add_kernel,Duration,N/A,3648,N/A,ns
+outer_vector_add_kernel,L1/TEX Cache Throughput,N/A,73.18,N/A,%
+outer_vector_add_kernel,L2 Cache Throughput,N/A,12.42,N/A,%
+outer_vector_add_kernel,SM Active Cycles,N/A,10.93,N/A,cycle
+outer_vector_add_kernel,Compute (SM) Throughput,N/A,0.01,N/A,%
+outer_vector_add_kernel,Block Size,N/A,128,N/A,
+outer_vector_add_kernel,Cluster Size,N/A,0,N/A,
+outer_vector_add_kernel,Grid Size,N/A,1,N/A,
+outer_vector_add_kernel,Registers Per Thread,N/A,22,N/A,register/thread
+outer_vector_add_kernel,Shared Memory Configuration Size,N/A,32768,N/A,byte
+outer_vector_add_kernel,Driver Shared Memory Per Block,N/A,1024,N/A,byte/block
+outer_vector_add_kernel,Dynamic Shared Memory Per Block,N/A,0,N/A,byte/block
+outer_vector_add_kernel,Static Shared Memory Per Block,N/A,0,N/A,byte/block
+outer_vector_add_kernel,# SMs,N/A,132,N/A,SM
+outer_vector_add_kernel,Threads,N/A,128,N/A,thread
+outer_vector_add_kernel,Uses Green Context,N/A,0,N/A,
+outer_vector_add_kernel,Waves Per SM,N/A,0.00,N/A,
+outer_vector_add_kernel,Max Active Clusters,N/A,0,N/A,cluster
+outer_vector_add_kernel,Max Cluster Size,N/A,8,N/A,block
+outer_vector_add_kernel,Overall GPU Occupancy,N/A,0,N/A,%
+outer_vector_add_kernel,Cluster Occupancy,N/A,0,N/A,%
+outer_vector_add_kernel,Block Limit Barriers,N/A,32,N/A,block
+outer_vector_add_kernel,Block Limit SM,N/A,32,N/A,block
+outer_vector_add_kernel,Block Limit Registers,N/A,21,N/A,block
+outer_vector_add_kernel,Block Limit Shared Mem,N/A,32,N/A,block
+outer_vector_add_kernel,Block Limit Warps,N/A,16,N/A,block
+outer_vector_add_kernel,Theoretical Active Warps per SM,N/A,64,N/A,warp
+outer_vector_add_kernel,Theoretical Occupancy,N/A,100,N/A,%
+outer_vector_add_kernel,Achieved Occupancy,N/A,6.21,N/A,%
+outer_vector_add_kernel,Achieved Active Warps Per SM,N/A,3.98,N/A,warp
+outer_vector_add_kernel,Average DRAM Active Cycles,N/A,2,N/A,cycle
+outer_vector_add_kernel,Total DRAM Elapsed Cycles,N/A,276480,N/A,cycle
+outer_vector_add_kernel,Average L1 Active Cycles,N/A,10.93,N/A,cycle
+outer_vector_add_kernel,Total L1 Elapsed Cycles,N/A,646652,N/A,cycle
+outer_vector_add_kernel,Average L2 Active Cycles,N/A,1174.99,N/A,cycle
+outer_vector_add_kernel,Total L2 Elapsed Cycles,N/A,469728,N/A,cycle
+outer_vector_add_kernel,Average SM Active Cycles,N/A,10.93,N/A,cycle
+outer_vector_add_kernel,Total SM Elapsed Cycles,N/A,646652,N/A,cycle
+outer_vector_add_kernel,Average SMSP Active Cycles,N/A,11.12,N/A,cycle
+outer_vector_add_kernel,Total SMSP Elapsed Cycles,N/A,2586608,N/A,cycle
+outer_vector_add_kernel,Achieved of Possible Occupancy,N/A,0.0621,N/A,%
+outer_vector_add_kernel,Cosine Similarity,N/A,N/A,N/A,
+outer_vector_add_kernel,compiles,True,True,N/A,
+softmax_kernel,DRAM Frequency,N/A,1582207207.21,N/A,hz
+softmax_kernel,SM Frequency,N/A,1317979307.43,N/A,hz
+softmax_kernel,Elapsed Cycles,N/A,15742,N/A,cycle
+softmax_kernel,Memory Throughput,N/A,40.22,N/A,%
+softmax_kernel,DRAM Throughput,N/A,19.82,N/A,%
+softmax_kernel,Duration,N/A,11840,N/A,ns
+softmax_kernel,L1/TEX Cache Throughput,N/A,58.72,N/A,%
+softmax_kernel,L2 Cache Throughput,N/A,34.12,N/A,%
+softmax_kernel,SM Active Cycles,N/A,10686.96,N/A,cycle
+softmax_kernel,Compute (SM) Throughput,N/A,39.77,N/A,%
+softmax_kernel,Block Size,N/A,256,N/A,
+softmax_kernel,Cluster Size,N/A,0,N/A,
+softmax_kernel,Grid Size,N/A,1056,N/A,
+softmax_kernel,Registers Per Thread,N/A,32,N/A,register/thread
+softmax_kernel,Shared Memory Configuration Size,N/A,135168,N/A,byte
+softmax_kernel,Driver Shared Memory Per Block,N/A,1024,N/A,byte/block
+softmax_kernel,Dynamic Shared Memory Per Block,N/A,12320,N/A,byte/block
+softmax_kernel,Static Shared Memory Per Block,N/A,0,N/A,byte/block
+softmax_kernel,# SMs,N/A,132,N/A,SM
+softmax_kernel,Threads,N/A,270336,N/A,thread
+softmax_kernel,Uses Green Context,N/A,0,N/A,
+softmax_kernel,Waves Per SM,N/A,1,N/A,
+softmax_kernel,Max Active Clusters,N/A,0,N/A,cluster
+softmax_kernel,Max Cluster Size,N/A,8,N/A,block
+softmax_kernel,Overall GPU Occupancy,N/A,0,N/A,%
+softmax_kernel,Cluster Occupancy,N/A,0,N/A,%
+softmax_kernel,Block Limit Barriers,N/A,32,N/A,block
+softmax_kernel,Block Limit SM,N/A,32,N/A,block
+softmax_kernel,Block Limit Registers,N/A,8,N/A,block
+softmax_kernel,Block Limit Shared Mem,N/A,10,N/A,block
+softmax_kernel,Block Limit Warps,N/A,8,N/A,block
+softmax_kernel,Theoretical Active Warps per SM,N/A,64,N/A,warp
+softmax_kernel,Theoretical Occupancy,N/A,100,N/A,%
+softmax_kernel,Achieved Occupancy,N/A,86.31,N/A,%
+softmax_kernel,Achieved Active Warps Per SM,N/A,55.24,N/A,warp
+softmax_kernel,Average DRAM Active Cycles,N/A,3712.33,N/A,cycle
+softmax_kernel,Total DRAM Elapsed Cycles,N/A,899200,N/A,cycle
+softmax_kernel,Average L1 Active Cycles,N/A,10686.96,N/A,cycle
+softmax_kernel,Total L1 Elapsed Cycles,N/A,2059600,N/A,cycle
+softmax_kernel,Average L2 Active Cycles,N/A,11823.48,N/A,cycle
+softmax_kernel,Total L2 Elapsed Cycles,N/A,1522752,N/A,cycle
+softmax_kernel,Average SM Active Cycles,N/A,10686.96,N/A,cycle
+softmax_kernel,Total SM Elapsed Cycles,N/A,2059600,N/A,cycle
+softmax_kernel,Average SMSP Active Cycles,N/A,10627.74,N/A,cycle
+softmax_kernel,Total SMSP Elapsed Cycles,N/A,8238400,N/A,cycle
+softmax_kernel,Achieved of Possible Occupancy,N/A,0.8631,N/A,%
+softmax_kernel,Cosine Similarity,N/A,N/A,N/A,
+softmax_kernel,compiles,True,True,N/A,
