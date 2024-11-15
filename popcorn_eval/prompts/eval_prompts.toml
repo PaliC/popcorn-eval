@@ -34,6 +34,7 @@ def matmul_kernel(
         ACTIVATION: tl.constexpr  #
 ):
 ```
+
 """
 # taken from triton documentation
 reference_kernel = """
@@ -174,6 +175,7 @@ def softmax_kernel(output_ptr, input_ptr, input_row_stride, output_row_stride, n
         output_ptrs = output_row_start_ptr + col_offsets
         tl.store(output_ptrs, softmax_output, mask=mask)
 ```
+
 """
 [[prompts]]
 # taken from triton documentation
@@ -202,6 +204,7 @@ def add_kernel(x_ptr,  # *Pointer* to first input vector.
                # NOTE: `constexpr` so it can be used as a shape value.
                ):
 ```
+
 """
 # taken from triton documentation
 reference_kernel = """
@@ -317,6 +320,7 @@ def _layer_norm_fwd_fused(
         # Write output
         tl.store(Y + cols, y, mask=mask)
 ```
+
 """
 
 [[prompts]]

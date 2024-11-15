@@ -20,7 +20,7 @@ def extract_python_code(text: str) -> str:
 
     # remove the first and last line
     try:
-        python_code = re.search(r"```python\n((.*\n)*)\n```", text).group(1)
+        python_code = re.search(r"```python\n((.*\n)*)```", text).group(1)
     except AttributeError:
         print(f"Could not find python code in {text}")
         # if no match, return an exception raised with the message could not find python code
