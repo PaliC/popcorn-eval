@@ -78,10 +78,15 @@ wandb login
 Once you have the `tune` cli up and running (checkable by running `tune ls`), you can finetune some models using the dataset in datasets/ using
 
 ```bash
-# 70b instruct model
+# llama 3.1 70b instruct model
 tune download meta-llama/Meta-Llama-3-70B-Instruct --output-dir /tmp/Llama-3.1-70B-Instruct/  --ignore-patterns "original/consolidated*" --hf-token <HF_TOKEN>
 tune run --nproc_per_node 8 full_finetune_distributed --config finetuning_configs/llama_3_70b_instruct_finetune_config.yaml
 
+# llama 3.1 70b model
+tune download meta-llama/Meta-Llama-3-70B --output-dir /tmp/Llama-3.1-70B/  --ignore-patterns "original/consolidated*" --hf-token <HF_TOKEN>
+tune run --nproc_per_node 8 full_finetune_distributed --config finetuning_configs/llama_3_70b_finetune_config.yaml
+
+# llama 3.2 3b model
 tune download meta-llama/Meta-Llama-3-3B --output-dir /tmp/Llama-3.2-3B/  --ignore-patterns "original/consolidated*" --hf-token <HF_TOKEN>
 tune full_finetune_single_device --config finetuning_configs/llama_3_3b_finetune_config.yaml
 ```
