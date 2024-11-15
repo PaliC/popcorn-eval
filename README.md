@@ -43,27 +43,20 @@ Currently we are using Anthropic's API to generate kernels. However, we plan on 
 3. The generated kernels will be saved in the `generated_code` directory, with both AI-generated and reference versions.
 
 4. Once the kernels are generated, you can run `cd popcorn_eval && python run_ncu.py` to evaluate the performance of the generated kernels.
+- When running `run_ncu.py` everything in the `generated_code` directory will be evaluated will be run through ncu. Similarily, for plot generation, the all experiments (subdirectories in `plots`) will be used for the plots.
 
-5. Analyze the results in the `logs` directory.
+5. Analyze the results in the `logs` and `plots` directories.
 
-## File Structure
 
-- `popcorn_eval/generate_kernels.py`: Main script for generating kernels using the Anthropic API.
-- `popcorn_eval/prompts/eval_prompts.toml`: Contains the prompts used for kernel generation.
-- `popcorn_eval/code_templates/`: Directory containing template files for different operations (e.g., matrix multiplication, addition, softmax).
-- `generated_code/`: Directory where generated kernel code is saved.
-- `_helper_functions.py`: Contains helper functions used in the generated code.
 
 
 ## TODO
-
-- [x] Add support for other models / make sure this does not rely on Anthropic's API
-- [x] Add support for finetuned model checkpoints
-- [ ] Add more prompts
-- [x] Create a summary for the results produced in `popcorn_eval/logs`
-- [x] Create summary of failed prompts / generations
-- [ ] Make log parser work on failures
+- [ ] Add more prompts related to different tasks (e.g. q/a, code completion, etc.)
+- [ ] Add labels to prompts. This should be a list which we can use to annoate the results / prompts
+- [ ] Add labeling to results to reflect type of task
+- [ ] Refine current prompts to ensure they are reasonable
 - [ ] Support Multiple Kernel Launches
+- [ ] Be able to support training multiple datasets on a single model to see the impact of the dataset on the performance of the model
 
 ### Finetuning
 
