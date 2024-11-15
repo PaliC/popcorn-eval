@@ -63,6 +63,7 @@ Currently we are using Anthropic's API to generate kernels. However, we plan on 
 - [ ] Be able to support training multiple datasets on a single model to see the impact of the dataset on the performance of the model
 - [ ] Search for checkpoints given a template string instead of manually listing them all out
 - [ ] Add speedup metric which measures wall clock time / gpu time
+- [ ] Refactor such that we only need to run reference/baseline implementations once
 
 ### Finetuning
 
