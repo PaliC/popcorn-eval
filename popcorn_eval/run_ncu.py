@@ -3,9 +3,9 @@ import os
 import subprocess
 from collections import defaultdict
 from pathlib import Path
-from get_report_summary import generate_plots
 
 import tomli
+from get_report_summary import generate_plots
 
 
 def is_float(value):
@@ -72,7 +72,7 @@ def get_ncu_commands_for_generated_code():
     paths = []
     ncu_commands = []
     logs = []
-    compilable_kernels = set()
+    compilable_kernels = defaultdict(lambda: set())
     for suffix in suffix_list:
         for path in Path("generated_code").glob(f"**/*{suffix}"):
             paths.append(path)
@@ -111,7 +111,7 @@ def get_ncu_commands_for_generated_code():
                 continue
             try:
                 compile(source=source_code, filename=path, mode="exec")
-                compilable_kernels.add(kernel_name)
+                compilable_kernels[experiment_directory_name].add(kernel_name)
             except (SyntaxError, MemoryError):
                 pass
 
@@ -129,7 +129,7 @@ def main():
         os.makedirs("logs")
 
     # get all generated code paths in the generated_code directory
-    ncu_commands, log_pairs, compiling_kernels = get_ncu_commands_for_generated_code()
+    ncu_commands, log_pairs, compilable_kernels = get_ncu_commands_for_generated_code()
 
     # run all ncu commands
     # TODO: run in parallel
@@ -180,12 +180,7 @@ def main():
             ai_generated_dict = {}
         else:
             ai_generated_dict = ai_generated_csv["0"]
-        try:
-            reference_dict = reference_csv["0"]
-        except KeyError:
-            print(log_pair)
-            print(reference_csv)
-            exit(0)
+        reference_dict = reference_csv["0"]
         if len(ai_generated_csv.keys()) > 1 or len(reference_csv.keys()) > 1:
             print(
                 f"Skipping {kernel_name} because it has more than one kernel launch. The reference kernel is {len(reference_csv.keys())} and the ai generated kernel is {len(ai_generated_csv.keys())}"
@@ -271,17 +266,16 @@ def main():
         ]
         experiment_dict_to_csv_rows[experiment_directory_name].append(csv_row)
 
-        if kernel_name in compiling_kernels:
-            experiment_dict_to_csv_rows[experiment_directory_name].append(
-                [
-                    kernel_name,
-                    "compiles",
-                    kernel_name in compiling_kernels,
-                    "True",
-                    "N/A",
-                    "",
-                ]
-            )
+        experiment_dict_to_csv_rows[experiment_directory_name].append(
+            [
+                kernel_name,
+                "compiles",
+                kernel_name in compilable_kernels[experiment_directory_name],
+                "True",
+                "N/A",
+                "",
+            ]
+        )
 
     # write to csvs
     print(experiment_dict_to_csv_rows.keys())
@@ -293,7 +287,7 @@ def main():
             writer = csv.writer(csvfile)
             csv_rows.insert(0, csv_columns)
             writer.writerows(csv_rows)
-    
+
     generate_plots("plots")
 
 

@@ -86,7 +86,8 @@ def create_plots(
         sns.barplot(x=list(values.keys()), y=list(values.values()))
         plt.xticks(fontsize=16, rotation=45, ha="right")
         plt.tight_layout()
-        plt.savefig(os.path.join(output_dir, f"{metric}_numerical_summary.png"))
+        metric_cleaned = metric.replace("/", "_")
+        plt.savefig(os.path.join(output_dir, f"{metric_cleaned}_numerical_summary.png"))
         plt.close()
     # create a bar plot for the success rate summary. Each metric should have a barplot
     # with the experiment names on the x axis and the success rate on the y axis
@@ -95,15 +96,16 @@ def create_plots(
         sns.barplot(x=list(values.keys()), y=list(values.values()))
         plt.xticks(fontsize=16, rotation=45, ha="right")
         plt.tight_layout()
-        plt.savefig(os.path.join(output_dir, f"{metric}_success_rate_summary.png"))
+        metric_cleaned = metric.replace("/", "_")
+        plt.savefig(
+            os.path.join(output_dir, f"{metric_cleaned}_success_rate_summary.png")
+        )
         plt.close()
 
 
 def generate_plots(output_dir: str) -> None:
     results = get_experiment_results()
-    report_summary_numerical, report_summary_success_rate = get_report_summary(
-        results, metrics=["compiles", "Achieved of Possible Occupancy"]
-    )
+    report_summary_numerical, report_summary_success_rate = get_report_summary(results)
     create_plots(report_summary_numerical, report_summary_success_rate, output_dir)
 
 
