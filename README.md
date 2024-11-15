@@ -57,6 +57,7 @@ Currently we are using Anthropic's API to generate kernels. However, we plan on 
 - [ ] Refine current prompts to ensure they are reasonable
 - [ ] Support Multiple Kernel Launches
 - [ ] Be able to support training multiple datasets on a single model to see the impact of the dataset on the performance of the model
+- [ ] Search for checkpoints given a template string instead of manually listing them all out
 
 ### Finetuning
 
