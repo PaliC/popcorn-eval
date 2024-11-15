@@ -9,7 +9,7 @@ import tomli
 
 from anthropic_api import get_anthropic_response
 from llama import generate_text_from_llama
-from open_ai_api import get_openai_response
+from open_ai_api import get_openai_gpt_response, get_openai_o1_response
 from torchtune.models.llama3 import llama3_tokenizer
 
 
@@ -59,8 +59,10 @@ def route_to_model(
         )
     elif "claude" in model_name:
         return get_anthropic_response(prompt_dict, model_name)
-    elif "gpt" in model_name or "o1" in model_name:
-        return get_openai_response(prompt_dict, model_name)
+    elif "gpt" in model_name:
+        return get_openai_gpt_response(prompt_dict, model_name)
+    if "o1" in model_name:
+        return get_openai_o1_response(prompt_dict, model_name)
     else:
         raise ValueError(f"Model {model_name} not supported")
 
