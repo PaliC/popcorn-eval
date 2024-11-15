@@ -69,6 +69,12 @@ Currently we are using Anthropic's API to generate kernels. However, we plan on 
 
 For finetuning we use torchtune. In order to install it follow the instructions found here: https://github.com/pytorch/torchtune#installation
 
+We also use wandb. So make an account, grab an api key, and set it up
+```
+pip install wandb
+wandb login
+```
+
 Once you have the `tune` cli up and running (checkable by running `tune ls`), you can finetune some models using the dataset in datasets/ using
 
 ```bash
