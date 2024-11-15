@@ -37,8 +37,12 @@ Currently we are using Anthropic's API to generate kernels. However, we plan on 
 
    ```bash
    cd popcorn_eval
-   python generate_kernels.py
+   python generate_kernels.py --model_name <model-name> --output_dir <experiment_name>
    ```
+   Generally all text completion models from openai and anthropic are supported. You'd want to let `output_dir` be the name of your experiment.
+   If you want to use your own model we currently expect huggingface style checkpoints and use [torchtune](https://pytorch.org/torchtune/stable/index.html) for infernece.
+   You'd do something like python generate_kernels.py --model_name <model-name> --output_dir <experiment_name>  --tokenizer_path <tokenizer_path> --checkpoint_files <space_seperated_paths_to_checkpoint_files>
+
 
 3. The generated kernels will be saved in the `generated_code` directory, with both AI-generated and reference versions.
 
@@ -58,6 +62,7 @@ Currently we are using Anthropic's API to generate kernels. However, we plan on 
 - [ ] Support Multiple Kernel Launches
 - [ ] Be able to support training multiple datasets on a single model to see the impact of the dataset on the performance of the model
 - [ ] Search for checkpoints given a template string instead of manually listing them all out
+- [ ] Add speedup metric which measures wall clock time / gpu time
 
 ### Finetuning
 

@@ -83,7 +83,10 @@ def create_plots(
     # with the experiment names on the x axis and the metric values on the y axis
     for metric, values in report_summary_numerical.items():
         plt.figure(figsize=(12, 8))
-        sns.barplot(x=list(values.keys()), y=list(values.values()))
+        title = f"Difference in {metric} against reference"
+        if metric == "compiles":
+            title = f"Percentage of generated kernels that"
+        sns.barplot(x=list(values.keys()), y=list(values.values())).set_title(title)
         plt.xticks(fontsize=16, rotation=45, ha="right")
         plt.tight_layout()
         metric_cleaned = metric.replace("/", "_")
@@ -93,7 +96,9 @@ def create_plots(
     # with the experiment names on the x axis and the success rate on the y axis
     for metric, values in report_summary_success_rate.items():
         plt.figure(figsize=(12, 8))
-        sns.barplot(x=list(values.keys()), y=list(values.values()))
+        sns.barplot(x=list(values.keys()), y=list(values.values())).set_title(
+            f"{metric} success rate"
+        )
         plt.xticks(fontsize=16, rotation=45, ha="right")
         plt.tight_layout()
         metric_cleaned = metric.replace("/", "_")
