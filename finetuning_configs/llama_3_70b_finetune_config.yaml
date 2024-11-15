@@ -21,7 +21,7 @@ shuffle: True
 # Tokenizer
 tokenizer:
   _component_: torchtune.models.llama3.llama3_tokenizer
-  path: //tmp/Llama-3.1-70B-Base/original/tokenizer.model
+  path: /tmp/Llama-3.1-70B/original/tokenizer.model
   max_seq_len: null
 
 # Dataset
@@ -38,7 +38,7 @@ model:
 
 checkpointer:
   _component_: torchtune.training.FullModelHFCheckpointer
-  checkpoint_dir: /tmp/Llama-3.1-70B-Base
+  checkpoint_dir: /tmp/Llama-3.1-70B
   checkpoint_files: [
     model-00001-of-00030.safetensors,
     model-00002-of-00030.safetensors,
@@ -72,7 +72,7 @@ checkpointer:
     model-00030-of-00030.safetensors,
   ]
   recipe_checkpoint: null
-  output_dir: /tmp/Meta-Llama-3-70b-Base
+  output_dir: /tmp/Meta-Llama-3-70b
   model_type: LLAMA3
 resume_from_checkpoint: False
 
