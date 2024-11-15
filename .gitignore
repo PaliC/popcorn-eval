@@ -2,3 +2,4 @@
 popcorn_eval/generated_code/
 popcorn_eval/logs/
 wandb/
+popcorn_eval/plots/
