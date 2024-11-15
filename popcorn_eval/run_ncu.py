@@ -3,6 +3,7 @@ import os
 import subprocess
 from collections import defaultdict
 from pathlib import Path
+from get_report_summary import generate_plots
 
 import tomli
 
@@ -292,6 +293,8 @@ def main():
             writer = csv.writer(csvfile)
             csv_rows.insert(0, csv_columns)
             writer.writerows(csv_rows)
+    
+    generate_plots("plots")
 
 
 if __name__ == "__main__":
