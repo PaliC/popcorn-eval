@@ -3,13 +3,13 @@ import os
 import re
 import shutil
 from datetime import datetime
-from typing import Dict, Optional, Tuple
+from typing import Dict, Optional
 
 import tomli
 
 from anthropic_api import get_anthropic_response
-from dotenv import load_dotenv
 from llama import generate_text_from_llama
+from open_ai_api import get_openai_response
 from torchtune.models.llama3 import llama3_tokenizer
 
 
@@ -59,6 +59,8 @@ def route_to_model(
         )
     elif "claude" in model_name:
         return get_anthropic_response(prompt_dict, model_name)
+    elif "gpt" in model_name or "o1" in model_name:
+        return get_openai_response(prompt_dict, model_name)
     else:
         raise ValueError(f"Model {model_name} not supported")
 
