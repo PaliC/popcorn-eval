@@ -1,0 +1,14 @@
+
+
+  
+            Write a triton kernel function that performs an elementwise addition operation given two input vectors. The kernel should have the function signature:
+            ```python
+            def add_kernel(x_ptr, # *Pointer* to first input vector.
+                        y_ptr```
+
+
+  
+            Write a triton kernel function that performs an elementwise addition operation given two input vectors. The kernel should have the function signature:
+            ```python
+            def add_kernel(x_ptr, # *Pointer* to first input vector.
+                        y_ptr```
