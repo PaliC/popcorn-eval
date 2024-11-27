@@ -4,3 +4,7 @@ tomli
 jaxtyping
 torch
 triton
+torchao
+torchtune
+openai
+seaborn

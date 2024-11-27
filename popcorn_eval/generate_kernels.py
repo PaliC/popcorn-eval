@@ -10,7 +10,13 @@ import tomli
 from anthropic_api import get_anthropic_response
 from llama import generate_text_from_llama
 from open_ai_api import get_openai_gpt_response, get_openai_o1_response
+from prompt_improvements import add_triton_examples
 from torchtune.models.llama3 import llama3_tokenizer
+
+
+def apply_prompt_improvements(prompt_dict: Dict[str, str]) -> Dict[str, str]:
+    prompt_dict["prompt"] = add_triton_examples(prompt_dict["prompt"], 100)
+    return prompt_dict
 
 
 def extract_python_code(text: str) -> str:
@@ -96,6 +102,11 @@ def main():
         required=False,
         help="Output directory to save generated code.",
     )
+    parser.add_argument(
+        "--apply_prompt_improvements",
+        action="store_true",
+        help="Apply prompt improvements to prompts.",
+    )
     args = parser.parse_args()
 
     model_name = args.model_name
@@ -115,6 +126,8 @@ def main():
     total = len(all_prompts)
     count = 0
     for prompt_dict in all_prompts:
+        if args.apply_prompt_improvements:
+            prompt_dict = apply_prompt_improvements(prompt_dict)
         count += 1
         print(f"Generating {count} of {total}")
         if prompt_dict.get("skip", False):
