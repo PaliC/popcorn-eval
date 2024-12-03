@@ -677,7 +677,7 @@ user_prompt = """
 Write a triton kernel that sums a batch of numbers. Block size B0 represents a range of batches of x of length N0. Each element is of length T. Process it B1 < T elements at a time.
 The kernel should have the function signature:
 ```python
-def long_sum_kernel(x_ptr, z_ptr, N0, T, B0: tl.constexpr, B1: tl.constexpr):
+def long_sum_kernel(x_ptr, z_ptr, N0, N1, T, B0: tl.constexpr, B1: tl.constexpr):
 ```
 """
 reference_kernel = """
